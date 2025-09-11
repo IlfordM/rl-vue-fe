@@ -22,14 +22,12 @@ const favoriteItems = ref([
 
 <template>
   <section class="favorites-sidebar">
-    <div class="sidebar-header">
+    <header class="favorites-header">
+      <Icon name="heart" w="30" h="28" />
       <h2>Favorites ({{ favoritesCount }})</h2>
-      <button class="close-btn" @click="$emit('close')">
-        <Icon name="close" w="20" h="20" />
-      </button>
-    </div>
+    </header>
 
-    <div class="sidebar-content">
+    <div class="favorites-content">
       <div v-if="favoriteItems.length === 0" class="empty-favorites">
         <Icon name="heart" w="48" h="48" />
         <p>Favorites list is empty</p>
@@ -64,7 +62,7 @@ const favoriteItems = ref([
   flex-direction: column;
 }
 
-.sidebar-header {
+.favorites-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -72,26 +70,13 @@ const favoriteItems = ref([
   border-bottom: 1px solid var(--color-gray-2);
 }
 
-.sidebar-header h2 {
+.favorites-header h2 {
   margin: 0;
   font-size: 18px;
   font-weight: 600;
 }
 
-.close-btn {
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 4px;
-  border-radius: 4px;
-  transition: background-color 0.2s;
-}
-
-.close-btn:hover {
-  background: var(--color-gray-1);
-}
-
-.sidebar-content {
+.favorites-content {
   flex: 1;
   overflow-y: auto;
   padding: 20px;

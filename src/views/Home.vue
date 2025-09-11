@@ -225,6 +225,7 @@ const addToCart = (id: string) => {
   height: 84px;
   width: 80px;
   right: 0;
+  background-color: var(--color-white);
   box-shadow: 0 0 10px 0 var(--color-gray);
 }
 

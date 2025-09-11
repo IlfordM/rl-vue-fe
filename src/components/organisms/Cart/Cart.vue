@@ -2,6 +2,7 @@
 import { ref } from 'vue';
 import Icon from '@/components/atoms/Icon/Icon.vue';
 import Button from '@/components/atoms/Button/Button.vue';
+import PriceWithDiscount from '@/components/molecules/PriceWithDiscount/PriceWithDiscount.vue';
 
 defineProps<{
   isOpen: boolean;
@@ -15,8 +16,8 @@ defineEmits<{
 
 // Mock cart items
 const cartItems = ref([
-  { id: '1', name: 'Product 1', price: 29.99, quantity: 1, image: '/placeholder.jpg' },
-  { id: '2', name: 'Product 2', price: 49.99, quantity: 1, image: '/placeholder.jpg' }
+  { id: '1', name: 'The Perfect Pockets Long Parka', price: 195.00, discount: 10.00, size: 'XL', color: 'Yellow', quantity: 1, image: 'public/assets/images/image1.jpg' },
+  { id: '2', name: 'Product 2', price: 49.99, quantity: 1, image: 'public/assets/images/image1.jpg' }
 ]);
 
 const totalPrice = ref(79.98);
@@ -24,14 +25,12 @@ const totalPrice = ref(79.98);
 
 <template>
   <section class="cart-sidebar">
-    <div class="sidebar-header">
-      <h2>Cart ({{ cartCount }})</h2>
-      <button class="close-btn" @click="$emit('close')">
-        <Icon name="close" w="20" h="20" />
-      </button>
-    </div>
+    <header class="cart-header">
+      <Icon name="cart" w="30" h="28" />
+      <h2 class="cart-title">Cart ({{ cartCount }})</h2>
+    </header>
 
-    <div class="sidebar-content">
+    <div class="cart-content">
       <div v-if="cartItems.length === 0" class="empty-cart">
         <Icon name="cart" w="48" h="48" />
         <p>Cart is empty</p>
@@ -39,31 +38,49 @@ const totalPrice = ref(79.98);
 
       <div v-else class="cart-items">
         <div v-for="item in cartItems" :key="item.id" class="cart-item">
-          <img :src="item.image" :alt="item.name" class="item-image" />
-          <div class="item-details">
-            <h3>{{ item.name }}</h3>
-            <p class="item-price">${{ item.price }}</p>
+          <div class="item-container">
+            <img :src="item.image" :alt="item.name" class="item-image" loading="lazy" decoding="async" w="94" h="94" />
+            <div class="item-details">
+              <h3 class="item-name">{{ item.name }}</h3>
+              <PriceWithDiscount :price="item.price" :discount="item.discount" class="item-price-discount" />
+            </div>
+            <Icon name="heart" w="25" h="25" />
+          </div>
+          <div class="item-actions">
+            <Button variant="secondary" size="sm" @click="$emit('removeItem', item.id)">{{ item.size }}</Button>
+            <Button variant="secondary" size="sm" @click="$emit('removeItem', item.id)">{{ item.color }}</Button>
             <div class="quantity-controls">
               <button class="qty-btn">-</button>
               <span>{{ item.quantity }}</span>
               <button class="qty-btn">+</button>
             </div>
           </div>
-          <button class="remove-btn" @click="$emit('removeItem', item.id)">
-            <Icon name="trash" w="16" h="16" />
-          </button>
         </div>
       </div>
     </div>
 
-    <div v-if="cartItems.length > 0" class="sidebar-footer">
+    <footer v-if="cartItems.length > 0" class="cart-footer">
       <div class="total">
-        <span>Total: ${{ totalPrice }}</span>
+        <span>Total Payment</span>
+        <PriceWithDiscount :price="totalPrice" />
       </div>
-      <Button variant="primary" class="checkout-btn">
-        Checkout
-      </Button>
-    </div>
+      <div class="promo-code">
+        <span>Promo Code</span>
+        <div class="promo-code-input">
+          <input type="text" placeholder="e.g APRIL20" class="promo-code-input-field" />
+          <Button variant="primary" class="promo-code-btn">
+            <Icon name="coupon" w="18" h="14" style="margin-right: 8px;" />
+            Apply
+          </Button>
+        </div>
+      </div>
+      <div class="checkout-btn-container">
+        <Button variant="selected" class="checkout-btn" style="font-size: 20px; font-weight: 500;">
+          <Icon name="cart-plus" w="16" h="16" style="margin-right: 8px;" />
+          Checkout
+        </Button>
+      </div>
+    </footer>
   </section>
 </template>
 
@@ -75,37 +92,25 @@ const totalPrice = ref(79.98);
   flex-direction: column;
 }
 
-.sidebar-header {
+.cart-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 20px;
-  border-bottom: 1px solid var(--color-gray-2);
+  border-bottom: 1px solid var(--color-gray-3);
 }
 
-.sidebar-header h2 {
+.cart-header .cart-title {
+  font-family: 'Space Grotesk', sans-serif;
   margin: 0;
-  font-size: 18px;
+  font-size: 36px;
   font-weight: 600;
 }
 
-.close-btn {
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 4px;
-  border-radius: 4px;
-  transition: background-color 0.2s;
-}
-
-.close-btn:hover {
-  background: var(--color-gray-1);
-}
-
-.sidebar-content {
+.cart-content {
   flex: 1;
   overflow-y: auto;
-  padding: 20px;
+  padding: 20px 0;
 }
 
 .empty-cart {
@@ -125,33 +130,49 @@ const totalPrice = ref(79.98);
 .cart-items {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 20px;
+  margin-bottom: 16px;
 }
 
 .cart-item {
+  padding: 0 20px;
+  border-bottom: 1px solid var(--color-gray-3);
+}
+
+.item-container {
   display: flex;
+  margin-bottom: 6px;
   gap: 12px;
-  padding: 12px;
-  border: 1px solid var(--color-gray-2);
-  border-radius: 8px;
+}
+
+.item-actions {
+  display: flex;
+  gap: 8px;
+  align-items: flex-end;
+  padding-bottom: 16px;
 }
 
 .item-image {
-  width: 60px;
-  height: 60px;
+  width: 94px;
+  height: 94px;
   object-fit: cover;
-  border-radius: 4px;
+  border-radius: 2px;
   background: var(--color-gray-1);
+  margin: 0;
+}
+
+.item-name {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  margin: 0 0 4px 0;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: start;
+  margin-bottom: 14px;
 }
 
 .item-details {
   flex: 1;
-}
-
-.item-details h3 {
-  margin: 0 0 4px 0;
-  font-size: 14px;
-  font-weight: 500;
 }
 
 .item-price {
@@ -162,6 +183,7 @@ const totalPrice = ref(79.98);
 }
 
 .quantity-controls {
+  margin-left: auto;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -198,19 +220,75 @@ const totalPrice = ref(79.98);
   background: var(--color-red-light);
 }
 
-.sidebar-footer {
-  padding: 20px;
+.cart-footer {
+  padding: 20px 0;
   border-top: 1px solid var(--color-gray-2);
 }
 
 .total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'Space Grotesk', sans-serif;
+  color: var(--color-blue);
+  padding: 0 20px;
   margin-bottom: 16px;
   font-size: 18px;
   font-weight: 600;
   text-align: center;
+  border-bottom: 1px solid var(--color-gray-3);
+}
+
+.total-price {
+  color: var(--color-black);
+  font-family: 'Courier';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+}
+
+.checkout-btn-container {
+  padding: 0 20px;
+}
+
+.promo-code {
+  color: var(--color-blue);
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  text-align: start;
+  padding: 0 20px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--color-gray-3);
+}
+
+.promo-code-input {
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.promo-code-input-field {
+  flex: 1;
+  border: 1px solid var(--color-gray-3);
+  border-radius: 6px;
+  background-color: var(--color-gray-4);
+  padding: 8px 16px;
+  height: 52px;
+  box-sizing: border-box;
+}
+
+.promo-code-btn {
+  color: var(--color-black);
+  margin-left: 8px;
+  height: 52px;
+  min-height: 52px;
 }
 
 .checkout-btn {
   width: 100%;
+  font-weight: 500;
 }
 </style>
