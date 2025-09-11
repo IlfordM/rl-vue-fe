@@ -4,34 +4,51 @@ import Icon from "./components/atoms/Icon/Icon.vue"
 
 <template>
   <div id="app">
-    <nav class="navigation">
-      <router-link to="/">
-        <Icon name="home" class="nav-icon" />
-        Home
-      </router-link>
-      <router-link to="/about">
-        <Icon name="user" class="nav-icon" />
-        About
-      </router-link>
-      <router-link to="/contacts">
-        <Icon name="mail" class="nav-icon" />
-        Contacts
-      </router-link>
-    </nav>
-    <router-view />
+    <div class="app-container">
+      <nav class="navigation">
+        <router-link to="/" class="nav-link">
+          <Icon name="home" class="nav-icon" />
+          Home
+        </router-link>
+        <router-link to="/about" class="nav-link">
+          <Icon name="user" class="nav-icon" />
+          About
+        </router-link>
+        <router-link to="/contacts" class="nav-link">
+          <Icon name="mail" class="nav-icon" />
+          Contacts
+        </router-link>
+      </nav>
+      <router-view />
+    </div>
   </div>
 </template>
 
 <style scoped>
-.navigation {
-  padding: 12px;
-  text-align: end;
+.app-container {
+  position: relative;
+  width: 100%;
+  max-width: 1000px;
+  padding: 0 100px;
+  margin: 0 auto;
 }
 
-.navigation a {
+.navigation {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 38px;
+  position: sticky;
+  top: 0;
+  padding: 10px 0;
+  text-align: end;
+  background-color: white;
+  z-index: 1;
+}
+
+.navigation .nav-link {
   color: var(--color-black);
   text-decoration: underline;
-  margin: 0 10px;
   display: inline-flex;
   align-items: center;
   gap: 4px;

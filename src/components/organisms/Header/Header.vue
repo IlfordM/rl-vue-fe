@@ -20,7 +20,7 @@ defineOptions({
       Shop
       <Icon name="dropdown" w="16" h="8" />
     </Button>
-    <Input type="search" placeholder="Search" variant="withIcon" icon="search" iconSize="16" size="md"
+    <Input type="search" placeholder="Search" variant="withIcon" icon="search" iconSize="24" size="md"
       style="max-width: 800px;" />
     <AuthBlock style="min-width: 220px; display: inline-flex; align-items: end; justify-content: flex-end;" />
   </div>
@@ -28,10 +28,15 @@ defineOptions({
 
 <style scoped>
 .page-header {
+  position: sticky;
+  top: 48px;
+  z-index: 1;
   width: 100%;
   display: inline-flex;
   align-items: center;
   gap: 12px;
   color: var(--color-blue);
+  background-color: var(--color-white);
+  margin-bottom: 64px;
 }
 </style>

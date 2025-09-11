@@ -31,7 +31,7 @@ const props = withDefaults(defineProps<Props>(), {
   size: "md",
   variant: "default",
   icon: "search",
-  iconSize: 16
+  iconSize: 24
 })
 
 const emit = defineEmits<{
@@ -65,17 +65,17 @@ const inputClasses = computed(() => {
 
 const inputStyles = computed(() => {
   const sizeStyles = {
-    sm: { padding: "6px 12px", fontSize: "14px" },
-    md: { padding: "8px 16px", fontSize: "16px" },
-    lg: { padding: "12px 24px", fontSize: "18px" }
+    sm: { padding: "10px 18px", fontSize: "14px" },
+    md: { padding: "12px 22px", fontSize: "16px" },
+    lg: { padding: "16px 30px", fontSize: "18px" }
   }
 
   // Override padding for withIcon variant
   if (props.variant === 'withIcon') {
     const iconPaddingStyles = {
-      sm: { padding: "6px 12px 6px 26px", fontSize: "14px" },
-      md: { padding: "8px 16px 8px 30px", fontSize: "16px" },
-      lg: { padding: "12px 24px 12px 34px", fontSize: "18px" }
+      sm: { padding: "10px 18px 10px 34px", fontSize: "14px" },
+      md: { padding: "12px 22px 12px 38px", fontSize: "16px" },
+      lg: { padding: "16px 30px 16px 42px", fontSize: "18px" }
     }
     return {
       ...iconPaddingStyles[props.size],
@@ -131,9 +131,9 @@ const handleBlur = (event: FocusEvent) => {
 
 .input {
   width: 100%;
-  border: 1px solid var(--color-gray);
+  border: 1px solid var(--color-gray-3);
   border-radius: 6px;
-  background-color: var(--color-white);
+  background-color: var(--color-gray-4);
   color: var(--color-black);
   transition: all 0.2s;
   outline: none;
