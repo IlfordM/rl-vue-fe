@@ -2,37 +2,93 @@
 import PageHeader from '@/components/organisms/Header/Header.vue';
 import Button from '@/components/atoms/Button/Button.vue';
 import Icon from '@/components/atoms/Icon/Icon.vue';
-import { ref } from 'vue';
+import Cart from '@/components/organisms/Cart/Cart.vue';
+import Favorites from '@/components/organisms/Favorites/Favorites.vue';
+import { ref, computed } from 'vue';
 
 defineOptions({
   name: "HomePage"
 })
 
+enum SidebarType {
+  CART = 'cart',
+  FAVORITES = 'favorites'
+}
+
 // Mock data for cart and favorites count
 const cartCount = ref(2);
 const favoritesCount = ref(1);
+
+// Sidebar state
+const sidebarType = ref<SidebarType | null>(null);
+
+// Computed properties
+const isSidebarOpen = computed(() => sidebarType.value !== null);
+const currentCount = computed(() => {
+  return sidebarType.value === SidebarType.CART ? cartCount.value : favoritesCount.value;
+});
+
+// Sidebar handlers
+const openCart = () => {
+  sidebarType.value = SidebarType.CART;
+};
+
+const openFavorites = () => {
+  sidebarType.value = SidebarType.FAVORITES;
+};
+
+const closeSidebar = () => {
+  sidebarType.value = null;
+};
+
+const removeFromCart = (id: string) => {
+  cartCount.value = Math.max(0, cartCount.value - 1);
+  // Here you would remove the item from cart
+};
+
+const removeFromFavorites = (id: string) => {
+  favoritesCount.value = Math.max(0, favoritesCount.value - 1);
+  // Here you would remove the item from favorites
+};
+
+const addToCart = (id: string) => {
+  cartCount.value += 1;
+  // Here you would add the item to cart
+};
 </script>
 
 
 <template>
   <div class="home">
     <PageHeader />
-    <Button class="sidebar-button" variant="ghost" :style="{ top: '140px' }">
+    <Button class="sidebar-button" variant="ghost" :style="{ top: '140px' }" @click="openCart">
       <div class="icon-with-badge">
         <Icon name="cart" w="27" h="24" class="icon-cart" />
-        <span v-if="cartCount > 0" class="badge" :aria-label="`${cartCount} товаров в корзине`">
+        <span v-if="cartCount > 0" class="badge" :aria-label="`${cartCount} items in cart`">
           {{ cartCount > 99 ? '99+' : cartCount }}
         </span>
       </div>
     </Button>
-    <Button class="sidebar-button" variant="ghost" :style="{ top: '240px' }">
+    <Button class="sidebar-button" variant="ghost" :style="{ top: '240px' }" @click="openFavorites">
       <div class="icon-with-badge">
         <Icon name="heart" w="27" h="24" class="icon-heart" />
-        <span v-if="favoritesCount > 0" class="badge" :aria-label="`${favoritesCount} товаров в избранном`">
+        <span v-if="favoritesCount > 0" class="badge" :aria-label="`${favoritesCount} items in favorites`">
           {{ favoritesCount > 99 ? '99+' : favoritesCount }}
         </span>
       </div>
     </Button>
+
+    <!-- Single Sidebar Container -->
+    <div v-if="isSidebarOpen" class="sidebar-overlay" @click="closeSidebar">
+      <div class="sidebar-container" @click.stop>
+        <Cart v-if="sidebarType === SidebarType.CART" :is-open="true" :cart-count="currentCount" @close="closeSidebar"
+          @remove-item="removeFromCart" />
+
+        <Favorites v-if="sidebarType === SidebarType.FAVORITES" :is-open="true" :favorites-count="currentCount"
+          @close="closeSidebar" @remove-favorite="removeFromFavorites" @add-to-cart="addToCart" />
+      </div>
+    </div>
+
     <section class="hero">
       <h1>Welcome to Our Website</h1>
       <p>Discover amazing content and explore everything we have to offer.</p>
@@ -170,6 +226,25 @@ const favoritesCount = ref(1);
   width: 80px;
   right: 0;
   box-shadow: 0 0 10px 0 var(--color-gray);
+}
+
+.sidebar-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.1);
+  z-index: 2;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.sidebar-container {
+  width: 400px;
+  height: 100vh;
+  background: var(--color-white);
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .icon-with-badge {
