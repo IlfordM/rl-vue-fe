@@ -12,6 +12,7 @@ interface Props {
   loading?: boolean
   type?: "button" | "submit" | "reset"
   class?: string
+  style?: string | Record<string, any>
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -58,7 +59,8 @@ const buttonStyles = computed(() => {
   return {
     ...sizeStyles[props.size],
     opacity: props.disabled || props.loading ? 0.5 : 1,
-    cursor: props.disabled || props.loading ? "not-allowed" : "pointer"
+    cursor: props.disabled || props.loading ? "not-allowed" : "pointer",
+    ...(typeof props.style === 'object' ? props.style : {})
   }
 })
 
@@ -112,6 +114,8 @@ const handleClick = (event: MouseEvent) => {
 }
 
 .btn-secondary {
+  font-weight: 400;
+  font-size: 20px;
   background-color: transparent;
   color: currentColor;
   opacity: 0.8;

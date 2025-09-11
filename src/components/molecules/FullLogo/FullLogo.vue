@@ -10,7 +10,7 @@ defineOptions({
 
 <template>
   <div class="full-logo">
-    <Icon name="logo" :size="40" class="logo-icon" />
+    <Icon name="logo" :size="64" class="logo-icon" />
     <span class="logo-text">
       Ridge Line
     </span>
@@ -22,18 +22,18 @@ defineOptions({
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  font-weight: 600;
+  font-weight: 700;
+  font-size: 28px;
   font-family: 'Space Grotesk', sans-serif;
+}
+
+.full-logo * {
+  font-weight: inherit;
+  font-size: inherit;
+  font-family: inherit;
 }
 
 .logo-icon {
   flex-shrink: 0;
-}
-
-.logo-text {
-  font-family: 'Space Grotesk', sans-serif;
-  font-weight: 900;
-  letter-spacing: -0.02em;
-  line-height: 1;
 }
 </style>
