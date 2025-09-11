@@ -1,9 +1,11 @@
 :root {
   /* Primary Colors */
   --color-blue: #5c7995;
+  --color-blue-3: #bed1e3;
   --color-red: #eb0606;
   --color-red-3: #dd5c5c;
   --color-yellow: #e1a829;
+  --color-gray: #6c6c6c;
 
   /* Neutral Colors */
   --color-white: #ffffff;
