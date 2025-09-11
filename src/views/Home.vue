@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import PageHeader from '@/components/organisms/Header/Header.vue';
+import Button from '@/components/atoms/Button/Button.vue';
+import Icon from '@/components/atoms/Icon/Icon.vue';
 
 defineOptions({
   name: "HomePage"
@@ -10,6 +12,12 @@ defineOptions({
 <template>
   <div class="home">
     <PageHeader />
+    <Button class="sidebar-button" variant="ghost" :style="{ top: '140px' }">
+      <Icon name="cart" w="27" h="24" class="icon-cart" />
+    </Button>
+    <Button class="sidebar-button" variant="ghost" :style="{ top: '240px' }">
+      <Icon name="heart" w="27" h="24" class="icon-heart" />
+    </Button>
     <section class="hero">
       <h1>Welcome to Our Website</h1>
       <p>Discover amazing content and explore everything we have to offer.</p>
@@ -135,5 +143,17 @@ defineOptions({
   width: 100%;
   padding: 0;
   margin: 0 auto;
+}
+
+.sidebar-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  border-radius: 6px 0 0 6px;
+  position: fixed;
+  height: 84px;
+  width: 80px;
+  right: 0;
+  box-shadow: 0 0 10px 0 var(--color-gray);
 }
 </style>
