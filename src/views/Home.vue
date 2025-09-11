@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Button from '@/components/atoms/Button/Button.vue';
+import PageHeader from '@/components/organisms/Header/Header.vue';
 
 defineOptions({
   name: "HomePage"
@@ -9,8 +9,7 @@ defineOptions({
 
 <template>
   <div class="home">
-    <Button variant="secondary">Primary</Button>
-
+    <PageHeader />
   </div>
 </template>
 
@@ -18,6 +17,8 @@ defineOptions({
 <style scoped>
 .home {
   text-align: center;
-  padding: 2rem;
+  width: 90%;
+  padding: 0;
+  margin: 0 auto;
 }
 </style>
