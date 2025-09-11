@@ -2,10 +2,15 @@
 import PageHeader from '@/components/organisms/Header/Header.vue';
 import Button from '@/components/atoms/Button/Button.vue';
 import Icon from '@/components/atoms/Icon/Icon.vue';
+import { ref } from 'vue';
 
 defineOptions({
   name: "HomePage"
 })
+
+// Mock data for cart and favorites count
+const cartCount = ref(2);
+const favoritesCount = ref(1);
 </script>
 
 
@@ -13,10 +18,20 @@ defineOptions({
   <div class="home">
     <PageHeader />
     <Button class="sidebar-button" variant="ghost" :style="{ top: '140px' }">
-      <Icon name="cart" w="27" h="24" class="icon-cart" />
+      <div class="icon-with-badge">
+        <Icon name="cart" w="27" h="24" class="icon-cart" />
+        <span v-if="cartCount > 0" class="badge" :aria-label="`${cartCount} товаров в корзине`">
+          {{ cartCount > 99 ? '99+' : cartCount }}
+        </span>
+      </div>
     </Button>
     <Button class="sidebar-button" variant="ghost" :style="{ top: '240px' }">
-      <Icon name="heart" w="27" h="24" class="icon-heart" />
+      <div class="icon-with-badge">
+        <Icon name="heart" w="27" h="24" class="icon-heart" />
+        <span v-if="favoritesCount > 0" class="badge" :aria-label="`${favoritesCount} товаров в избранном`">
+          {{ favoritesCount > 99 ? '99+' : favoritesCount }}
+        </span>
+      </div>
     </Button>
     <section class="hero">
       <h1>Welcome to Our Website</h1>
@@ -155,5 +170,48 @@ defineOptions({
   width: 80px;
   right: 0;
   box-shadow: 0 0 10px 0 var(--color-gray);
+}
+
+.icon-with-badge {
+  position: relative;
+  display: inline-block;
+}
+
+.badge {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  background: var(--color-red);
+  color: var(--color-white);
+  border-radius: 50%;
+  width: 14px;
+  height: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 600;
+  border: 1px solid var(--color-white);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, var(--color-gray-3));
+  transition: all 0.2s ease;
+  animation: badgePulse 0.3s ease-out;
+}
+
+.badge:hover {
+  transform: scale(1.1);
+}
+
+@keyframes badgePulse {
+  0% {
+    transform: scale(0);
+  }
+
+  50% {
+    transform: scale(1.2);
+  }
+
+  100% {
+    transform: scale(1);
+  }
 }
 </style>
