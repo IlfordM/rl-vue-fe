@@ -1,0 +1,15 @@
+/* Font imports and base typography */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+/* Base font settings */
+* {
+  font-family: 'Poppins', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+}
+
+/* Space Grotesk utility class */
+.font-space-grotesk {
+  font-family: 'Space Grotesk', sans-serif;
+}

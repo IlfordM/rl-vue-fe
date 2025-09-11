@@ -29,8 +29,7 @@ import Icon from "./components/Icon.vue"
 }
 
 .navigation a {
-  font-weight: bold;
-  color: #2c3e50;
+  color: var(--color-black);
   text-decoration: underline;
   margin: 0 10px;
   display: inline-flex;
@@ -39,7 +38,7 @@ import Icon from "./components/Icon.vue"
 }
 
 .navigation a.router-link-active {
-  color: #42b983;
+  color: var(--color-blue);
 }
 
 .nav-icon {
