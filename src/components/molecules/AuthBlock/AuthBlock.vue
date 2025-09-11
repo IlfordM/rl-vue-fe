@@ -11,9 +11,7 @@ defineOptions({
 <template>
   <div class="auth-block">
     <Button variant="ghost" :style="{ color: 'var(--color-black)' }">Sign Up</Button>
-    <Button variant="secondary"
-      :style="{ backgroundColor: 'var(--color-blue)', color: 'var(--color-white)', borderRadius: '2px', border: 'none' }">Sign
-      in</Button>
+    <Button variant="secondary" class="sign-in-btn">Sign in</Button>
   </div>
 </template>
 
@@ -25,5 +23,17 @@ defineOptions({
   gap: 8px;
   font-weight: 500;
   font-family: 'Space Grotesk', sans-serif;
+}
+
+.sign-in-btn {
+  background-color: var(--color-blue) !important;
+  color: var(--color-white) !important;
+  border-radius: 2px;
+  border: none;
+  transition: background-color 0.2s ease;
+}
+
+.sign-in-btn:hover {
+  background-color: var(--color-blue-3) !important;
 }
 </style>
