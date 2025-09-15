@@ -4,6 +4,7 @@ import Button from '@/components/atoms/Button/Button.vue';
 import Icon from '@/components/atoms/Icon/Icon.vue';
 import Cart from '@/components/organisms/Cart/Cart.vue';
 import Favorites from '@/components/organisms/Favorites/Favorites.vue';
+import ImageCarousel from '@/components/organisms/Carousel/ImageCarousel.vue';
 import { ref, computed } from 'vue';
 
 defineOptions({
@@ -27,6 +28,52 @@ const isSidebarOpen = computed(() => sidebarType.value !== null);
 const currentCount = computed(() => {
   return sidebarType.value === SidebarType.CART ? cartCount.value : favoritesCount.value;
 });
+
+// Sample images for the carousel
+const carouselImages = [
+  {
+    id: 1,
+    src: 'https://picsum.photos/seed/1/800/600',
+    alt: 'Beautiful landscape',
+    title: 'Mountain View',
+    description: 'Stunning mountain landscape with clear blue skies'
+  },
+  {
+    id: 2,
+    src: 'https://picsum.photos/seed/2/800/600',
+    alt: 'Ocean sunset',
+    title: 'Ocean Sunset',
+    description: 'Peaceful ocean view during golden hour'
+  },
+  {
+    id: 3,
+    src: 'https://picsum.photos/seed/3/800/600',
+    alt: 'Forest path',
+    title: 'Forest Trail',
+    description: 'Serene forest path through ancient trees'
+  },
+  {
+    id: 4,
+    src: 'https://picsum.photos/seed/4/800/600',
+    alt: 'City skyline',
+    title: 'Urban Life',
+    description: 'Modern city skyline at twilight'
+  },
+  {
+    id: 5,
+    src: 'https://picsum.photos/seed/5/800/600',
+    alt: 'Desert dunes',
+    title: 'Desert Journey',
+    description: 'Golden sand dunes stretching to the horizon'
+  },
+  {
+    id: 6,
+    src: 'https://picsum.photos/seed/6/800/600',
+    alt: 'Lakeside view',
+    title: 'Lakeside Retreat',
+    description: 'Tranquil lake surrounded by mountains'
+  }
+];
 
 // Sidebar handlers
 const openCart = () => {
@@ -56,7 +103,6 @@ const addToCart = (id: string) => {
   // Here you would add the item to cart
 };
 </script>
-
 
 <template>
   <div class="home">
@@ -92,6 +138,21 @@ const addToCart = (id: string) => {
     <section class="hero">
       <h1>Welcome to Our Website</h1>
       <p>Discover amazing content and explore everything we have to offer.</p>
+    </section>
+
+    <!-- Image Gallery Section -->
+    <section class="gallery-section">
+      <h2 style="clip-path: inset(50%); width: 1px;
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;">Featured Gallery</h2>
+      <div class="gallery-container">
+        <ImageCarousel :images="carouselImages" :autoplay="false" :show-navigation="false" :show-pagination="false"
+          :items-to-show="1" :wrap-around="true" :height="500" :width="'100%'" :slide-effect="'fade'"
+          :show-thumbnails="true" :thumbnails-items-to-show="4" :thumbnails-height="80" :thumbnails-gap="8"
+          :thumbnails-position="'left'" :thumbnails-direction="'column'" />
+      </div>
     </section>
 
     <section class="about">
@@ -207,7 +268,6 @@ const addToCart = (id: string) => {
   </div>
 </template>
 
-
 <style scoped>
 .home {
   text-align: center;
@@ -275,6 +335,16 @@ const addToCart = (id: string) => {
 
 .badge:hover {
   transform: scale(1.1);
+}
+
+.gallery-section {
+  padding: 60px 20px;
+  background: var(--color-gray-4);
+}
+
+.gallery-container {
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
 @keyframes badgePulse {
