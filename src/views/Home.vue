@@ -1,15 +1,94 @@
 <script setup lang="ts">
 import PageHeader from '@/components/organisms/Header/Header.vue';
+import Button from '@/components/atoms/Button/Button.vue';
+import Icon from '@/components/atoms/Icon/Icon.vue';
+import Cart from '@/components/organisms/Cart/Cart.vue';
+import Favorites from '@/components/organisms/Favorites/Favorites.vue';
+import { ref, computed } from 'vue';
 
 defineOptions({
   name: "HomePage"
 })
+
+enum SidebarType {
+  CART = 'cart',
+  FAVORITES = 'favorites'
+}
+
+// Mock data for cart and favorites count
+const cartCount = ref(2);
+const favoritesCount = ref(1);
+
+// Sidebar state
+const sidebarType = ref<SidebarType | null>(null);
+
+// Computed properties
+const isSidebarOpen = computed(() => sidebarType.value !== null);
+const currentCount = computed(() => {
+  return sidebarType.value === SidebarType.CART ? cartCount.value : favoritesCount.value;
+});
+
+// Sidebar handlers
+const openCart = () => {
+  sidebarType.value = SidebarType.CART;
+};
+
+const openFavorites = () => {
+  sidebarType.value = SidebarType.FAVORITES;
+};
+
+const closeSidebar = () => {
+  sidebarType.value = null;
+};
+
+const removeFromCart = (id: string) => {
+  cartCount.value = Math.max(0, cartCount.value - 1);
+  // Here you would remove the item from cart
+};
+
+const removeFromFavorites = (id: string) => {
+  favoritesCount.value = Math.max(0, favoritesCount.value - 1);
+  // Here you would remove the item from favorites
+};
+
+const addToCart = (id: string) => {
+  cartCount.value += 1;
+  // Here you would add the item to cart
+};
 </script>
 
 
 <template>
   <div class="home">
     <PageHeader />
+    <Button class="sidebar-button" variant="ghost" :style="{ top: '140px' }" @click="openCart">
+      <div class="icon-with-badge">
+        <Icon name="cart" w="27" h="24" class="icon-cart" />
+        <span v-if="cartCount > 0" class="badge" :aria-label="`${cartCount} items in cart`">
+          {{ cartCount > 99 ? '99+' : cartCount }}
+        </span>
+      </div>
+    </Button>
+    <Button class="sidebar-button" variant="ghost" :style="{ top: '240px' }" @click="openFavorites">
+      <div class="icon-with-badge">
+        <Icon name="heart" w="27" h="24" class="icon-heart" />
+        <span v-if="favoritesCount > 0" class="badge" :aria-label="`${favoritesCount} items in favorites`">
+          {{ favoritesCount > 99 ? '99+' : favoritesCount }}
+        </span>
+      </div>
+    </Button>
+
+    <!-- Single Sidebar Container -->
+    <div v-if="isSidebarOpen" class="sidebar-overlay" @click="closeSidebar">
+      <div class="sidebar-container" @click.stop>
+        <Cart v-if="sidebarType === SidebarType.CART" :is-open="true" :cart-count="currentCount" @close="closeSidebar"
+          @remove-item="removeFromCart" />
+
+        <Favorites v-if="sidebarType === SidebarType.FAVORITES" :is-open="true" :favorites-count="currentCount"
+          @close="closeSidebar" @remove-favorite="removeFromFavorites" @add-to-cart="addToCart" />
+      </div>
+    </div>
+
     <section class="hero">
       <h1>Welcome to Our Website</h1>
       <p>Discover amazing content and explore everything we have to offer.</p>
@@ -135,5 +214,80 @@ defineOptions({
   width: 100%;
   padding: 0;
   margin: 0 auto;
+}
+
+.sidebar-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  border-radius: 6px 0 0 6px;
+  position: fixed;
+  height: 84px;
+  width: 80px;
+  right: 0;
+  background-color: var(--color-white);
+  box-shadow: 0 0 10px 0 var(--color-gray);
+}
+
+.sidebar-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.1);
+  z-index: 2;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.sidebar-container {
+  width: 400px;
+  height: 100vh;
+  background: var(--color-white);
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.icon-with-badge {
+  position: relative;
+  display: inline-block;
+}
+
+.badge {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  background: var(--color-red);
+  color: var(--color-white);
+  border-radius: 50%;
+  width: 14px;
+  height: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 600;
+  border: 1px solid var(--color-white);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, var(--color-gray-3));
+  transition: all 0.2s ease;
+  animation: badgePulse 0.3s ease-out;
+}
+
+.badge:hover {
+  transform: scale(1.1);
+}
+
+@keyframes badgePulse {
+  0% {
+    transform: scale(0);
+  }
+
+  50% {
+    transform: scale(1.2);
+  }
+
+  100% {
+    transform: scale(1);
+  }
 }
 </style>
