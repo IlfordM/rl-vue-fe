@@ -43,7 +43,7 @@ const props = withDefaults(defineProps<Props>(), {
   wrapAround: true,
   mouseDrag: true,
   touchDrag: true,
-  height: 400,
+  height: 467,
   width: '100%',
   slideEffect: 'slide',
   showThumbnails: false,
@@ -78,7 +78,7 @@ const thumbnailsConfig = computed(() => ({
   touchDrag: false,
   mouseDrag: false,
   gap: props.thumbnailsGap,
-  dir: props.thumbnailsDirection === 'column' ? 'ttb' : 'ltr',
+  dir: (props.thumbnailsDirection === 'column' ? 'ttb' : 'ltr') as 'ttb' | 'ltr',
 }))
 </script>
 
@@ -202,7 +202,7 @@ const thumbnailsConfig = computed(() => ({
   --vc-nav-color: var(--color-gray);
   --vc-nav-width: 32px;
   --vc-nav-height: 32px;
-  height: 500px;
+  height: v-bind('props.thumbnailsHeight + "px"');
   flex-shrink: 0;
   border: 1px solid var(--color-gray-3);
   border-radius: 4px;
@@ -211,7 +211,7 @@ const thumbnailsConfig = computed(() => ({
 
 .thumbnails-carousel-left :deep(.carousel__viewport) {
   position: relative;
-  height: 400px;
+  height: 360px;
   top: 42px;
 }
 

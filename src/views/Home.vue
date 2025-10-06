@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import PageHeader from '@/components/organisms/Header/Header.vue';
+import PageFooter from '@/components/organisms/Footer/Footer.vue';
 import Button from '@/components/atoms/Button/Button.vue';
 import Icon from '@/components/atoms/Icon/Icon.vue';
 import Cart from '@/components/organisms/Cart/Cart.vue';
@@ -102,6 +103,14 @@ const addToCart = (id: string) => {
   cartCount.value += 1;
   // Here you would add the item to cart
 };
+
+const product = ref({
+  id: '1',
+  name: 'Sample Product',
+  price: 99.99,
+  image: 'https://picsum.photos/seed/product/300/300',
+  description: 'A great product for your needs'
+});
 </script>
 
 <template>
@@ -136,22 +145,14 @@ const addToCart = (id: string) => {
     </div>
 
     <section class="hero">
-      <h1>Welcome to Our Website</h1>
-      <p>Discover amazing content and explore everything we have to offer.</p>
+      <h1>RL shop</h1>
     </section>
-
-    <!-- Image Gallery Section -->
-    <section class="gallery-section">
-      <h2 style="clip-path: inset(50%); width: 1px;
-  height: 1px;
-  overflow: hidden;
-  position: absolute;
-  white-space: nowrap;">Featured Gallery</h2>
+    <section class="item-section">
       <div class="gallery-container">
         <ImageCarousel :images="carouselImages" :autoplay="false" :show-navigation="false" :show-pagination="false"
-          :items-to-show="1" :wrap-around="true" :height="500" :width="'100%'" :slide-effect="'fade'"
-          :show-thumbnails="true" :thumbnails-items-to-show="4" :thumbnails-height="80" :thumbnails-gap="8"
-          :thumbnails-position="'left'" :thumbnails-direction="'column'" />
+          :items-to-show="1" :wrap-around="true" :width="'100%'" :slide-effect="'fade'" :show-thumbnails="true"
+          :thumbnails-items-to-show="4" :thumbnails-height="465" :thumbnails-gap="4" :thumbnails-position="'left'"
+          :thumbnails-direction="'column'" />
       </div>
     </section>
 
@@ -266,6 +267,7 @@ const addToCart = (id: string) => {
       <button class="cta-button">Get Started Today</button>
     </section>
   </div>
+  <PageFooter />
 </template>
 
 <style scoped>
@@ -337,15 +339,16 @@ const addToCart = (id: string) => {
   transform: scale(1.1);
 }
 
-.gallery-section {
-  padding: 60px 20px;
-  background: var(--color-gray-4);
+.item-section {
+  display: flex;
+  gap: 20px;
+  height: 467px;
 }
 
 .gallery-container {
-  max-width: 1000px;
-  margin: 0 auto;
+  max-width: 587px;
 }
+
 
 @keyframes badgePulse {
   0% {

@@ -29,14 +29,15 @@ defineOptions({
 <style scoped>
 .page-header {
   position: sticky;
-  top: 48px;
-  z-index: 1;
+  top: 45px;
+  z-index: 3;
   width: 100%;
   display: inline-flex;
   align-items: center;
   gap: 12px;
   color: var(--color-blue);
   background-color: var(--color-white);
-  margin-bottom: 64px;
+  padding-bottom: 10px;
+  margin-bottom: 14px;
 }
 </style>
