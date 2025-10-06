@@ -27,8 +27,7 @@ import Icon from "./components/atoms/Icon/Icon.vue"
 <style scoped>
 .app-container {
   position: relative;
-  width: 100%;
-  max-width: 1000px;
+  width: vw;
   padding: 0 100px;
   margin: 0 auto;
 }
