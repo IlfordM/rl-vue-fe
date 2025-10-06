@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/vue3'
-import ImageCarousel from './ImageCarousel.vue'
+import type { Meta, StoryObj } from '@storybook/vue3';
+import ImageCarousel from './ImageCarousel.vue';
 
 const meta: Meta<typeof ImageCarousel> = {
   title: 'Organisms/ImageCarousel',
@@ -85,10 +85,10 @@ const meta: Meta<typeof ImageCarousel> = {
       description: 'Direction of thumbnails layout',
     },
   },
-}
+};
 
-export default meta
-type Story = StoryObj<typeof meta>
+export default meta;
+type Story = StoryObj<typeof meta>;
 
 const sampleImages = Array.from({ length: 10 }, (_, index) => ({
   id: index + 1,
@@ -96,7 +96,7 @@ const sampleImages = Array.from({ length: 10 }, (_, index) => ({
   alt: `Gallery Image ${index + 1}`,
   title: `Image ${index + 1}`,
   description: `Beautiful image ${index + 1} from our gallery`,
-}))
+}));
 
 export const Default: Story = {
   args: {
@@ -111,7 +111,7 @@ export const Default: Story = {
     slideEffect: 'slide',
     showThumbnails: false,
   },
-}
+};
 
 export const WithThumbnails: Story = {
   args: {
@@ -129,7 +129,7 @@ export const WithThumbnails: Story = {
     thumbnailsHeight: 80,
     thumbnailsGap: 10,
   },
-}
+};
 
 export const LeftThumbnailsColumn: Story = {
   args: {
@@ -149,22 +149,7 @@ export const LeftThumbnailsColumn: Story = {
     thumbnailsPosition: 'left',
     thumbnailsDirection: 'column',
   },
-}
-
-export const FadeEffect: Story = {
-  args: {
-    images: sampleImages,
-    autoplay: false,
-    showNavigation: true,
-    showPagination: true,
-    itemsToShow: 1,
-    wrapAround: true,
-    height: 400,
-    width: '600px',
-    slideEffect: 'fade',
-    showThumbnails: false,
-  },
-}
+};
 
 export const Autoplay: Story = {
   args: {
@@ -180,7 +165,7 @@ export const Autoplay: Story = {
     slideEffect: 'slide',
     showThumbnails: false,
   },
-}
+};
 
 export const MultipleItems: Story = {
   args: {
@@ -196,25 +181,7 @@ export const MultipleItems: Story = {
     slideEffect: 'slide',
     showThumbnails: false,
   },
-}
-
-export const GalleryWithThumbnails: Story = {
-  args: {
-    images: sampleImages,
-    autoplay: false,
-    showNavigation: true,
-    showPagination: false,
-    itemsToShow: 1,
-    wrapAround: true,
-    height: 500,
-    width: '700px',
-    slideEffect: 'fade',
-    showThumbnails: true,
-    thumbnailsItemsToShow: 8,
-    thumbnailsHeight: 100,
-    thumbnailsGap: 8,
-  },
-}
+};
 
 export const NoNavigation: Story = {
   args: {
@@ -230,7 +197,7 @@ export const NoNavigation: Story = {
     slideEffect: 'slide',
     showThumbnails: false,
   },
-}
+};
 
 export const NoPagination: Story = {
   args: {
@@ -245,4 +212,4 @@ export const NoPagination: Story = {
     slideEffect: 'slide',
     showThumbnails: false,
   },
-}
+};

@@ -5,8 +5,8 @@ import Button from '@/components/atoms/Button/Button.vue';
 import Icon from '@/components/atoms/Icon/Icon.vue';
 import Cart from '@/components/organisms/Cart/Cart.vue';
 import Favorites from '@/components/organisms/Favorites/Favorites.vue';
-import ImageCarousel from '@/components/organisms/Carousel/ImageCarousel.vue';
 import { ref, computed } from 'vue';
+import Product from '@/components/organisms/Product/Product.vue';
 
 defineOptions({
   name: "HomePage"
@@ -30,51 +30,7 @@ const currentCount = computed(() => {
   return sidebarType.value === SidebarType.CART ? cartCount.value : favoritesCount.value;
 });
 
-// Sample images for the carousel
-const carouselImages = [
-  {
-    id: 1,
-    src: 'https://picsum.photos/seed/1/800/600',
-    alt: 'Beautiful landscape',
-    title: 'Mountain View',
-    description: 'Stunning mountain landscape with clear blue skies'
-  },
-  {
-    id: 2,
-    src: 'https://picsum.photos/seed/2/800/600',
-    alt: 'Ocean sunset',
-    title: 'Ocean Sunset',
-    description: 'Peaceful ocean view during golden hour'
-  },
-  {
-    id: 3,
-    src: 'https://picsum.photos/seed/3/800/600',
-    alt: 'Forest path',
-    title: 'Forest Trail',
-    description: 'Serene forest path through ancient trees'
-  },
-  {
-    id: 4,
-    src: 'https://picsum.photos/seed/4/800/600',
-    alt: 'City skyline',
-    title: 'Urban Life',
-    description: 'Modern city skyline at twilight'
-  },
-  {
-    id: 5,
-    src: 'https://picsum.photos/seed/5/800/600',
-    alt: 'Desert dunes',
-    title: 'Desert Journey',
-    description: 'Golden sand dunes stretching to the horizon'
-  },
-  {
-    id: 6,
-    src: 'https://picsum.photos/seed/6/800/600',
-    alt: 'Lakeside view',
-    title: 'Lakeside Retreat',
-    description: 'Tranquil lake surrounded by mountains'
-  }
-];
+
 
 // Sidebar handlers
 const openCart = () => {
@@ -106,11 +62,43 @@ const addToCart = (id: string) => {
 
 const product = ref({
   id: '1',
-  name: 'Sample Product',
-  price: 99.99,
-  image: 'https://picsum.photos/seed/product/300/300',
-  description: 'A great product for your needs'
+  name: 'Premium Wireless Headphones',
+  price: 199.99,
+  originalPrice: 249.99,
+  discount: 20,
+  image: 'https://picsum.photos/seed/product/400/400',
+  description: 'High-quality wireless headphones with noise cancellation and premium sound quality.',
+  rating: 4.5,
+  reviewCount: 128,
+  inStock: true,
+  tags: ['Wireless', 'Noise Cancelling', 'Premium'],
+  colors: [
+    { name: 'Black', value: '#000000', available: true },
+    { name: 'White', value: '#ffffff', available: true },
+    { name: 'Blue', value: '#3b82f6', available: false }
+  ],
+  sizes: [
+    { name: 'S', available: true },
+    { name: 'M', available: true },
+    { name: 'L', available: false },
+    { name: 'XL', available: true }
+  ]
 });
+
+const handleAddToCart = (product: any) => {
+  cartCount.value += 1;
+  console.log('Added to cart:', product);
+};
+
+const handleAddToFavorites = (product: any) => {
+  favoritesCount.value += 1;
+  console.log('Added to favorites:', product);
+};
+
+const handleRemoveFromFavorites = (product: any) => {
+  favoritesCount.value = Math.max(0, favoritesCount.value - 1);
+  console.log('Removed from favorites:', product);
+};
 </script>
 
 <template>
@@ -150,14 +138,10 @@ const product = ref({
         <h1>RL shop</h1>
       </section>
       <section class="item-section">
-        <div class="gallery-container">
-          <ImageCarousel :images="carouselImages" :autoplay="false" :show-navigation="false" :show-pagination="false"
-            :items-to-show="1" :wrap-around="true" :width="'100%'" :slide-effect="'fade'" :show-thumbnails="true"
-            :thumbnails-items-to-show="4" :thumbnails-height="465" :thumbnails-gap="4" :thumbnails-position="'left'"
-            :thumbnails-direction="'column'" />
-        </div>
-        <div class="item-details">
 
+        <div class="item-details">
+          <Product :product="product" variant="detailed" @add-to-cart="handleAddToCart"
+            @add-to-favorites="handleAddToFavorites" @remove-from-favorites="handleRemoveFromFavorites" />
         </div>
       </section>
 
@@ -369,9 +353,7 @@ const product = ref({
   }
 }
 
-.gallery-container {
-  max-width: 587px;
-}
+
 
 
 @keyframes badgePulse {
