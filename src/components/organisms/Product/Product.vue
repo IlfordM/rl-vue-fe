@@ -3,6 +3,7 @@ import Button from "../../atoms/Button/Button.vue"
 import Icon from "../../atoms/Icon/Icon.vue"
 import PriceWithDiscount from "../../molecules/PriceWithDiscount/PriceWithDiscount.vue"
 import ImageCarousel from '@/components/organisms/Carousel/ImageCarousel.vue';
+import Breadcrumb from '@/components/organisms/Breadcrumb/Breadcrumb.vue';
 import { ref } from 'vue';
 
 // Sample images for the carousel
@@ -103,6 +104,14 @@ const selectedColor = ref<string>("")
 const selectedSize = ref<string>("")
 const isInFavorites = ref(false)
 
+// Add breadcrumb items
+const breadcrumbItems = ref([
+  { label: 'Home', href: '/' },
+  { label: 'Products', href: '/products' },
+  { label: 'Electronics', href: '/products/electronics' },
+  { label: props.product.name, active: true }
+]);
+
 const handleAddToCart = () => {
   emit("addToCart", props.product)
 }
@@ -139,6 +148,9 @@ const handleSizeSelect = (size: string) => {
 
     <!-- Product Info -->
     <div class="product-info">
+      <!-- Breadcrumb -->
+      <Breadcrumb :items="breadcrumbItems" class="product-breadcrumb" />
+
       <!-- Product Name -->
       <h3 class="product-name">{{ props.product.name }}</h3>
 
@@ -288,12 +300,17 @@ const handleSizeSelect = (size: string) => {
 }
 
 .product-info {
-  padding: 16px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 8px;
   flex: 1;
+}
+
+.product-breadcrumb {
+  margin-bottom: 8px;
+  padding: 0;
+  font-size: 8px;
 }
 
 .product-name {

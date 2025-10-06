@@ -79,7 +79,8 @@ const handleClick = (item: BreadcrumbItem, index: number) => {
   display: flex;
   align-items: center;
   padding: 8px 0;
-  font-size: 14px;
+  font-size: inherit;
+  /* Use parent font-size instead of fixed 14px */
   color: var(--color-gray);
 }
 
@@ -87,6 +88,7 @@ const handleClick = (item: BreadcrumbItem, index: number) => {
   display: flex;
   align-items: center;
   list-style: none;
+  font-size: inherit;
   margin: 0;
   padding: 0;
   gap: 4px;
@@ -96,11 +98,13 @@ const handleClick = (item: BreadcrumbItem, index: number) => {
   display: flex;
   align-items: center;
   gap: 4px;
+  font-size: inherit;
 }
 
 .breadcrumb-link {
   color: var(--color-blue);
   text-decoration: none;
+  font-size: inherit;
   padding: 4px 8px;
   border-radius: 4px;
   transition: all 0.2s ease;
@@ -117,6 +121,7 @@ const handleClick = (item: BreadcrumbItem, index: number) => {
 .breadcrumb-current {
   color: var(--color-gray);
   font-weight: 500;
+  font-size: inherit;
   padding: 4px 8px;
 }
 
@@ -134,6 +139,7 @@ const handleClick = (item: BreadcrumbItem, index: number) => {
 
 .home-link {
   display: flex;
+  font-size: inherit;
   align-items: center;
   gap: 4px;
 }
@@ -150,7 +156,8 @@ const handleClick = (item: BreadcrumbItem, index: number) => {
 /* Responsive design */
 @media (max-width: 768px) {
   .breadcrumb {
-    font-size: 12px;
+    font-size: inherit;
+    /* Keep inheriting parent font-size */
     padding: 6px 0;
   }
 
