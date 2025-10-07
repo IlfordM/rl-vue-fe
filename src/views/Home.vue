@@ -75,6 +75,8 @@ const product = ref({
   colors: [
     { name: 'Black', value: '#000000', available: true },
     { name: 'White', value: '#ffffff', available: true },
+    { name: 'Red', value: '#ff0000', available: true },
+    { name: 'Green', value: '#00ff00', available: true },
     { name: 'Blue', value: '#3b82f6', available: false }
   ],
   sizes: [
