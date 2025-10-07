@@ -28,7 +28,8 @@
     "tailwind-merge": "^3.3.1",
     "tailwindcss-animate": "^1.0.7",
     "vue": "^3.5.18",
-    "vue-router": "^4.4.5"
+    "vue-router": "^4.4.5",
+    "vue3-carousel": "^0.16.0"
   },
   "devDependencies": {
     "@storybook/addon-docs": "^9.1.5",

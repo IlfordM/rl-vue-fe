@@ -27,8 +27,7 @@ import Icon from "./components/atoms/Icon/Icon.vue"
 <style scoped>
 .app-container {
   position: relative;
-  width: 100%;
-  max-width: 1000px;
+  width: vw;
   padding: 0 100px;
   margin: 0 auto;
 }
@@ -43,7 +42,7 @@ import Icon from "./components/atoms/Icon/Icon.vue"
   padding: 10px 0;
   text-align: end;
   background-color: white;
-  z-index: 1;
+  z-index: 3;
 }
 
 .navigation .nav-link {
