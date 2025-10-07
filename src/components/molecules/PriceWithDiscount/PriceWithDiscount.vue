@@ -28,6 +28,10 @@ const isOfferActive = computed(() => {
   return new Date() < new Date(props.offerEndDate)
 })
 
+const shouldShowDiscount = computed(() => {
+  return props.discount && props.discount > 0 && isOfferActive.value
+})
+
 const offerEndDateText = computed(() => {
   if (!props.offerEndDate) return ''
   const date = new Date(props.offerEndDate)
@@ -41,7 +45,7 @@ const formatPrice = (price: number) => {
 
 <template>
   <div class="price-with-discount">
-    <span v-if="discount && discount > 0" class="original-price">{{ formatPrice(price) }}</span>
+    <span v-if="shouldShowDiscount" class="original-price">{{ formatPrice(price) }}</span>
     <span class="discounted-price">{{ formatPrice(discountedPrice) }}</span>
     <Badge v-if="isOfferActive" variant="sale" size="lg">On Sale</Badge>
     <a v-if="isOfferActive && offerDescriptionLink" :href="offerDescriptionLink" class="offer-link">

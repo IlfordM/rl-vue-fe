@@ -38,89 +38,12 @@ export const Default: Story = {
   },
 };
 
-export const WithDiscount: Story = {
-  args: {
-    price: 199.99,
-    discount: 20,
-    currency: '$',
-  },
-};
-
 export const WithActiveOffer: Story = {
   args: {
     price: 199.99,
     discount: 20,
     currency: '$',
-    offerEndDate: '2024-12-31',
+    offerEndDate: '2035-12-31',
     offerDescriptionLink: '/offers/wireless-headphones-sale',
-  },
-};
-
-export const ExpiredOffer: Story = {
-  args: {
-    price: 199.99,
-    discount: 20,
-    currency: '$',
-    offerEndDate: '2023-01-01',
-    offerDescriptionLink: '/offers/wireless-headphones-sale',
-  },
-};
-
-export const DifferentCurrencies: Story = {
-  render: () => ({
-    components: { PriceWithDiscount },
-    template: `
-      <div style="display: flex; flex-direction: column; gap: 12px; align-items: flex-start;">
-        <PriceWithDiscount price="199.99" discount="20" currency="$" />
-        <PriceWithDiscount price="199.99" discount="20" currency="€" />
-        <PriceWithDiscount price="199.99" discount="20" currency="£" />
-        <PriceWithDiscount price="199.99" discount="20" currency="¥" />
-      </div>
-    `,
-  }),
-};
-
-export const DifferentDiscounts: Story = {
-  render: () => ({
-    components: { PriceWithDiscount },
-    template: `
-      <div style="display: flex; flex-direction: column; gap: 12px; align-items: flex-start;">
-        <PriceWithDiscount price="199.99" discount="10" currency="$" />
-        <PriceWithDiscount price="199.99" discount="25" currency="$" />
-        <PriceWithDiscount price="199.99" discount="50" currency="$" />
-        <PriceWithDiscount price="199.99" discount="75" currency="$" />
-      </div>
-    `,
-  }),
-};
-
-export const WithAndWithoutOffer: Story = {
-  render: () => ({
-    components: { PriceWithDiscount },
-    template: `
-      <div style="display: flex; flex-direction: column; gap: 12px; align-items: flex-start;">
-        <PriceWithDiscount price="199.99" discount="20" currency="$" />
-        <PriceWithDiscount price="199.99" discount="20" currency="$"
-          offer-end-date="2024-12-31"
-          offer-description-link="/offers/wireless-headphones-sale" />
-      </div>
-    `,
-  }),
-};
-
-export const Interactive: Story = {
-  args: {
-    price: 199.99,
-    discount: 20,
-    currency: '$',
-    offerEndDate: '2024-12-31',
-    offerDescriptionLink: '/offers/wireless-headphones-sale',
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: 'Interactive price component with all controls available.',
-      },
-    },
   },
 };
