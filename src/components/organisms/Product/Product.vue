@@ -94,6 +94,7 @@ const props = withDefaults(defineProps<Props>(), {
 
 const emit = defineEmits<{
   addToCart: [product: Product]
+  buyNow: [product: Product]
   addToFavorites: [product: Product]
   removeFromFavorites: [product: Product]
   selectColor: [color: string]
@@ -123,6 +124,10 @@ const handleToggleFavorites = () => {
     emit("addToFavorites", props.product)
   }
   isInFavorites.value = !isInFavorites.value
+}
+
+const handleBuyNow = () => {
+  emit("buyNow", props.product)
 }
 
 const handleColorSelect = (color: string) => {
@@ -218,10 +223,20 @@ const handleSizeSelect = (size: string) => {
 
       <!-- Actions -->
       <div v-if="props.showAddToCart" class="product-actions">
-        <Button variant="primary" size="md" :disabled="!props.product.inStock" @click="handleAddToCart"
+        <Button variant="selected" size="md" :disabled="!props.product.inStock" @click="handleAddToCart"
           class="add-to-cart-btn">
           <Icon name="cart-plus" w="16" h="16" />
           Add to Cart
+        </Button>
+        <Button variant="primary" size="md" :disabled="!props.product.inStock" @click="handleBuyNow"
+          class="buy-now-btn">
+          <Icon name="shopping-bag" w="16" h="16" />
+          Buy Now
+        </Button>
+        <Button v-if="props.showFavorites" variant="primary" size="md" @click="handleToggleFavorites"
+          class="add-to-wishlist-btn">
+          <Icon name="heart-plus" w="22" h="22" />
+          {{ isInFavorites ? 'Remove from Wishlist' : 'Add to Wishlist' }}
         </Button>
       </div>
     </div>
@@ -456,12 +471,14 @@ const handleSizeSelect = (size: string) => {
 }
 
 .product-actions {
+  width: 100%;
   margin-top: auto;
   padding-top: 16px;
+  display: flex;
+  gap: 8px;
 }
 
 .add-to-cart-btn {
-  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
