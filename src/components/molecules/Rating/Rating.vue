@@ -1,58 +1,70 @@
 <script setup lang="ts">
-import Icon from "../../atoms/Icon/Icon.vue"
+import Icon from '../../atoms/Icon/Icon.vue';
 
 defineOptions({
-  name: "ProductRating"
-})
+  name: 'ProductRating',
+});
 
 interface Props {
-  rating: number
-  reviewCount?: number
-  showReviewCount?: boolean
-  showReviewsLink?: boolean
-  reviewsLink?: string
-  size?: "sm" | "md" | "lg"
-  class?: string
+  rating: number;
+  reviewCount?: number;
+  showReviewCount?: boolean;
+  showReviewsLink?: boolean;
+  reviewsLink?: string;
+  size?: 'sm' | 'md' | 'lg';
+  class?: string;
 }
 
 const props = withDefaults(defineProps<Props>(), {
   showReviewCount: true,
   showReviewsLink: false,
-  size: "md"
-})
+  size: 'md',
+});
 
 const iconSize = {
-  sm: "12",
-  md: "16",
-  lg: "20"
-}
+  sm: '12',
+  md: '16',
+  lg: '20',
+};
 
 const getStarType = (starIndex: number, rating: number) => {
-  if (starIndex <= Math.floor(rating)) return "star-fill"
-  if (starIndex === Math.ceil(rating) && rating % 1 !== 0) return "star-half"
-  return "star"
-}
+  if (starIndex <= Math.floor(rating)) return 'star-fill';
+  if (starIndex === Math.ceil(rating) && rating % 1 !== 0) return 'star-half';
+  return 'star';
+};
 
 const getStarClass = (starIndex: number) => {
-  const classes = []
-  if (starIndex <= Math.floor(props.rating)) classes.push('filled')
-  if (starIndex === Math.ceil(props.rating) && props.rating % 1 !== 0) classes.push('half-filled')
-  if (starIndex > Math.ceil(props.rating) || (starIndex > Math.floor(props.rating) && props.rating % 1 === 0)) classes.push('stroke')
-  return classes.join(' ')
-}
+  const classes = [];
+  if (starIndex <= Math.floor(props.rating)) classes.push('filled');
+  if (starIndex === Math.ceil(props.rating) && props.rating % 1 !== 0) classes.push('half-filled');
+  if (
+    starIndex > Math.ceil(props.rating) ||
+    (starIndex > Math.floor(props.rating) && props.rating % 1 === 0)
+  )
+    classes.push('stroke');
+  return classes.join(' ');
+};
 </script>
 
 <template>
   <div class="rating" :class="[`rating--${props.size}`, props.class]">
     <div class="rating-stars">
       <template v-for="star in 5" :key="star">
-        <Icon :name="getStarType(star, props.rating)" :w="iconSize[props.size]" :h="iconSize[props.size]"
-          :class="getStarClass(star)" />
+        <Icon
+          :name="getStarType(star, props.rating)"
+          :w="iconSize[props.size]"
+          :h="iconSize[props.size]"
+          :class="getStarClass(star)"
+        />
       </template>
     </div>
     <span v-if="props.showReviewCount" class="rating-text">
       {{ props.rating }}
-      <a v-if="props.showReviewsLink && props.reviewsLink" :href="props.reviewsLink" class="reviews-link">
+      <a
+        v-if="props.showReviewsLink && props.reviewsLink"
+        :href="props.reviewsLink"
+        class="reviews-link"
+      >
         See All Reviews ({{ props.reviewCount || 0 }})
       </a>
       <span v-else>({{ props.reviewCount || 0 }})</span>

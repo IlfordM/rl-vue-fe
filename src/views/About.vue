@@ -1,9 +1,8 @@
 <script setup lang="ts">
 defineOptions({
-  name: "AboutPage"
-})
+  name: 'AboutPage',
+});
 </script>
-
 
 <template>
   <div class="about">
@@ -12,7 +11,6 @@ defineOptions({
     <router-link to="/">Go to Home</router-link>
   </div>
 </template>
-
 
 <style scoped>
 .about {

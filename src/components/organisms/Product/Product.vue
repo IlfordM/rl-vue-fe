@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import Button from "../../atoms/Button/Button.vue"
-import Icon from "../../atoms/Icon/Icon.vue"
-import PriceWithDiscount from "../../molecules/PriceWithDiscount/PriceWithDiscount.vue"
-import Rating from "../../molecules/Rating/Rating.vue"
-import Sizes from "../../molecules/Sizes/Sizes.vue"
-import Colors from "../../molecules/Colors/Colors.vue"
+import { ref } from 'vue';
+import Button from '../../atoms/Button/Button.vue';
+import Icon from '../../atoms/Icon/Icon.vue';
+import PriceWithDiscount from '../../molecules/PriceWithDiscount/PriceWithDiscount.vue';
+import Rating from '../../molecules/Rating/Rating.vue';
+import Sizes from '../../molecules/Sizes/Sizes.vue';
+import Colors from '../../molecules/Colors/Colors.vue';
 import ImageCarousel from '@/components/organisms/Carousel/ImageCarousel.vue';
 import Breadcrumb from '@/components/organisms/Breadcrumb/Breadcrumb.vue';
 // Sample images for the carousel
@@ -15,78 +15,78 @@ const carouselImages = [
     src: 'https://picsum.photos/seed/1/800/600',
     alt: 'Beautiful landscape',
     title: 'Mountain View',
-    description: 'Stunning mountain landscape with clear blue skies'
+    description: 'Stunning mountain landscape with clear blue skies',
   },
   {
     id: 2,
     src: 'https://picsum.photos/seed/2/800/600',
     alt: 'Ocean sunset',
     title: 'Ocean Sunset',
-    description: 'Peaceful ocean view during golden hour'
+    description: 'Peaceful ocean view during golden hour',
   },
   {
     id: 3,
     src: 'https://picsum.photos/seed/3/800/600',
     alt: 'Forest path',
     title: 'Forest Trail',
-    description: 'Serene forest path through ancient trees'
+    description: 'Serene forest path through ancient trees',
   },
   {
     id: 4,
     src: 'https://picsum.photos/seed/4/800/600',
     alt: 'City skyline',
     title: 'Urban Life',
-    description: 'Modern city skyline at twilight'
+    description: 'Modern city skyline at twilight',
   },
   {
     id: 5,
     src: 'https://picsum.photos/seed/5/800/600',
     alt: 'Desert dunes',
     title: 'Desert Journey',
-    description: 'Golden sand dunes stretching to the horizon'
+    description: 'Golden sand dunes stretching to the horizon',
   },
   {
     id: 6,
     src: 'https://picsum.photos/seed/6/800/600',
     alt: 'Lakeside view',
     title: 'Lakeside Retreat',
-    description: 'Tranquil lake surrounded by mountains'
-  }
+    description: 'Tranquil lake surrounded by mountains',
+  },
 ];
 
 defineOptions({
-  name: "ProductCard"
-})
+  name: 'ProductCard',
+});
 
 export interface IProduct {
-  id: string
-  name: string
-  price: number
-  originalPrice?: number
-  discount?: number
-  image: string
-  description: string
-  rating?: number
-  reviewCount?: number
-  inStock?: boolean
-  tags?: string[]
-  colors?: Array<{ name: string; value: string; available: boolean }>
-  sizes?: Array<{ name: string; available: boolean }>
-  offerEndDate?: string
-  offerDescriptionLink?: string
-  infoText?: string
-  withInfo?: boolean
+  id: string;
+  name: string;
+  price: number;
+  originalPrice?: number;
+  discount?: number;
+  image: string;
+  description: string;
+  rating?: number;
+  reviewCount?: number;
+  inStock?: boolean;
+  tags?: string[];
+  colors?: Array<{ name: string; value: string; available: boolean }>;
+  sizes?: Array<{ name: string; available: boolean }>;
+  offerEndDate?: string;
+  offerDescriptionLink?: string;
+  infoText?: string;
+  withInfo?: boolean;
 }
 
 interface Props {
-  product: IProduct
-  showAddToCart?: boolean
-  showFavorites?: boolean
-  showRating?: boolean
-  showColors?: boolean
-  showSizes?: boolean
-  variant?: "default" | "compact" | "detailed"
-  class?: string
+  product: IProduct;
+  showAddToCart?: boolean;
+  showFavorites?: boolean;
+  showRating?: boolean;
+  showColors?: boolean;
+  showSizes?: boolean;
+  variant?: 'default' | 'compact' | 'detailed';
+  class?: string;
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -95,66 +95,78 @@ const props = withDefaults(defineProps<Props>(), {
   showRating: true,
   showColors: true,
   showSizes: true,
-  variant: "default"
-})
+  variant: 'default',
+});
 
 const emit = defineEmits<{
-  addToCart: [product: IProduct]
-  buyNow: [product: IProduct]
-  addToFavorites: [product: IProduct]
-  removeFromFavorites: [product: IProduct]
-  selectColor: [color: string]
-  selectSize: [size: string]
-}>()
+  addToCart: [product: IProduct];
+  buyNow: [product: IProduct];
+  addToFavorites: [product: IProduct];
+  removeFromFavorites: [product: IProduct];
+  selectColor: [color: string];
+  selectSize: [size: string];
+}>();
 
-const selectedColor = ref<string>("")
-const selectedSize = ref<string>("")
-const isInFavorites = ref(false)
+const selectedColor = ref<string>('');
+const selectedSize = ref<string>('');
+const isInFavorites = ref(false);
 
 // Add breadcrumb items
 const breadcrumbItems = ref([
   { label: 'Home', href: '/' },
   { label: 'Products', href: '/products' },
   { label: 'Electronics', href: '/products/electronics' },
-  { label: props.product.name, active: true }
+  { label: props.product.name, active: true },
 ]);
 
 const handleAddToCart = () => {
-  emit("addToCart", props.product)
-}
+  emit('addToCart', props.product);
+};
 
 const handleToggleFavorites = () => {
   if (isInFavorites.value) {
-    emit("removeFromFavorites", props.product)
+    emit('removeFromFavorites', props.product);
   } else {
-    emit("addToFavorites", props.product)
+    emit('addToFavorites', props.product);
   }
-  isInFavorites.value = !isInFavorites.value
-}
+  isInFavorites.value = !isInFavorites.value;
+};
 
 const handleBuyNow = () => {
-  emit("buyNow", props.product)
-}
+  emit('buyNow', props.product);
+};
 
 const handleColorSelect = (color: string) => {
-  selectedColor.value = color
-  emit("selectColor", color)
-}
+  selectedColor.value = color;
+  emit('selectColor', color);
+};
 
 const handleSizeSelect = (size: string) => {
-  selectedSize.value = size
-  emit("selectSize", size)
-}
+  selectedSize.value = size;
+  emit('selectSize', size);
+};
 </script>
 
 <template>
   <div class="product" :class="[`product--${props.variant}`, props.class]">
     <!-- Product Image -->
     <div class="gallery-container">
-      <ImageCarousel :images="carouselImages" :autoplay="false" :show-navigation="false" :show-pagination="false"
-        :items-to-show="1" :wrap-around="true" :width="'100%'" :slide-effect="'fade'" :show-thumbnails="true"
-        :thumbnails-items-to-show="4" :thumbnails-height="465" :thumbnails-gap="4" :thumbnails-position="'left'"
-        :thumbnails-direction="'column'" />
+      <ImageCarousel
+        :images="carouselImages"
+        :autoplay="false"
+        :show-navigation="false"
+        :show-pagination="false"
+        :items-to-show="1"
+        :wrap-around="true"
+        :width="'100%'"
+        :slide-effect="'fade'"
+        :show-thumbnails="true"
+        :thumbnails-items-to-show="4"
+        :thumbnails-height="465"
+        :thumbnails-gap="4"
+        :thumbnails-position="'left'"
+        :thumbnails-direction="'column'"
+      />
     </div>
 
     <!-- Product Info -->
@@ -166,39 +178,71 @@ const handleSizeSelect = (size: string) => {
       <h3 class="product-name">{{ props.product.name }}</h3>
 
       <!-- Rating -->
-      <Rating v-if="props.showRating && props.product.rating" :rating="props.product.rating"
-        :review-count="props.product.reviewCount" :show-reviews-link="true"
-        :reviews-link="`/products/${props.product.id}/reviews`" size="md" />
+      <Rating
+        v-if="props.showRating && props.product.rating"
+        :rating="props.product.rating"
+        :review-count="props.product.reviewCount"
+        :show-reviews-link="true"
+        :reviews-link="`/products/${props.product.id}/reviews`"
+        size="md"
+      />
 
       <!-- Price -->
       <div class="product-price">
-        <PriceWithDiscount :price="props.product.price" :original-price="props.product.originalPrice"
-          :discount="props.product.discount" :offer-end-date="props.product.offerEndDate"
-          :offer-description-link="props.product.offerDescriptionLink" />
+        <PriceWithDiscount
+          :price="props.product.price"
+          :original-price="props.product.originalPrice"
+          :discount="props.product.discount"
+          :offer-end-date="props.product.offerEndDate"
+          :offer-description-link="props.product.offerDescriptionLink"
+        />
       </div>
 
       <!-- Sizes -->
-      <Sizes v-if="props.showSizes && props.product.sizes" :sizes="props.product.sizes" :selected-size="selectedSize"
-        @select-size="handleSizeSelect" />
+      <Sizes
+        v-if="props.showSizes && props.product.sizes"
+        :sizes="props.product.sizes"
+        :selected-size="selectedSize"
+        @select-size="handleSizeSelect"
+      />
 
       <!-- Colors -->
-      <Colors v-if="props.showColors && props.product.colors" :colors="props.product.colors"
-        :selected-color="selectedColor" @select-color="handleColorSelect" />
+      <Colors
+        v-if="props.showColors && props.product.colors"
+        :colors="props.product.colors"
+        :selected-color="selectedColor"
+        @select-color="handleColorSelect"
+      />
 
       <!-- Actions -->
       <div v-if="props.showAddToCart" class="product-actions">
-        <Button variant="selected" size="md" :disabled="!props.product.inStock" @click="handleAddToCart"
-          class="add-to-cart-btn">
+        <Button
+          variant="selected"
+          size="md"
+          :disabled="!props.product.inStock"
+          @click="handleAddToCart"
+          class="add-to-cart-btn"
+        >
           <Icon name="cart-plus" w="16" h="16" />
           Add to Cart
         </Button>
-        <Button variant="primary" size="md" :disabled="!props.product.inStock" @click="handleBuyNow"
-          class="buy-now-btn">
+        <Button
+          variant="primary"
+          size="md"
+          :disabled="!props.product.inStock"
+          @click="handleBuyNow"
+          class="buy-now-btn"
+        >
           <Icon name="shopping-bag" w="16" h="16" />
           Buy Now
         </Button>
-        <Button v-if="props.showFavorites" variant="primary" size="md" @click="handleToggleFavorites"
-          class="add-to-wishlist-btn">
+        <Button
+          v-if="props.showFavorites"
+          variant="primary"
+          size="md"
+          @click="handleToggleFavorites"
+          class="add-to-wishlist-btn"
+        >
           <Icon name="heart-plus" w="22" h="22" />
           {{ isInFavorites ? 'Remove from Wishlist' : 'Add to Wishlist' }}
         </Button>

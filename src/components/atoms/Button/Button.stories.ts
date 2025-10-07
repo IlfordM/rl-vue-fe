@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/vue3'
-import Button from './Button.vue'
+import type { Meta, StoryObj } from '@storybook/vue3';
+import Button from './Button.vue';
 
 const meta: Meta<typeof Button> = {
   title: 'Atoms/Button',
@@ -42,10 +42,10 @@ const meta: Meta<typeof Button> = {
       description: 'Additional CSS classes',
     },
   },
-}
+};
 
-export default meta
-type Story = StoryObj<typeof meta>
+export default meta;
+type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
@@ -54,70 +54,70 @@ export const Default: Story = {
     disabled: false,
     loading: false,
   },
-  render: (args) => ({
+  render: args => ({
     components: { Button },
     setup() {
-      return { args }
+      return { args };
     },
     template: '<Button v-bind="args">Click me</Button>',
   }),
-}
+};
 
 export const Primary: Story = {
   args: {
     variant: 'primary',
     size: 'md',
   },
-  render: (args) => ({
+  render: args => ({
     components: { Button },
     setup() {
-      return { args }
+      return { args };
     },
     template: '<Button v-bind="args">Primary Button</Button>',
   }),
-}
+};
 
 export const Secondary: Story = {
   args: {
     variant: 'secondary',
     size: 'md',
   },
-  render: (args) => ({
+  render: args => ({
     components: { Button },
     setup() {
-      return { args }
+      return { args };
     },
     template: '<Button v-bind="args">Secondary Button</Button>',
   }),
-}
+};
 
 export const Ghost: Story = {
   args: {
     variant: 'ghost',
     size: 'md',
   },
-  render: (args) => ({
+  render: args => ({
     components: { Button },
     setup() {
-      return { args }
+      return { args };
     },
     template: '<Button v-bind="args">Ghost Button</Button>',
   }),
-}
+};
 
 export const Selected: Story = {
   args: {
     variant: 'selected',
     size: 'md',
   },
-  render: (args) => ({
+  render: args => ({
     components: { Button },
     setup() {
-      return { args }
+      return { args };
     },
     template: '<Button v-bind="args">Delete</Button>',
   }),
-}
+};
 
 export const Sizes: Story = {
   render: () => ({
@@ -137,7 +137,7 @@ export const Sizes: Story = {
       },
     },
   },
-}
+};
 
 export const States: Story = {
   render: () => ({
@@ -157,7 +157,7 @@ export const States: Story = {
       },
     },
   },
-}
+};
 
 export const AllVariants: Story = {
   render: () => ({
@@ -182,7 +182,7 @@ export const AllVariants: Story = {
       },
     },
   },
-}
+};
 
 export const WithIcon: Story = {
   render: () => ({
@@ -211,4 +211,4 @@ export const WithIcon: Story = {
       },
     },
   },
-}
+};

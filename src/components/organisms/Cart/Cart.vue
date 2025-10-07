@@ -5,7 +5,7 @@ import Button from '@/components/atoms/Button/Button.vue';
 import PriceWithDiscount from '@/components/molecules/PriceWithDiscount/PriceWithDiscount.vue';
 
 defineOptions({
-  name: 'CartSidebar'
+  name: 'CartSidebar',
 });
 
 defineProps<{
@@ -20,8 +20,23 @@ defineEmits<{
 
 // Mock cart items
 const cartItems = ref([
-  { id: '1', name: 'The Perfect Pockets Long Parka', price: 195.00, discount: 10.00, size: 'XL', color: 'Yellow', quantity: 1, image: 'public/assets/images/image1.jpg' },
-  { id: '2', name: 'Product 2', price: 49.99, quantity: 1, image: 'public/assets/images/image1.jpg' }
+  {
+    id: '1',
+    name: 'The Perfect Pockets Long Parka',
+    price: 195.0,
+    discount: 10.0,
+    size: 'XL',
+    color: 'Yellow',
+    quantity: 1,
+    image: 'public/assets/images/image1.jpg',
+  },
+  {
+    id: '2',
+    name: 'Product 2',
+    price: 49.99,
+    quantity: 1,
+    image: 'public/assets/images/image1.jpg',
+  },
 ]);
 
 const totalPrice = ref(79.98);
@@ -43,16 +58,32 @@ const totalPrice = ref(79.98);
       <div v-else class="cart-items">
         <div v-for="item in cartItems" :key="item.id" class="cart-item">
           <div class="item-container">
-            <img :src="item.image" :alt="item.name" class="item-image" loading="lazy" decoding="async" w="94" h="94" />
+            <img
+              :src="item.image"
+              :alt="item.name"
+              class="item-image"
+              loading="lazy"
+              decoding="async"
+              w="94"
+              h="94"
+            />
             <div class="item-details">
               <h3 class="item-name">{{ item.name }}</h3>
-              <PriceWithDiscount :price="item.price" :discount="item.discount" class="item-price-discount" />
+              <PriceWithDiscount
+                :price="item.price"
+                :discount="item.discount"
+                class="item-price-discount"
+              />
             </div>
             <Icon name="heart" w="25" h="25" />
           </div>
           <div class="item-actions">
-            <Button variant="secondary" size="sm" @click="$emit('removeItem', item.id)">{{ item.size }}</Button>
-            <Button variant="secondary" size="sm" @click="$emit('removeItem', item.id)">{{ item.color }}</Button>
+            <Button variant="secondary" size="sm" @click="$emit('removeItem', item.id)">
+              {{ item.size }}
+            </Button>
+            <Button variant="secondary" size="sm" @click="$emit('removeItem', item.id)">
+              {{ item.color }}
+            </Button>
             <div class="quantity-controls">
               <button class="qty-btn">-</button>
               <span>{{ item.quantity }}</span>
@@ -73,14 +104,14 @@ const totalPrice = ref(79.98);
         <div class="promo-code-input">
           <input type="text" placeholder="e.g APRIL20" class="promo-code-input-field" />
           <Button variant="primary" class="promo-code-btn">
-            <Icon name="coupon" w="18" h="14" style="margin-right: 8px;" />
+            <Icon name="coupon" w="18" h="14" style="margin-right: 8px" />
             Apply
           </Button>
         </div>
       </div>
       <div class="checkout-btn-container">
-        <Button variant="selected" class="checkout-btn" style="font-size: 20px; font-weight: 500;">
-          <Icon name="cart-plus" w="16" h="16" style="margin-right: 8px;" />
+        <Button variant="selected" class="checkout-btn" style="font-size: 20px; font-weight: 500">
+          <Icon name="cart-plus" w="16" h="16" style="margin-right: 8px" />
           Checkout
         </Button>
       </div>

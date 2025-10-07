@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/vue3'
-import Icon from './Icon.vue'
+import type { Meta, StoryObj } from '@storybook/vue3';
+import Icon from './Icon.vue';
 
 const meta: Meta<typeof Icon> = {
   title: 'Atoms/Icon',
@@ -71,10 +71,10 @@ const meta: Meta<typeof Icon> = {
       description: 'Accessibility label for screen readers',
     },
   },
-}
+};
 
-export default meta
-type Story = StoryObj<typeof meta>
+export default meta;
+type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
@@ -82,7 +82,7 @@ export const Default: Story = {
     size: 24,
     fill: 'currentColor',
   },
-}
+};
 
 export const Large: Story = {
   args: {
@@ -90,7 +90,7 @@ export const Large: Story = {
     size: 48,
     fill: '#ffd700',
   },
-}
+};
 
 export const CustomDimensions: Story = {
   args: {
@@ -99,7 +99,7 @@ export const CustomDimensions: Story = {
     h: 24,
     fill: '#ff6b6b',
   },
-}
+};
 
 export const WithAriaLabel: Story = {
   args: {
@@ -108,7 +108,7 @@ export const WithAriaLabel: Story = {
     fill: '#333',
     ariaLabel: 'Search for content',
   },
-}
+};
 
 export const CustomClass: Story = {
   args: {
@@ -117,7 +117,7 @@ export const CustomClass: Story = {
     fill: '#007bff',
     class: 'fill-current hover:fill-blue-600 transition-colors',
   },
-}
+};
 
 export const AllIcons: Story = {
   render: () => ({
@@ -160,7 +160,7 @@ export const AllIcons: Story = {
           'star-half',
           'star-empty',
         ],
-      }
+      };
     },
   }),
   parameters: {
@@ -170,7 +170,7 @@ export const AllIcons: Story = {
       },
     },
   },
-}
+};
 
 export const SizeVariations: Story = {
   render: () => ({
@@ -186,7 +186,7 @@ export const SizeVariations: Story = {
     data() {
       return {
         sizes: [16, 20, 24, 32, 40, 48],
-      }
+      };
     },
   }),
   parameters: {
@@ -196,7 +196,7 @@ export const SizeVariations: Story = {
       },
     },
   },
-}
+};
 
 export const ColorVariations: Story = {
   render: () => ({
@@ -221,7 +221,7 @@ export const ColorVariations: Story = {
           { name: 'Purple', value: '#8b5cf6' },
           { name: 'Pink', value: '#ec4899' },
         ],
-      }
+      };
     },
   }),
   parameters: {
@@ -231,4 +231,4 @@ export const ColorVariations: Story = {
       },
     },
   },
-}
+};

@@ -10,12 +10,12 @@ import Product from '@/components/organisms/Product/Product.vue';
 import type { IProduct } from '@/components/organisms/Product/Product.vue';
 
 defineOptions({
-  name: "HomePage"
-})
+  name: 'HomePage',
+});
 
 enum SidebarType {
   CART = 'cart',
-  FAVORITES = 'favorites'
+  FAVORITES = 'favorites',
 }
 
 // Mock data for cart and favorites count
@@ -30,8 +30,6 @@ const isSidebarOpen = computed(() => sidebarType.value !== null);
 const currentCount = computed(() => {
   return sidebarType.value === SidebarType.CART ? cartCount.value : favoritesCount.value;
 });
-
-
 
 // Sidebar handlers
 const openCart = () => {
@@ -68,7 +66,8 @@ const product = ref({
   originalPrice: 249.99,
   discount: 20,
   image: 'https://picsum.photos/seed/product/400/400',
-  description: 'This cozy parka has a water-resistant shell made of upcycled materials, synthetic down filling, and an abundance of pockets. There are six zipper-close pockets plus one roomy velcro-close pouch. Engineered for storage, this parka provides space for all the necessities you’ll bring on your next cold-weather adventure.',
+  description:
+    'This cozy parka has a water-resistant shell made of upcycled materials, synthetic down filling, and an abundance of pockets. There are six zipper-close pockets plus one roomy velcro-close pouch. Engineered for storage, this parka provides space for all the necessities you’ll bring on your next cold-weather adventure.',
   rating: 4.5,
   reviewCount: 128,
   inStock: true,
@@ -78,7 +77,7 @@ const product = ref({
     { name: 'White', value: '#ffffff', available: true },
     { name: 'Red', value: '#ff0000', available: true },
     { name: 'Green', value: '#00ff00', available: true },
-    { name: 'Blue', value: '#3b82f6', available: false }
+    { name: 'Blue', value: '#3b82f6', available: false },
   ],
   sizes: [
     { name: 'XS', available: true },
@@ -86,12 +85,13 @@ const product = ref({
     { name: 'M', available: true },
     { name: 'L', available: false },
     { name: 'XL', available: true },
-    { name: 'XXL', available: true }
+    { name: 'XXL', available: true },
   ],
   offerEndDate: '2025-12-31',
   offerDescriptionLink: '/offers/wireless-headphones-sale',
-  infoText: 'This cozy parka has a water-resistant shell made of upcycled materials, synthetic down filling, and an abundance of pockets. There are six zipper-close pockets plus one roomy velcro-close pouch. Engineered for storage, this parka provides space for all the necessities you’ll bring on your next cold-weather adventure.',
-  withInfo: true
+  infoText:
+    'This cozy parka has a water-resistant shell made of upcycled materials, synthetic down filling, and an abundance of pockets. There are six zipper-close pockets plus one roomy velcro-close pouch. Engineered for storage, this parka provides space for all the necessities you’ll bring on your next cold-weather adventure.',
+  withInfo: true,
 });
 
 const handleAddToCart = (product: IProduct) => {
@@ -124,7 +124,11 @@ const handleRemoveFromFavorites = (product: IProduct) => {
     <Button class="sidebar-button" variant="ghost" :style="{ top: '240px' }" @click="openFavorites">
       <div class="icon-with-badge">
         <Icon name="heart" w="27" h="24" class="icon-heart" />
-        <span v-if="favoritesCount > 0" class="badge" :aria-label="`${favoritesCount} items in favorites`">
+        <span
+          v-if="favoritesCount > 0"
+          class="badge"
+          :aria-label="`${favoritesCount} items in favorites`"
+        >
           {{ favoritesCount > 99 ? '99+' : favoritesCount }}
         </span>
       </div>
@@ -133,40 +137,56 @@ const handleRemoveFromFavorites = (product: IProduct) => {
     <!-- Single Sidebar Container -->
     <div v-if="isSidebarOpen" class="sidebar-overlay" @click="closeSidebar">
       <div class="sidebar-container" @click.stop>
-        <Cart v-if="sidebarType === SidebarType.CART" :is-open="true" :cart-count="currentCount" @close="closeSidebar"
-          @remove-item="removeFromCart" />
+        <Cart
+          v-if="sidebarType === SidebarType.CART"
+          :is-open="true"
+          :cart-count="currentCount"
+          @close="closeSidebar"
+          @remove-item="removeFromCart"
+        />
 
-        <Favorites v-if="sidebarType === SidebarType.FAVORITES" :is-open="true" :favorites-count="currentCount"
-          @close="closeSidebar" @remove-favorite="removeFromFavorites" @add-to-cart="addToCart" />
+        <Favorites
+          v-if="sidebarType === SidebarType.FAVORITES"
+          :is-open="true"
+          :favorites-count="currentCount"
+          @close="closeSidebar"
+          @remove-favorite="removeFromFavorites"
+          @add-to-cart="addToCart"
+        />
       </div>
     </div>
 
     <main class="main-content">
-
       <section class="hero">
         <h1>RL shop</h1>
       </section>
       <section class="item-section">
-
         <div class="item-details">
-          <Product :product="product" variant="detailed" @add-to-cart="handleAddToCart"
-            @add-to-favorites="handleAddToFavorites" @remove-from-favorites="handleRemoveFromFavorites" />
+          <Product
+            :product="product"
+            variant="detailed"
+            @add-to-cart="handleAddToCart"
+            @add-to-favorites="handleAddToFavorites"
+            @remove-from-favorites="handleRemoveFromFavorites"
+          />
         </div>
       </section>
 
       <section class="about">
         <h2>About Us</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore
-          magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur.</p>
-        <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
-          laborum.
-          Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem
-          aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt
+          ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+          ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+        </p>
+        <p>
+          Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit
+          anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+          accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore
+          veritatis et quasi architecto beatae vitae dicta sunt explicabo.
         </p>
       </section>
-
     </main>
   </div>
   <PageFooter />
@@ -250,8 +270,6 @@ const handleRemoveFromFavorites = (product: IProduct) => {
   width: 100%;
   background-color: var(--color-gray-1);
 }
-
-
 
 @keyframes badgePulse {
   0% {

@@ -1,51 +1,61 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref } from 'vue';
 
 defineOptions({
-  name: "ColorSelector"
-})
+  name: 'ColorSelector',
+});
 
 interface Color {
-  name: string
-  value: string
-  available: boolean
+  name: string;
+  value: string;
+  available: boolean;
 }
 
 interface Props {
-  colors: Color[]
-  selectedColor?: string
-  disabled?: boolean
-  withInfo?: boolean
-  infoText?: string
+  colors: Color[];
+  selectedColor?: string;
+  disabled?: boolean;
+  withInfo?: boolean;
+  infoText?: string;
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  selectedColor: "",
+  selectedColor: '',
   disabled: false,
   withInfo: false,
-  infoText: ""
-})
+  infoText: '',
+});
 
 const emit = defineEmits<{
-  selectColor: [color: string]
-}>()
+  selectColor: [color: string];
+}>();
 
-const selectedColor = ref<string>(props.selectedColor)
+const selectedColor = ref<string>(props.selectedColor);
 
 const handleColorSelect = (color: string) => {
-  selectedColor.value = color
-  emit("selectColor", color)
-}
+  selectedColor.value = color;
+  emit('selectColor', color);
+};
 </script>
 
 <template>
   <div class="product-colors">
     <h4 class="colors-title">Colors:</h4>
     <div class="colors-list">
-      <button v-for="color in props.colors" :key="color.name" :class="['color-option', {
-        'selected': selectedColor === color.name,
-        'unavailable': !color.available
-      }]" :disabled="!color.available || props.disabled" @click="handleColorSelect(color.name)" :title="color.name">
+      <button
+        v-for="color in props.colors"
+        :key="color.name"
+        :class="[
+          'color-option',
+          {
+            selected: selectedColor === color.name,
+            unavailable: !color.available,
+          },
+        ]"
+        :disabled="!color.available || props.disabled"
+        @click="handleColorSelect(color.name)"
+        :title="color.name"
+      >
         <div class="color-circle" :style="{ backgroundColor: color.value }"></div>
         <span class="color-name">{{ color.name }}</span>
       </button>

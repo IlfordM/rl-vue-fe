@@ -1,40 +1,40 @@
 <script setup lang="ts">
-import 'vue3-carousel/carousel.css'
-import { Carousel, Slide, Navigation } from 'vue3-carousel'
-import { ref, computed } from 'vue'
+import 'vue3-carousel/carousel.css';
+import { Carousel, Slide, Navigation } from 'vue3-carousel';
+import { ref, computed } from 'vue';
 
 defineOptions({
-  name: "ImageCarousel"
+  name: 'ImageCarousel',
 });
 
 interface ImageItem {
-  id: string | number
-  src: string
-  alt: string
-  title?: string
-  description?: string
+  id: string | number;
+  src: string;
+  alt: string;
+  title?: string;
+  description?: string;
 }
 
 interface Props {
-  images: ImageItem[]
-  autoplay?: boolean
-  autoplayInterval?: number
-  showNavigation?: boolean
-  showPagination?: boolean
-  itemsToShow?: number
-  itemsToScroll?: number
-  wrapAround?: boolean
-  mouseDrag?: boolean
-  touchDrag?: boolean
-  height?: number
-  width?: string
-  slideEffect?: 'slide' | 'fade'
-  showThumbnails?: boolean
-  thumbnailsItemsToShow?: number
-  thumbnailsHeight?: number
-  thumbnailsGap?: number
-  thumbnailsPosition?: 'bottom' | 'left'
-  thumbnailsDirection?: 'row' | 'column'
+  images: ImageItem[];
+  autoplay?: boolean;
+  autoplayInterval?: number;
+  showNavigation?: boolean;
+  showPagination?: boolean;
+  itemsToShow?: number;
+  itemsToScroll?: number;
+  wrapAround?: boolean;
+  mouseDrag?: boolean;
+  touchDrag?: boolean;
+  height?: number;
+  width?: string;
+  slideEffect?: 'slide' | 'fade';
+  showThumbnails?: boolean;
+  thumbnailsItemsToShow?: number;
+  thumbnailsHeight?: number;
+  thumbnailsGap?: number;
+  thumbnailsPosition?: 'bottom' | 'left';
+  thumbnailsDirection?: 'row' | 'column';
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -55,14 +55,14 @@ const props = withDefaults(defineProps<Props>(), {
   thumbnailsHeight: 80,
   thumbnailsGap: 10,
   thumbnailsPosition: 'bottom',
-  thumbnailsDirection: 'row'
-})
+  thumbnailsDirection: 'row',
+});
 
-const currentSlide = ref(0)
+const currentSlide = ref(0);
 
 const slideTo = (nextSlide: number) => {
-  currentSlide.value = nextSlide
-}
+  currentSlide.value = nextSlide;
+};
 
 const galleryConfig = computed(() => ({
   itemsToShow: props.itemsToShow,
@@ -73,7 +73,7 @@ const galleryConfig = computed(() => ({
   touchDrag: props.touchDrag,
   height: props.height,
   autoplay: props.autoplay ? props.autoplayInterval : 0,
-}))
+}));
 
 const thumbnailsConfig = computed(() => ({
   height: props.thumbnailsHeight,
@@ -83,16 +83,27 @@ const thumbnailsConfig = computed(() => ({
   mouseDrag: false,
   gap: props.thumbnailsGap,
   dir: (props.thumbnailsDirection === 'column' ? 'ttb' : 'ltr') as 'ttb' | 'ltr',
-}))
+}));
 </script>
 
 <template>
-  <div class="image-carousel" :class="{ 'thumbnails-left': props.thumbnailsPosition === 'left' }"
-    :style="{ width: props.width }">
+  <div
+    class="image-carousel"
+    :class="{ 'thumbnails-left': props.thumbnailsPosition === 'left' }"
+    :style="{ width: props.width }"
+  >
     <!-- Left Thumbnails Layout -->
-    <div v-if="props.showThumbnails && props.thumbnailsPosition === 'left'" class="carousel-layout-left">
+    <div
+      v-if="props.showThumbnails && props.thumbnailsPosition === 'left'"
+      class="carousel-layout-left"
+    >
       <!-- Thumbnails Carousel (Left) -->
-      <Carousel id="thumbnails-left" v-bind="thumbnailsConfig" v-model="currentSlide" class="thumbnails-carousel-left">
+      <Carousel
+        id="thumbnails-left"
+        v-bind="thumbnailsConfig"
+        v-model="currentSlide"
+        class="thumbnails-carousel-left"
+      >
         <Slide v-for="image in props.images" :key="image.id">
           <template #default="{ currentIndex, isActive }">
             <div :class="['thumbnail', { 'is-active': isActive }]" @click="slideTo(currentIndex)">
@@ -107,7 +118,12 @@ const thumbnailsConfig = computed(() => ({
       </Carousel>
 
       <!-- Main Gallery Carousel (Right) -->
-      <Carousel id="gallery-left" v-bind="galleryConfig" v-model="currentSlide" class="gallery-carousel-left">
+      <Carousel
+        id="gallery-left"
+        v-bind="galleryConfig"
+        v-model="currentSlide"
+        class="gallery-carousel-left"
+      >
         <Slide v-for="image in props.images" :key="image.id">
           <div class="image-container">
             <img :src="image.src" :alt="image.alt" class="gallery-image" />
@@ -140,8 +156,13 @@ const thumbnailsConfig = computed(() => ({
       </Carousel>
 
       <!-- Thumbnails Carousel (Bottom) -->
-      <Carousel v-if="props.showThumbnails" id="thumbnails" v-bind="thumbnailsConfig" v-model="currentSlide"
-        class="thumbnails-carousel">
+      <Carousel
+        v-if="props.showThumbnails"
+        id="thumbnails"
+        v-bind="thumbnailsConfig"
+        v-model="currentSlide"
+        class="thumbnails-carousel"
+      >
         <Slide v-for="image in props.images" :key="image.id">
           <template #default="{ currentIndex, isActive }">
             <div :class="['thumbnail', { 'is-active': isActive }]" @click="slideTo(currentIndex)">
@@ -157,9 +178,14 @@ const thumbnailsConfig = computed(() => ({
 
       <!-- Pagination Dots (when thumbnails are not shown) -->
       <div v-if="props.showPagination && !props.showThumbnails" class="pagination-container">
-        <button v-for="(image, index) in props.images" :key="index" class="pagination-dot"
-          :class="{ active: index === currentSlide }" @click="slideTo(index)"
-          :aria-label="`Go to slide ${index + 1}`" />
+        <button
+          v-for="(image, index) in props.images"
+          :key="index"
+          class="pagination-dot"
+          :class="{ active: index === currentSlide }"
+          @click="slideTo(index)"
+          :aria-label="`Go to slide ${index + 1}`"
+        />
       </div>
     </div>
   </div>
@@ -364,7 +390,6 @@ const thumbnailsConfig = computed(() => ({
 
 /* Responsive Design */
 @media (max-width: 768px) {
-
   .gallery-carousel,
   .gallery-carousel-left {
     --vc-nav-width: 40px;
@@ -404,7 +429,6 @@ const thumbnailsConfig = computed(() => ({
 }
 
 @media (max-width: 480px) {
-
   .gallery-carousel,
   .gallery-carousel-left {
     --vc-nav-width: 36px;

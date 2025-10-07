@@ -1,61 +1,61 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
-import Icon from '../../atoms/Icon/Icon.vue'
+import { ref, onMounted, onUnmounted } from 'vue';
+import Icon from '../../atoms/Icon/Icon.vue';
 
 defineOptions({
-  name: "SizeSelector"
-})
+  name: 'SizeSelector',
+});
 
 interface Size {
-  name: string
-  available: boolean
+  name: string;
+  available: boolean;
 }
 
 interface Props {
-  sizes: Size[]
-  selectedSize?: string
-  disabled?: boolean
-  withInfo?: boolean
-  infoText?: string
+  sizes: Size[];
+  selectedSize?: string;
+  disabled?: boolean;
+  withInfo?: boolean;
+  infoText?: string;
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  selectedSize: "",
+  selectedSize: '',
   disabled: false,
   withInfo: false,
-  infoText: ""
-})
+  infoText: '',
+});
 
 const emit = defineEmits<{
-  selectSize: [size: string]
-}>()
+  selectSize: [size: string];
+}>();
 
-const selectedSize = ref<string>(props.selectedSize)
-const showPopover = ref(false)
-const infoContainer = ref<HTMLElement>()
+const selectedSize = ref<string>(props.selectedSize);
+const showPopover = ref(false);
+const infoContainer = ref<HTMLElement>();
 
 const handleSizeSelect = (size: string) => {
-  selectedSize.value = size
-  emit("selectSize", size)
-}
+  selectedSize.value = size;
+  emit('selectSize', size);
+};
 
 const togglePopover = () => {
-  showPopover.value = !showPopover.value
-}
+  showPopover.value = !showPopover.value;
+};
 
 const handleClickOutside = (event: MouseEvent) => {
   if (infoContainer.value && !infoContainer.value.contains(event.target as Node)) {
-    showPopover.value = false
+    showPopover.value = false;
   }
-}
+};
 
 onMounted(() => {
-  document.addEventListener('click', handleClickOutside)
-})
+  document.addEventListener('click', handleClickOutside);
+});
 
 onUnmounted(() => {
-  document.removeEventListener('click', handleClickOutside)
-})
+  document.removeEventListener('click', handleClickOutside);
+});
 </script>
 
 <template>
@@ -70,10 +70,19 @@ onUnmounted(() => {
       </div>
     </div>
     <div class="sizes-list">
-      <button v-for="size in props.sizes" :key="size.name" :class="['size-option', {
-        'selected': selectedSize === size.name,
-        'unavailable': !size.available
-      }]" :disabled="!size.available || props.disabled" @click="handleSizeSelect(size.name)">
+      <button
+        v-for="size in props.sizes"
+        :key="size.name"
+        :class="[
+          'size-option',
+          {
+            selected: selectedSize === size.name,
+            unavailable: !size.available,
+          },
+        ]"
+        :disabled="!size.available || props.disabled"
+        @click="handleSizeSelect(size.name)"
+      >
         {{ size.name }}
       </button>
     </div>

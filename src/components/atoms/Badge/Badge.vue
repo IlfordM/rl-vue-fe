@@ -1,18 +1,18 @@
 <script setup lang="ts">
 defineOptions({
-  name: "ProductBadge"
-})
+  name: 'ProductBadge',
+});
 
 interface Props {
-  variant?: "default" | "sale" | "info"
-  size?: "sm" | "md" | "lg"
-  class?: string
+  variant?: 'default' | 'sale' | 'info';
+  size?: 'sm' | 'md' | 'lg';
+  class?: string;
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  variant: "default",
-  size: "md"
-})
+  variant: 'default',
+  size: 'md',
+});
 </script>
 
 <template>

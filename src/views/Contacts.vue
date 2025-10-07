@@ -1,11 +1,8 @@
 <script setup lang="ts">
-
 defineOptions({
-  name: "ContactsPage"
+  name: 'ContactsPage',
 });
-
 </script>
-
 
 <template>
   <div class="contacts">
@@ -14,7 +11,6 @@ defineOptions({
     <router-link to="/">Go to Home</router-link>
   </div>
 </template>
-
 
 <style scoped>
 .contacts {

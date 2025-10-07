@@ -1,6 +1,6 @@
-import type { Meta, StoryObj } from '@storybook/vue3'
-import { ref } from 'vue'
-import Input from './Input.vue'
+import type { Meta, StoryObj } from '@storybook/vue3';
+import { ref } from 'vue';
+import Input from './Input.vue';
 
 const meta: Meta<typeof Input> = {
   title: 'Atoms/Input',
@@ -63,10 +63,10 @@ const meta: Meta<typeof Input> = {
       description: 'Additional CSS classes',
     },
   },
-}
+};
 
-export default meta
-type Story = StoryObj<typeof meta>
+export default meta;
+type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
@@ -76,15 +76,15 @@ export const Default: Story = {
     size: 'md',
     variant: 'default',
   },
-  render: (args) => ({
+  render: args => ({
     components: { Input },
     setup() {
-      const value = ref(args.value || '')
-      return { args, value }
+      const value = ref(args.value || '');
+      return { args, value };
     },
     template: '<Input v-bind="args" v-model:value="value" style="width: 300px;" />',
   }),
-}
+};
 
 export const WithIcon: Story = {
   args: {
@@ -95,15 +95,15 @@ export const WithIcon: Story = {
     iconSize: 16,
     size: 'md',
   },
-  render: (args) => ({
+  render: args => ({
     components: { Input },
     setup() {
-      const value = ref('')
-      return { args, value }
+      const value = ref('');
+      return { args, value };
     },
     template: '<Input v-bind="args" v-model:value="value" style="width: 300px;" />',
   }),
-}
+};
 
 export const Outline: Story = {
   args: {
@@ -112,15 +112,15 @@ export const Outline: Story = {
     variant: 'outline',
     size: 'md',
   },
-  render: (args) => ({
+  render: args => ({
     components: { Input },
     setup() {
-      const value = ref('')
-      return { args, value }
+      const value = ref('');
+      return { args, value };
     },
     template: '<Input v-bind="args" v-model:value="value" style="width: 300px;" />',
   }),
-}
+};
 
 export const Sizes: Story = {
   render: () => ({
@@ -140,7 +140,7 @@ export const Sizes: Story = {
       },
     },
   },
-}
+};
 
 export const States: Story = {
   render: () => ({
@@ -161,7 +161,7 @@ export const States: Story = {
       },
     },
   },
-}
+};
 
 export const Types: Story = {
   render: () => ({
@@ -184,4 +184,4 @@ export const Types: Story = {
       },
     },
   },
-}
+};

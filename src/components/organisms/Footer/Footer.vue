@@ -1,17 +1,14 @@
 <script setup lang="ts">
-import FullLogo from "../../molecules/FullLogo/FullLogo.vue"
-
+import FullLogo from '../../molecules/FullLogo/FullLogo.vue';
 
 defineOptions({
-  name: "PageFooter"
-})
-
+  name: 'PageFooter',
+});
 </script>
 
 <template>
   <footer class="page-footer">
-    <FullLogo style="min-width: 220px;" class="footer-logo" />
-
+    <FullLogo style="min-width: 220px" class="footer-logo" />
   </footer>
 </template>
 

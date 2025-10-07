@@ -1,41 +1,41 @@
 <script setup lang="ts">
-import Icon from "../../atoms/Icon/Icon.vue"
+import Icon from '../../atoms/Icon/Icon.vue';
 
 defineOptions({
-  name: "BreadcrumbNav"
-})
+  name: 'BreadcrumbNav',
+});
 
 interface BreadcrumbItem {
-  label: string
-  href?: string
-  active?: boolean
+  label: string;
+  href?: string;
+  active?: boolean;
 }
 
 interface Props {
-  items: BreadcrumbItem[]
-  separator?: string
-  showHome?: boolean
-  homeLabel?: string
-  homeHref?: string
-  class?: string
+  items: BreadcrumbItem[];
+  separator?: string;
+  showHome?: boolean;
+  homeLabel?: string;
+  homeHref?: string;
+  class?: string;
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  separator: "/",
+  separator: '/',
   showHome: true,
-  homeLabel: "Home",
-  homeHref: "/"
-})
+  homeLabel: 'Home',
+  homeHref: '/',
+});
 
 const emit = defineEmits<{
-  navigate: [item: BreadcrumbItem, index: number]
-}>()
+  navigate: [item: BreadcrumbItem, index: number];
+}>();
 
 const handleClick = (item: BreadcrumbItem, index: number) => {
   if (!item.active && item.href) {
-    emit("navigate", item, index)
+    emit('navigate', item, index);
   }
-}
+};
 </script>
 
 <template>
@@ -43,8 +43,11 @@ const handleClick = (item: BreadcrumbItem, index: number) => {
     <ol class="breadcrumb-list">
       <!-- Home item -->
       <li v-if="props.showHome" class="breadcrumb-item">
-        <a :href="props.homeHref" class="breadcrumb-link home-link"
-          @click="handleClick({ label: props.homeLabel, href: props.homeHref }, -1)">
+        <a
+          :href="props.homeHref"
+          class="breadcrumb-link home-link"
+          @click="handleClick({ label: props.homeLabel, href: props.homeHref }, -1)"
+        >
           <Icon name="home" w="16" h="16" class="home-icon" />
           <span>{{ props.homeLabel }}</span>
         </a>
@@ -56,9 +59,18 @@ const handleClick = (item: BreadcrumbItem, index: number) => {
       </li>
 
       <!-- Breadcrumb items -->
-      <li v-for="(item, index) in props.items" :key="index" class="breadcrumb-item"
-        :class="{ 'is-active': item.active }">
-        <a v-if="!item.active && item.href" :href="item.href" class="breadcrumb-link" @click="handleClick(item, index)">
+      <li
+        v-for="(item, index) in props.items"
+        :key="index"
+        class="breadcrumb-item"
+        :class="{ 'is-active': item.active }"
+      >
+        <a
+          v-if="!item.active && item.href"
+          :href="item.href"
+          class="breadcrumb-link"
+          @click="handleClick(item, index)"
+        >
           {{ item.label }}
         </a>
         <span v-else class="breadcrumb-current" :aria-current="item.active ? 'page' : undefined">

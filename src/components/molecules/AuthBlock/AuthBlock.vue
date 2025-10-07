@@ -1,11 +1,9 @@
 <script setup lang="ts">
-import Button from "../../atoms/Button/Button.vue"
+import Button from '../../atoms/Button/Button.vue';
 
 defineOptions({
-  name: "AuthBlock"
-})
-
-
+  name: 'AuthBlock',
+});
 </script>
 
 <template>

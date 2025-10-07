@@ -1,124 +1,144 @@
 <script setup lang="ts">
-import { computed } from "vue"
-import Icon from "../Icon/Icon.vue"
+import { computed } from 'vue';
+import Icon from '../Icon/Icon.vue';
 
 defineOptions({
-  name: "AppInput"
-})
+  name: 'AppInput',
+});
 
 interface Props {
-  type?: "text" | "email" | "password" | "search" | "tel" | "url"
-  placeholder?: string
-  value?: string
-  disabled?: boolean
-  readonly?: boolean
-  required?: boolean
-  size?: "sm" | "md" | "lg"
-  variant?: "default" | "withIcon" | "outline"
-  icon?: string
-  iconSize?: number | string
-  class?: string
-  style?: string | Record<string, string | number>
+  type?: 'text' | 'email' | 'password' | 'search' | 'tel' | 'url';
+  placeholder?: string;
+  value?: string;
+  disabled?: boolean;
+  readonly?: boolean;
+  required?: boolean;
+  size?: 'sm' | 'md' | 'lg';
+  variant?: 'default' | 'withIcon' | 'outline';
+  icon?: string;
+  iconSize?: number | string;
+  class?: string;
+  style?: string | Record<string, string | number>;
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  type: "text",
-  placeholder: "",
-  value: "",
+  type: 'text',
+  placeholder: '',
+  value: '',
   disabled: false,
   readonly: false,
   required: false,
-  size: "md",
-  variant: "default",
-  icon: "search",
-  iconSize: 24
-})
+  size: 'md',
+  variant: 'default',
+  icon: 'search',
+  iconSize: 24,
+});
 
 const emit = defineEmits<{
-  "update:value": [value: string]
-  input: [event: Event]
-  change: [event: Event]
-  focus: [event: FocusEvent]
-  blur: [event: FocusEvent]
-}>()
+  'update:value': [value: string];
+  input: [event: Event];
+  change: [event: Event];
+  focus: [event: FocusEvent];
+  blur: [event: FocusEvent];
+}>();
 
 const inputClasses = computed(() => {
-  const baseClasses = "input"
+  const baseClasses = 'input';
   const variantClasses = {
-    default: "input-default",
-    withIcon: "input-with-icon",
-    outline: "input-outline"
-  }
+    default: 'input-default',
+    withIcon: 'input-with-icon',
+    outline: 'input-outline',
+  };
   const sizeClasses = {
-    sm: "input-sm",
-    md: "input-md",
-    lg: "input-lg"
-  }
+    sm: 'input-sm',
+    md: 'input-md',
+    lg: 'input-lg',
+  };
 
-  return [
-    baseClasses,
-    variantClasses[props.variant],
-    sizeClasses[props.size],
-    props.class
-  ].filter(Boolean).join(" ")
-})
+  return [baseClasses, variantClasses[props.variant], sizeClasses[props.size], props.class]
+    .filter(Boolean)
+    .join(' ');
+});
 
 const inputStyles = computed(() => {
   const sizeStyles = {
-    sm: { padding: "10px 18px", fontSize: "14px" },
-    md: { padding: "12px 22px", fontSize: "16px" },
-    lg: { padding: "16px 30px", fontSize: "18px" }
-  }
+    sm: { padding: '10px 18px', fontSize: '14px' },
+    md: { padding: '12px 22px', fontSize: '16px' },
+    lg: { padding: '16px 30px', fontSize: '18px' },
+  };
 
   // Override padding for withIcon variant
   if (props.variant === 'withIcon') {
     const iconPaddingStyles = {
-      sm: { padding: "10px 18px 10px 34px", fontSize: "14px" },
-      md: { padding: "12px 22px 12px 38px", fontSize: "16px" },
-      lg: { padding: "16px 30px 16px 42px", fontSize: "18px" }
-    }
+      sm: { padding: '10px 18px 10px 34px', fontSize: '14px' },
+      md: { padding: '12px 22px 12px 38px', fontSize: '16px' },
+      lg: { padding: '16px 30px 16px 42px', fontSize: '18px' },
+    };
     return {
       ...iconPaddingStyles[props.size],
-      ...(typeof props.style === 'object' ? props.style : {})
-    }
+      ...(typeof props.style === 'object' ? props.style : {}),
+    };
   }
 
   return {
     ...sizeStyles[props.size],
-    ...(typeof props.style === 'object' ? props.style : {})
-  }
-})
+    ...(typeof props.style === 'object' ? props.style : {}),
+  };
+});
 
 const handleInput = (event: Event) => {
-  const target = event.target as HTMLInputElement
-  emit("update:value", target.value)
-  emit("input", event)
-}
+  const target = event.target as HTMLInputElement;
+  emit('update:value', target.value);
+  emit('input', event);
+};
 
 const handleChange = (event: Event) => {
-  emit("change", event)
-}
+  emit('change', event);
+};
 
 const handleFocus = (event: FocusEvent) => {
-  emit("focus", event)
-}
+  emit('focus', event);
+};
 
 const handleBlur = (event: FocusEvent) => {
-  emit("blur", event)
-}
+  emit('blur', event);
+};
 </script>
 
 <template>
   <div class="input-wrapper">
     <div v-if="variant === 'withIcon'" class="input-icon-container">
       <Icon :name="icon" :size="iconSize" class="input-icon" />
-      <input :type="type" :placeholder="placeholder" :value="value" :disabled="disabled" :readonly="readonly"
-        :required="required" :class="inputClasses" :style="inputStyles" @input="handleInput" @change="handleChange"
-        @focus="handleFocus" @blur="handleBlur" />
+      <input
+        :type="type"
+        :placeholder="placeholder"
+        :value="value"
+        :disabled="disabled"
+        :readonly="readonly"
+        :required="required"
+        :class="inputClasses"
+        :style="inputStyles"
+        @input="handleInput"
+        @change="handleChange"
+        @focus="handleFocus"
+        @blur="handleBlur"
+      />
     </div>
-    <input v-else :type="type" :placeholder="placeholder" :value="value" :disabled="disabled" :readonly="readonly"
-      :required="required" :class="inputClasses" :style="inputStyles" @input="handleInput" @change="handleChange"
-      @focus="handleFocus" @blur="handleBlur" />
+    <input
+      v-else
+      :type="type"
+      :placeholder="placeholder"
+      :value="value"
+      :disabled="disabled"
+      :readonly="readonly"
+      :required="required"
+      :class="inputClasses"
+      :style="inputStyles"
+      @input="handleInput"
+      @change="handleChange"
+      @focus="handleFocus"
+      @blur="handleBlur"
+    />
   </div>
 </template>
 

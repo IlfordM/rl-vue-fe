@@ -1,19 +1,15 @@
 <script setup lang="ts">
-import Icon from "../../atoms/Icon/Icon.vue"
+import Icon from '../../atoms/Icon/Icon.vue';
 
 defineOptions({
-  name: "FullLogo"
-})
-
-
+  name: 'FullLogo',
+});
 </script>
 
 <template>
   <div class="full-logo">
     <Icon name="logo" :size="64" class="logo-icon" />
-    <span class="logo-text">
-      Ridge Line
-    </span>
+    <span class="logo-text">Ridge Line</span>
   </div>
 </template>
 

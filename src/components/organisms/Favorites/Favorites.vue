@@ -4,7 +4,7 @@ import Icon from '@/components/atoms/Icon/Icon.vue';
 import Button from '@/components/atoms/Button/Button.vue';
 
 defineOptions({
-  name: 'FavoritesSidebar'
+  name: 'FavoritesSidebar',
 });
 
 defineProps<{
@@ -20,7 +20,7 @@ defineEmits<{
 
 // Mock favorite items
 const favoriteItems = ref([
-  { id: '1', name: 'Favorite Product 1', price: 39.99, image: '/placeholder.jpg' }
+  { id: '1', name: 'Favorite Product 1', price: 39.99, image: '/placeholder.jpg' },
 ]);
 </script>
 
