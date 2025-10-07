@@ -70,6 +70,8 @@ interface Product {
   tags?: string[]
   colors?: Array<{ name: string; value: string; available: boolean }>
   sizes?: Array<{ name: string; available: boolean }>
+  offerEndDate?: string
+  offerDescriptionLink?: string
 }
 
 interface Props {
@@ -167,7 +169,8 @@ const handleSizeSelect = (size: string) => {
       <!-- Price -->
       <div class="product-price">
         <PriceWithDiscount :price="props.product.price" :original-price="props.product.originalPrice"
-          :discount="props.product.discount" />
+          :discount="props.product.discount" :offer-end-date="props.product.offerEndDate"
+          :offer-description-link="props.product.offerDescriptionLink" />
       </div>
 
       <!-- Description -->
