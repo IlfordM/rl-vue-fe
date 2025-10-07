@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import Badge from "@/components/atoms/Badge/Badge.vue"
 import { computed } from "vue"
 
 defineOptions({
@@ -42,7 +43,7 @@ const formatPrice = (price: number) => {
   <div class="price-with-discount">
     <span v-if="discount && discount > 0" class="original-price">{{ formatPrice(price) }}</span>
     <span class="discounted-price">{{ formatPrice(discountedPrice) }}</span>
-    <span v-if="isOfferActive">Badge</span>
+    <Badge v-if="isOfferActive" variant="sale" size="lg">On Sale</Badge>
     <a v-if="isOfferActive && offerDescriptionLink" :href="offerDescriptionLink" class="offer-link">
       {{ offerEndDateText }}
     </a>
