@@ -78,13 +78,17 @@ const product = ref({
     { name: 'Blue', value: '#3b82f6', available: false }
   ],
   sizes: [
+    { name: 'XS', available: true },
     { name: 'S', available: true },
     { name: 'M', available: true },
     { name: 'L', available: false },
-    { name: 'XL', available: true }
+    { name: 'XL', available: true },
+    { name: 'XXL', available: true }
   ],
   offerEndDate: '2025-12-31',
-  offerDescriptionLink: '/offers/wireless-headphones-sale'
+  offerDescriptionLink: '/offers/wireless-headphones-sale',
+  infoText: 'This cozy parka has a water-resistant shell made of upcycled materials, synthetic down filling, and an abundance of pockets. There are six zipper-close pockets plus one roomy velcro-close pouch. Engineered for storage, this parka provides space for all the necessities you’ll bring on your next cold-weather adventure.',
+  withInfo: true
 });
 
 const handleAddToCart = (product: any) => {
