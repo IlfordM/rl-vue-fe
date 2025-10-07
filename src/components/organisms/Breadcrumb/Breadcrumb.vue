@@ -105,7 +105,7 @@ const handleClick = (item: BreadcrumbItem, index: number) => {
   color: var(--color-blue);
   text-decoration: none;
   font-size: inherit;
-  padding: 4px 8px;
+  /* padding: 4px 8px; */
   border-radius: 4px;
   transition: all 0.2s ease;
   display: flex;

@@ -1,11 +1,11 @@
 <script setup lang="ts">
+import { ref } from 'vue'
 import Button from "../../atoms/Button/Button.vue"
 import Icon from "../../atoms/Icon/Icon.vue"
 import PriceWithDiscount from "../../molecules/PriceWithDiscount/PriceWithDiscount.vue"
+import Rating from "../../molecules/Rating/Rating.vue"
 import ImageCarousel from '@/components/organisms/Carousel/ImageCarousel.vue';
 import Breadcrumb from '@/components/organisms/Breadcrumb/Breadcrumb.vue';
-import { ref } from 'vue';
-
 // Sample images for the carousel
 const carouselImages = [
   {
@@ -160,16 +160,9 @@ const handleSizeSelect = (size: string) => {
       <h3 class="product-name">{{ props.product.name }}</h3>
 
       <!-- Rating -->
-      <div v-if="props.showRating && props.product.rating" class="product-rating">
-        <div class="rating-stars">
-          <template v-for="star in 5" :key="star">
-            <Icon name="star-fill" w="16" h="16" :class="star <= (props.product.rating || 0) ? 'filled' : ''" />
-          </template>
-        </div>
-        <span class="rating-text">
-          {{ props.product.rating }} ({{ props.product.reviewCount || 0 }})
-        </span>
-      </div>
+      <Rating v-if="props.showRating && props.product.rating" :rating="props.product.rating"
+        :review-count="props.product.reviewCount" :show-reviews-link="true"
+        :reviews-link="`/products/${props.product.id}/reviews`" size="md" />
 
       <!-- Price -->
       <div class="product-price">
@@ -323,17 +316,19 @@ const handleSizeSelect = (size: string) => {
 }
 
 .product-breadcrumb {
-  margin-bottom: 8px;
   padding: 0;
   font-size: 8px;
 }
 
 .product-name {
-  font-size: 18px;
-  font-weight: 600;
-  color: var(--color-gray);
+  color: var(--color-black);
   margin: 0;
-  line-height: 1.3;
+  font-family: 'Space Grotesk', sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 28px;
+  text-align: start;
 }
 
 .product-rating {
