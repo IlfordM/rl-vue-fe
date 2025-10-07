@@ -173,22 +173,6 @@ const handleSizeSelect = (size: string) => {
           :offer-description-link="props.product.offerDescriptionLink" />
       </div>
 
-      <!-- Description -->
-      <p v-if="props.variant === 'detailed'" class="product-description">
-        {{ props.product.description }}
-      </p>
-
-      <!-- Colors -->
-      <div v-if="props.showColors && props.product.colors" class="product-colors">
-        <h4 class="colors-title">Colors:</h4>
-        <div class="colors-list">
-          <button v-for="color in props.product.colors" :key="color.name" :class="['color-option', {
-            'selected': selectedColor === color.name,
-            'unavailable': !color.available
-          }]" :style="{ backgroundColor: color.value }" :disabled="!color.available"
-            @click="handleColorSelect(color.name)" :title="color.name" />
-        </div>
-      </div>
 
       <!-- Sizes -->
       <div v-if="props.showSizes && props.product.sizes" class="product-sizes">
@@ -203,18 +187,16 @@ const handleSizeSelect = (size: string) => {
         </div>
       </div>
 
-      <!-- Stock Status -->
-      <div class="product-stock">
-        <span :class="['stock-status', { 'in-stock': props.product.inStock, 'out-of-stock': !props.product.inStock }]">
-          {{ props.product.inStock ? 'In Stock' : 'Out of Stock' }}
-        </span>
-      </div>
-
-      <!-- Tags -->
-      <div v-if="props.product.tags" class="product-tags">
-        <span v-for="tag in props.product.tags" :key="tag" class="product-tag">
-          {{ tag }}
-        </span>
+      <!-- Colors -->
+      <div v-if="props.showColors && props.product.colors" class="product-colors">
+        <h4 class="colors-title">Colors:</h4>
+        <div class="colors-list">
+          <button v-for="color in props.product.colors" :key="color.name" :class="['color-option', {
+            'selected': selectedColor === color.name,
+            'unavailable': !color.available
+          }]" :style="{ backgroundColor: color.value }" :disabled="!color.available"
+            @click="handleColorSelect(color.name)" :title="color.name" />
+        </div>
       </div>
 
       <!-- Actions -->
@@ -237,6 +219,11 @@ const handleSizeSelect = (size: string) => {
       </div>
     </div>
   </div>
+  <!-- Description -->
+  <h4 class="product-description-title">Description:</h4>
+  <p v-if="props.variant === 'detailed'" class="product-description">
+    {{ props.product.description }}
+  </p>
 </template>
 
 <style scoped>
@@ -246,6 +233,7 @@ const handleSizeSelect = (size: string) => {
   background: transparent;
   overflow: hidden;
   transition: all 0.3s ease;
+  margin-bottom: 46px;
 }
 
 .product--compact {
@@ -311,10 +299,11 @@ const handleSizeSelect = (size: string) => {
 }
 
 .product-info {
+  height: 467px;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   align-items: flex-start;
-  gap: 8px;
   flex: 1;
 }
 
@@ -358,13 +347,6 @@ const handleSizeSelect = (size: string) => {
   font-size: 20px;
   font-weight: 700;
   color: var(--color-blue);
-}
-
-.product-description {
-  font-size: 14px;
-  color: var(--color-gray-3);
-  line-height: 1.4;
-  margin: 0;
 }
 
 .product-colors,
@@ -470,7 +452,6 @@ const handleSizeSelect = (size: string) => {
 
 .product-actions {
   width: 100%;
-  margin-top: auto;
   padding-top: 16px;
   display: flex;
   gap: 8px;
@@ -501,5 +482,22 @@ const handleSizeSelect = (size: string) => {
   .product-price {
     font-size: 18px;
   }
+}
+
+.product-description-title {
+  text-align: start;
+  color: var(--color-blue);
+  font-family: 'Space Grotesk';
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 28px;
+}
+
+.product-description {
+  text-align: start;
+  font-family: 'Poppins';
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
 }
 </style>

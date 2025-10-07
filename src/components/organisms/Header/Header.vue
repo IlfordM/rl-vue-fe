@@ -29,7 +29,7 @@ defineOptions({
 <style scoped>
 .page-header {
   position: sticky;
-  top: 45px;
+  top: 44px;
   z-index: 3;
   width: 100%;
   display: inline-flex;
@@ -37,7 +37,7 @@ defineOptions({
   gap: 12px;
   color: var(--color-blue);
   background-color: var(--color-white);
-  padding-bottom: 10px;
+  padding: 10px 0;
   margin-bottom: 14px;
 }
 </style>
