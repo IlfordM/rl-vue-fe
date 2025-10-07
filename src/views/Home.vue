@@ -300,7 +300,7 @@ const handleRemoveFromFavorites = (product: any) => {
   right: 0;
   bottom: 0;
   background: rgba(0, 0, 0, 0.1);
-  z-index: 2;
+  z-index: 3;
   display: flex;
   justify-content: flex-end;
 }
