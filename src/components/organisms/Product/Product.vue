@@ -311,10 +311,11 @@ const handleSizeSelect = (size: string) => {
 }
 
 .product-info {
+  height: 467px;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   align-items: flex-start;
-  gap: 8px;
   flex: 1;
 }
 
@@ -470,7 +471,6 @@ const handleSizeSelect = (size: string) => {
 
 .product-actions {
   width: 100%;
-  margin-top: auto;
   padding-top: 16px;
   display: flex;
   gap: 8px;
