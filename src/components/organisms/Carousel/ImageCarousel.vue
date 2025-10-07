@@ -3,6 +3,10 @@ import 'vue3-carousel/carousel.css'
 import { Carousel, Slide, Navigation } from 'vue3-carousel'
 import { ref, computed } from 'vue'
 
+defineOptions({
+  name: "ImageCarousel"
+});
+
 interface ImageItem {
   id: string | number
   src: string

@@ -3,6 +3,10 @@ import { ref } from 'vue';
 import Icon from '@/components/atoms/Icon/Icon.vue';
 import Button from '@/components/atoms/Button/Button.vue';
 
+defineOptions({
+  name: 'FavoritesSidebar'
+});
+
 defineProps<{
   isOpen: boolean;
   favoritesCount: number;

@@ -4,6 +4,10 @@ import Icon from '@/components/atoms/Icon/Icon.vue';
 import Button from '@/components/atoms/Button/Button.vue';
 import PriceWithDiscount from '@/components/molecules/PriceWithDiscount/PriceWithDiscount.vue';
 
+defineOptions({
+  name: 'CartSidebar'
+});
+
 defineProps<{
   isOpen: boolean;
   cartCount: number;
