@@ -12,7 +12,7 @@ interface Props {
   loading?: boolean
   type?: "button" | "submit" | "reset"
   class?: string
-  style?: string | Record<string, any>
+  style?: string | Record<string, string | number>
 }
 
 const props = withDefaults(defineProps<Props>(), {

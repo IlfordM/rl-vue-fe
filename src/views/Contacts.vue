@@ -1,5 +1,9 @@
 <script setup lang="ts">
 
+defineOptions({
+  name: "ContactsPage"
+});
+
 </script>
 
 

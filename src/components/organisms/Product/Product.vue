@@ -58,7 +58,7 @@ defineOptions({
   name: "ProductCard"
 })
 
-interface Product {
+export interface IProduct {
   id: string
   name: string
   price: number
@@ -79,7 +79,7 @@ interface Product {
 }
 
 interface Props {
-  product: Product
+  product: IProduct
   showAddToCart?: boolean
   showFavorites?: boolean
   showRating?: boolean
@@ -99,10 +99,10 @@ const props = withDefaults(defineProps<Props>(), {
 })
 
 const emit = defineEmits<{
-  addToCart: [product: Product]
-  buyNow: [product: Product]
-  addToFavorites: [product: Product]
-  removeFromFavorites: [product: Product]
+  addToCart: [product: IProduct]
+  buyNow: [product: IProduct]
+  addToFavorites: [product: IProduct]
+  removeFromFavorites: [product: IProduct]
   selectColor: [color: string]
   selectSize: [size: string]
 }>()
