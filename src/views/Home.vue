@@ -7,6 +7,7 @@ import Cart from '@/components/organisms/Cart/Cart.vue';
 import Favorites from '@/components/organisms/Favorites/Favorites.vue';
 import { ref, computed } from 'vue';
 import Product from '@/components/organisms/Product/Product.vue';
+import type { IProduct } from '@/components/organisms/Product/Product.vue';
 
 defineOptions({
   name: "HomePage"
@@ -45,17 +46,17 @@ const closeSidebar = () => {
   sidebarType.value = null;
 };
 
-const removeFromCart = (id: string) => {
+const removeFromCart = () => {
   cartCount.value = Math.max(0, cartCount.value - 1);
   // Here you would remove the item from cart
 };
 
-const removeFromFavorites = (id: string) => {
+const removeFromFavorites = () => {
   favoritesCount.value = Math.max(0, favoritesCount.value - 1);
   // Here you would remove the item from favorites
 };
 
-const addToCart = (id: string) => {
+const addToCart = () => {
   cartCount.value += 1;
   // Here you would add the item to cart
 };
@@ -93,17 +94,17 @@ const product = ref({
   withInfo: true
 });
 
-const handleAddToCart = (product: any) => {
+const handleAddToCart = (product: IProduct) => {
   cartCount.value += 1;
   console.log('Added to cart:', product);
 };
 
-const handleAddToFavorites = (product: any) => {
+const handleAddToFavorites = (product: IProduct) => {
   favoritesCount.value += 1;
   console.log('Added to favorites:', product);
 };
 
-const handleRemoveFromFavorites = (product: any) => {
+const handleRemoveFromFavorites = (product: IProduct) => {
   favoritesCount.value = Math.max(0, favoritesCount.value - 1);
   console.log('Removed from favorites:', product);
 };

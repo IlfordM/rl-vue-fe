@@ -11,13 +11,13 @@ interface Props {
   size?: number | string
   w?: number | string
   h?: number | string
-  class?: string
+  className?: string
   ariaLabel?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
   fill: "currentColor",
-  class: "fill-current"
+  className: "fill-current"
 })
 
 const defaultWidth = 24
@@ -26,6 +26,9 @@ const defaultHeight = 24
 // Calculate width and height
 const width = computed(() => props.w ?? props.size ?? defaultWidth)
 const height = computed(() => props.h ?? props.size ?? defaultHeight)
+
+// Icon href computed property
+const iconHref = computed(() => `/assets/icons/icons.svg#${props.name}`)
 
 // Available icons
 const availableIcons = [
@@ -41,8 +44,8 @@ if (!availableIcons.includes(props.name)) {
 </script>
 
 <template>
-  <svg :width="width" :height="height" :fill="fill" :class="class" :aria-label="ariaLabel" role="img"
+  <svg :width="width" :height="height" :fill="fill" :aria-label="ariaLabel" role="img" :class="className"
     xmlns="http://www.w3.org/2000/svg">
-    <use :href="`/assets/icons/icons.svg#${name}`" />
+    <use :href="iconHref" />
   </svg>
 </template>
