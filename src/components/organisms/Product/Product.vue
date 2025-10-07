@@ -214,7 +214,8 @@ const handleSizeSelect = (size: string) => {
 
 <style scoped>
 .product {
-  display: flex;
+  display: grid;
+  grid-template-columns: 50% 50%;
   gap: 20px;
   background: transparent;
   overflow: hidden;
@@ -234,7 +235,7 @@ const handleSizeSelect = (size: string) => {
 }
 
 .gallery-container {
-  max-width: 587px;
+  width: 100%;
 }
 
 .product-image__img {
