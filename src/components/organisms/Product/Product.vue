@@ -4,6 +4,8 @@ import Button from "../../atoms/Button/Button.vue"
 import Icon from "../../atoms/Icon/Icon.vue"
 import PriceWithDiscount from "../../molecules/PriceWithDiscount/PriceWithDiscount.vue"
 import Rating from "../../molecules/Rating/Rating.vue"
+import Sizes from "../../molecules/Sizes/Sizes.vue"
+import Colors from "../../molecules/Colors/Colors.vue"
 import ImageCarousel from '@/components/organisms/Carousel/ImageCarousel.vue';
 import Breadcrumb from '@/components/organisms/Breadcrumb/Breadcrumb.vue';
 // Sample images for the carousel
@@ -72,6 +74,8 @@ interface Product {
   sizes?: Array<{ name: string; available: boolean }>
   offerEndDate?: string
   offerDescriptionLink?: string
+  infoText?: string
+  withInfo?: boolean
 }
 
 interface Props {
@@ -173,31 +177,13 @@ const handleSizeSelect = (size: string) => {
           :offer-description-link="props.product.offerDescriptionLink" />
       </div>
 
-
       <!-- Sizes -->
-      <div v-if="props.showSizes && props.product.sizes" class="product-sizes">
-        <h4 class="sizes-title">Sizes:</h4>
-        <div class="sizes-list">
-          <button v-for="size in props.product.sizes" :key="size.name" :class="['size-option', {
-            'selected': selectedSize === size.name,
-            'unavailable': !size.available
-          }]" :disabled="!size.available" @click="handleSizeSelect(size.name)">
-            {{ size.name }}
-          </button>
-        </div>
-      </div>
+      <Sizes v-if="props.showSizes && props.product.sizes" :sizes="props.product.sizes" :selected-size="selectedSize"
+        @select-size="handleSizeSelect" />
 
       <!-- Colors -->
-      <div v-if="props.showColors && props.product.colors" class="product-colors">
-        <h4 class="colors-title">Colors:</h4>
-        <div class="colors-list">
-          <button v-for="color in props.product.colors" :key="color.name" :class="['color-option', {
-            'selected': selectedColor === color.name,
-            'unavailable': !color.available
-          }]" :style="{ backgroundColor: color.value }" :disabled="!color.available"
-            @click="handleColorSelect(color.name)" :title="color.name" />
-        </div>
-      </div>
+      <Colors v-if="props.showColors && props.product.colors" :colors="props.product.colors"
+        :selected-color="selectedColor" @select-color="handleColorSelect" />
 
       <!-- Actions -->
       <div v-if="props.showAddToCart" class="product-actions">
@@ -347,76 +333,6 @@ const handleSizeSelect = (size: string) => {
   font-size: 20px;
   font-weight: 700;
   color: var(--color-blue);
-}
-
-.product-colors,
-.product-sizes {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.colors-title,
-.sizes-title {
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--color-gray);
-  margin: 0;
-}
-
-.colors-list,
-.sizes-list {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-
-.color-option {
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  border: 2px solid transparent;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.color-option:hover {
-  border-color: var(--color-gray-3);
-}
-
-.color-option.selected {
-  border-color: var(--color-blue);
-  box-shadow: 0 0 0 2px var(--color-blue-3);
-}
-
-.color-option.unavailable {
-  opacity: 0.3;
-  cursor: not-allowed;
-}
-
-.size-option {
-  padding: 6px 12px;
-  border: 1px solid var(--color-gray-3);
-  border-radius: 4px;
-  background: var(--color-white);
-  cursor: pointer;
-  transition: all 0.2s ease;
-  font-size: 14px;
-}
-
-.size-option:hover {
-  border-color: var(--color-blue);
-}
-
-.size-option.selected {
-  border-color: var(--color-blue);
-  background: var(--color-blue-3);
-  color: var(--color-blue);
-}
-
-.size-option.unavailable {
-  opacity: 0.3;
-  cursor: not-allowed;
 }
 
 .product-stock {

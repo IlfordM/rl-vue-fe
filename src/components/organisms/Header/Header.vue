@@ -29,7 +29,7 @@ defineOptions({
 <style scoped>
 .page-header {
   position: sticky;
-  top: 44px;
+  top: 45px;
   z-index: 3;
   width: 100%;
   display: inline-flex;
