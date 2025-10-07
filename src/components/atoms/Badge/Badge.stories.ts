@@ -37,7 +37,7 @@ export const Default: Story = {
   }),
 };
 
-export const Error: Story = {
+export const Sale: Story = {
   args: {
     variant: 'sale',
     size: 'md',
@@ -70,9 +70,9 @@ export const AllSizes: Story = {
     components: { Badge },
     template: `
       <div style="display: flex; gap: 8px; align-items: center;">
-        <Badge variant="error" size="sm">On Sale</Badge>
-        <Badge variant="error" size="md">On Sale</Badge>
-        <Badge variant="error" size="lg">On Sale</Badge>
+        <Badge variant="sale" size="sm">On Sale</Badge>
+        <Badge variant="sale" size="md">On Sale</Badge>
+        <Badge variant="sale" size="lg">On Sale</Badge>
       </div>
     `,
   }),

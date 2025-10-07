@@ -33,6 +33,13 @@ const getStarType = (starIndex: number, rating: number) => {
   return "star"
 }
 
+const getStarClass = (starIndex: number) => {
+  const classes = []
+  if (starIndex <= Math.floor(props.rating)) classes.push('filled')
+  if (starIndex === Math.ceil(props.rating) && props.rating % 1 !== 0) classes.push('half-filled')
+  if (starIndex > Math.ceil(props.rating) || (starIndex > Math.floor(props.rating) && props.rating % 1 === 0)) classes.push('stroke')
+  return classes.join(' ')
+}
 </script>
 
 <template>
@@ -40,7 +47,7 @@ const getStarType = (starIndex: number, rating: number) => {
     <div class="rating-stars">
       <template v-for="star in 5" :key="star">
         <Icon :name="getStarType(star, props.rating)" :w="iconSize[props.size]" :h="iconSize[props.size]"
-          class="filled" />
+          :class="getStarClass(star)" />
       </template>
     </div>
     <span v-if="props.showReviewCount" class="rating-text">
@@ -67,6 +74,16 @@ const getStarType = (starIndex: number, rating: number) => {
 
 .rating-stars .filled {
   color: var(--color-yellow);
+}
+
+.rating-stars .half-filled {
+  color: var(--color-yellow);
+}
+
+.rating-stars .stroke {
+  color: var(--color-yellow);
+  stroke: var(--color-yellow);
+  fill: none;
 }
 
 .rating-text {
