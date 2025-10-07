@@ -82,7 +82,9 @@ const product = ref({
     { name: 'M', available: true },
     { name: 'L', available: false },
     { name: 'XL', available: true }
-  ]
+  ],
+  offerEndDate: '2025-12-31',
+  offerDescriptionLink: '/offers/wireless-headphones-sale'
 });
 
 const handleAddToCart = (product: any) => {
