@@ -138,7 +138,7 @@ describe('Home View', () => {
 
     expect(wrapper.find('.product').exists()).toBe(true);
     expect((wrapper.vm as unknown as HomeComponent).product.name).toBe(
-      'Premium Wireless Headphones'
+      'The Perfect Pockets Long Parka'
     );
     expect((wrapper.vm as unknown as HomeComponent).product.price).toBe(199.99);
   });
