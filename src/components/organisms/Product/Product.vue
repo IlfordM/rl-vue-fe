@@ -246,7 +246,7 @@ const averageRating = computed(() => {
           @click="handleBuyNow"
           class="buy-now-btn"
         >
-          <Icon name="shopping-bag" w="16" h="16" />
+          <Icon name="bag-plus" w="22" h="22" />
           Buy Now
         </Button>
         <Button

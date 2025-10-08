@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import Icon from './components/atoms/Icon/Icon.vue';
+import { useAuth } from '@/composables/useAuth';
+
+const { isAuthenticated } = useAuth();
 </script>
 
 <template>
@@ -17,6 +20,10 @@ import Icon from './components/atoms/Icon/Icon.vue';
         <router-link to="/contacts" class="nav-link">
           <Icon name="mail" class="nav-icon" />
           Contacts
+        </router-link>
+        <router-link v-if="isAuthenticated" to="/profile" class="nav-link">
+          <Icon name="user" class="nav-icon" />
+          Profile
         </router-link>
       </nav>
       <router-view />

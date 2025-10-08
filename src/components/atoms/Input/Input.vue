@@ -158,6 +158,10 @@ const handleBlur = (event: FocusEvent) => {
   transition: all 0.2s;
   outline: none;
   font-family: inherit;
+  display: inline-block;
+  margin: 0;
+  box-sizing: border-box;
+  vertical-align: middle;
 }
 
 .input:focus {

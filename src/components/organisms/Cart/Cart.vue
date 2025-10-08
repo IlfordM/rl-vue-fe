@@ -40,6 +40,13 @@ const cartItems = ref([
 ]);
 
 const totalPrice = ref(79.98);
+
+const updateQuantity = (itemId: string, change: number) => {
+  const item = cartItems.value.find(item => item.id === itemId);
+  if (item) {
+    item.quantity = Math.max(1, item.quantity + change);
+  }
+};
 </script>
 
 <template>
@@ -85,9 +92,9 @@ const totalPrice = ref(79.98);
               {{ item.color }}
             </Button>
             <div class="quantity-controls">
-              <button class="qty-btn">-</button>
+              <button class="qty-btn" @click="updateQuantity(item.id, -1)">-</button>
               <span>{{ item.quantity }}</span>
-              <button class="qty-btn">+</button>
+              <button class="qty-btn" @click="updateQuantity(item.id, 1)">+</button>
             </div>
           </div>
         </div>
