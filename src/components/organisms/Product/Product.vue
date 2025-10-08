@@ -164,10 +164,22 @@ const averageRating = computed(() => {
   <div class="product" :class="[`product--${props.variant}`, props.class]">
     <!-- Product Image -->
     <div class="gallery-container">
-      <ImageCarousel :images="carouselImages" :autoplay="false" :show-navigation="false" :show-pagination="false"
-        :items-to-show="1" :wrap-around="true" :width="'100%'" :slide-effect="'fade'" :show-thumbnails="true"
-        :thumbnails-items-to-show="4" :thumbnails-height="465" :thumbnails-gap="4" :thumbnails-position="'left'"
-        :thumbnails-direction="'column'" />
+      <ImageCarousel
+        :images="carouselImages"
+        :autoplay="false"
+        :show-navigation="false"
+        :show-pagination="false"
+        :items-to-show="1"
+        :wrap-around="true"
+        :width="'100%'"
+        :slide-effect="'fade'"
+        :show-thumbnails="true"
+        :thumbnails-items-to-show="4"
+        :thumbnails-height="465"
+        :thumbnails-gap="4"
+        :thumbnails-position="'left'"
+        :thumbnails-direction="'column'"
+      />
     </div>
 
     <!-- Product Info -->
@@ -179,39 +191,71 @@ const averageRating = computed(() => {
       <h3 class="product-name">{{ props.product.name }}</h3>
 
       <!-- Rating -->
-      <Rating v-if="props.showRating && props.product.reviews" :rating="averageRating"
-        :review-count="props.product.reviews.length" :show-reviews-link="true"
-        :reviews-link="`/products/${props.product.id}/reviews`" size="md" />
+      <Rating
+        v-if="props.showRating && props.product.reviews"
+        :rating="averageRating"
+        :review-count="props.product.reviews.length"
+        :show-reviews-link="true"
+        :reviews-link="`/products/${props.product.id}/reviews`"
+        size="md"
+      />
 
       <!-- Price -->
       <div class="product-price">
-        <PriceWithDiscount :price="props.product.price" :original-price="props.product.originalPrice"
-          :discount="props.product.discount" :offer-end-date="props.product.offerEndDate"
-          :offer-description-link="props.product.offerDescriptionLink" />
+        <PriceWithDiscount
+          :price="props.product.price"
+          :original-price="props.product.originalPrice"
+          :discount="props.product.discount"
+          :offer-end-date="props.product.offerEndDate"
+          :offer-description-link="props.product.offerDescriptionLink"
+        />
       </div>
 
       <!-- Sizes -->
-      <Sizes v-if="props.showSizes && props.product.sizes" :sizes="props.product.sizes" :selected-size="selectedSize"
-        @select-size="handleSizeSelect" />
+      <Sizes
+        v-if="props.showSizes && props.product.sizes"
+        :sizes="props.product.sizes"
+        :selected-size="selectedSize"
+        @select-size="handleSizeSelect"
+      />
 
       <!-- Colors -->
-      <Colors v-if="props.showColors && props.product.colors" :colors="props.product.colors"
-        :selected-color="selectedColor" @select-color="handleColorSelect" />
+      <Colors
+        v-if="props.showColors && props.product.colors"
+        :colors="props.product.colors"
+        :selected-color="selectedColor"
+        @select-color="handleColorSelect"
+      />
 
       <!-- Actions -->
       <div v-if="props.showAddToCart" class="product-actions">
-        <Button variant="selected" size="md" :disabled="!props.product.inStock" @click="handleAddToCart"
-          class="add-to-cart-btn">
+        <Button
+          variant="selected"
+          size="md"
+          :disabled="!props.product.inStock"
+          @click="handleAddToCart"
+          class="add-to-cart-btn"
+        >
           <Icon name="cart-plus" w="16" h="16" />
           Add to Cart
         </Button>
-        <Button variant="primary" size="md" :disabled="!props.product.inStock" @click="handleBuyNow"
-          class="buy-now-btn">
+        <Button
+          variant="primary"
+          size="md"
+          :disabled="!props.product.inStock"
+          @click="handleBuyNow"
+          class="buy-now-btn"
+        >
           <Icon name="shopping-bag" w="16" h="16" />
           Buy Now
         </Button>
-        <Button v-if="props.showFavorites" variant="primary" size="md" @click="handleToggleFavorites"
-          class="add-to-wishlist-btn">
+        <Button
+          v-if="props.showFavorites"
+          variant="primary"
+          size="md"
+          @click="handleToggleFavorites"
+          class="add-to-wishlist-btn"
+        >
           <Icon name="heart-plus" w="22" h="22" />
           {{ isInFavorites ? 'Remove from Wishlist' : 'Add to Wishlist' }}
         </Button>

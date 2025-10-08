@@ -125,7 +125,8 @@ const product = ref({
       reviewerName: 'Sarah Wilson',
       reviewerInitials: 'SW',
       rating: 5,
-      reviewText: 'Absolutely fantastic! I\'ve been using this product for over 6 months now and it has exceeded all my expectations. The build quality is outstanding, the materials feel premium, and the design is both functional and aesthetically pleasing. I particularly love how it fits perfectly and the attention to detail in the craftsmanship. The customer service was also excellent when I had a question about sizing. I would definitely purchase again and have already recommended it to several friends who have also been very happy with their purchases. This is exactly what I was looking for and more!',
+      reviewText:
+        "Absolutely fantastic! I've been using this product for over 6 months now and it has exceeded all my expectations. The build quality is outstanding, the materials feel premium, and the design is both functional and aesthetically pleasing. I particularly love how it fits perfectly and the attention to detail in the craftsmanship. The customer service was also excellent when I had a question about sizing. I would definitely purchase again and have already recommended it to several friends who have also been very happy with their purchases. This is exactly what I was looking for and more!",
       productSize: 'S',
       productColor: 'Black',
       avatarBackgroundColor: '#e1a829',
@@ -134,7 +135,8 @@ const product = ref({
       reviewerName: 'Mike Johnson',
       reviewerInitials: 'MJ',
       rating: 2,
-      reviewText: 'Not quite what I expected. The quality could be better for the price point. The material feels cheaper than advertised and the fit is a bit off. I had to return it and get a different size, which was a hassle. The customer service was helpful with the exchange though. Overall, I think there are better options available for the same price.',
+      reviewText:
+        'Not quite what I expected. The quality could be better for the price point. The material feels cheaper than advertised and the fit is a bit off. I had to return it and get a different size, which was a hassle. The customer service was helpful with the exchange though. Overall, I think there are better options available for the same price.',
       productSize: 'L',
       productColor: 'Green',
       avatarBackgroundColor: '#ff6b6b',
@@ -143,7 +145,8 @@ const product = ref({
       reviewerName: 'Emily Chen',
       reviewerInitials: 'EC',
       rating: 4,
-      reviewText: 'Really solid product overall. The quality is good and it does exactly what it\'s supposed to do. I\'ve been using it for about 3 months now and it\'s held up well. The only minor issue is that the color is slightly different from what I expected based on the photos, but it\'s still nice. Would recommend to others.',
+      reviewText:
+        "Really solid product overall. The quality is good and it does exactly what it's supposed to do. I've been using it for about 3 months now and it's held up well. The only minor issue is that the color is slightly different from what I expected based on the photos, but it's still nice. Would recommend to others.",
       productSize: 'M',
       productColor: 'White',
       avatarBackgroundColor: '#4ecdc4',
@@ -152,7 +155,8 @@ const product = ref({
       reviewerName: 'Alex Rodriguez',
       reviewerInitials: 'AR',
       rating: 5,
-      reviewText: 'This is hands down the best purchase I\'ve made this year! I was skeptical at first because of the price, but after using it for several months, I can confidently say it\'s worth every penny. The attention to detail is incredible - from the packaging to the product itself, everything feels premium. The functionality is exactly what I needed and more. I love how versatile it is and how well it integrates with my daily routine. The customer support team was also incredibly helpful when I had questions. I\'ve already ordered another one as a gift for my brother. This company really knows what they\'re doing and I\'ll definitely be a repeat customer. Highly, highly recommend!',
+      reviewText:
+        "This is hands down the best purchase I've made this year! I was skeptical at first because of the price, but after using it for several months, I can confidently say it's worth every penny. The attention to detail is incredible - from the packaging to the product itself, everything feels premium. The functionality is exactly what I needed and more. I love how versatile it is and how well it integrates with my daily routine. The customer support team was also incredibly helpful when I had questions. I've already ordered another one as a gift for my brother. This company really knows what they're doing and I'll definitely be a repeat customer. Highly, highly recommend!",
       productSize: 'XL',
       productColor: 'Blue',
       avatarBackgroundColor: '#9b59b6',
@@ -161,7 +165,8 @@ const product = ref({
       reviewerName: 'Lisa Thompson',
       reviewerInitials: 'LT',
       rating: 3,
-      reviewText: 'It\'s okay, nothing special. Does the job but I expected more for the price. The quality is decent but not exceptional. The shipping was fast though.',
+      reviewText:
+        "It's okay, nothing special. Does the job but I expected more for the price. The quality is decent but not exceptional. The shipping was fast though.",
       productSize: 'XS',
       productColor: 'Red',
       avatarBackgroundColor: '#f39c12',
@@ -170,7 +175,8 @@ const product = ref({
       reviewerName: 'David Kim',
       reviewerInitials: 'DK',
       rating: 4,
-      reviewText: 'Good value for money. The product arrived quickly and was well packaged. It works as described and I\'m satisfied with my purchase. The only thing I would change is the sizing - it runs a bit small so I\'d recommend going up one size.',
+      reviewText:
+        "Good value for money. The product arrived quickly and was well packaged. It works as described and I'm satisfied with my purchase. The only thing I would change is the sizing - it runs a bit small so I'd recommend going up one size.",
       productSize: 'L',
       productColor: 'Black',
       avatarBackgroundColor: '#2ecc71',
@@ -179,7 +185,8 @@ const product = ref({
       reviewerName: 'Maria Garcia',
       reviewerInitials: 'MG',
       rating: 5,
-      reviewText: 'Incredible product! I\'ve been searching for something like this for months and finally found it. The quality is outstanding and it has made such a difference in my daily life. The design is beautiful and functional, and I get compliments on it all the time. The company clearly cares about their customers and it shows in every aspect of the product and service. I\'m so happy with this purchase and would definitely buy again. Thank you for creating such an amazing product!',
+      reviewText:
+        "Incredible product! I've been searching for something like this for months and finally found it. The quality is outstanding and it has made such a difference in my daily life. The design is beautiful and functional, and I get compliments on it all the time. The company clearly cares about their customers and it shows in every aspect of the product and service. I'm so happy with this purchase and would definitely buy again. Thank you for creating such an amazing product!",
       productSize: 'M',
       productColor: 'Purple',
       avatarBackgroundColor: '#e74c3c',
@@ -217,7 +224,11 @@ const handleRemoveFromFavorites = (product: IProduct) => {
     <Button class="sidebar-button" variant="ghost" :style="{ top: '240px' }" @click="openFavorites">
       <div class="icon-with-badge">
         <Icon name="heart" w="27" h="24" class="icon-heart" />
-        <span v-if="favoritesCount > 0" class="badge" :aria-label="`${favoritesCount} items in favorites`">
+        <span
+          v-if="favoritesCount > 0"
+          class="badge"
+          :aria-label="`${favoritesCount} items in favorites`"
+        >
           {{ favoritesCount > 99 ? '99+' : favoritesCount }}
         </span>
       </div>
@@ -226,11 +237,22 @@ const handleRemoveFromFavorites = (product: IProduct) => {
     <!-- Single Sidebar Container -->
     <div v-if="isSidebarOpen" class="sidebar-overlay" @click="closeSidebar">
       <div class="sidebar-container" @click.stop>
-        <Cart v-if="sidebarType === SidebarType.CART" :is-open="true" :cart-count="currentCount" @close="closeSidebar"
-          @remove-item="removeFromCart" />
+        <Cart
+          v-if="sidebarType === SidebarType.CART"
+          :is-open="true"
+          :cart-count="currentCount"
+          @close="closeSidebar"
+          @remove-item="removeFromCart"
+        />
 
-        <Favorites v-if="sidebarType === SidebarType.FAVORITES" :is-open="true" :favorites-count="currentCount"
-          @close="closeSidebar" @remove-favorite="removeFromFavorites" @add-to-cart="addToCart" />
+        <Favorites
+          v-if="sidebarType === SidebarType.FAVORITES"
+          :is-open="true"
+          :favorites-count="currentCount"
+          @close="closeSidebar"
+          @remove-favorite="removeFromFavorites"
+          @add-to-cart="addToCart"
+        />
       </div>
     </div>
 
@@ -240,17 +262,29 @@ const handleRemoveFromFavorites = (product: IProduct) => {
       </section>
       <section class="item-section">
         <div class="item-details">
-          <Product :product="product" variant="detailed" @add-to-cart="handleAddToCart"
-            @add-to-favorites="handleAddToFavorites" @remove-from-favorites="handleRemoveFromFavorites" />
+          <Product
+            :product="product"
+            variant="detailed"
+            @add-to-cart="handleAddToCart"
+            @add-to-favorites="handleAddToFavorites"
+            @remove-from-favorites="handleRemoveFromFavorites"
+          />
         </div>
       </section>
 
       <section class="reviews">
         <h2 class="reviews-title">Reviews ({{ product.reviews.length }})</h2>
-        <ReviewCard v-for="review in product.reviews" :key="review.reviewerName" :reviewer-name="review.reviewerName"
-          :reviewer-initials="review.reviewerInitials" :rating="review.rating" :review-text="review.reviewText"
-          :product-size="review.productSize" :product-color="review.productColor"
-          :avatar-background-color="review.avatarBackgroundColor || '#5c7995'" />
+        <ReviewCard
+          v-for="review in product.reviews"
+          :key="review.reviewerName"
+          :reviewer-name="review.reviewerName"
+          :reviewer-initials="review.reviewerInitials"
+          :rating="review.rating"
+          :review-text="review.reviewText"
+          :product-size="review.productSize"
+          :product-color="review.productColor"
+          :avatar-background-color="review.avatarBackgroundColor || '#5c7995'"
+        />
       </section>
     </main>
   </div>

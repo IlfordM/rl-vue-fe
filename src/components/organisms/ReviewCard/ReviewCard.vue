@@ -22,7 +22,6 @@ const props = withDefaults(defineProps<Props>(), {
   productColor: '',
   avatarBackgroundColor: '#5c7995',
 });
-
 </script>
 
 <template>
@@ -35,8 +34,12 @@ const props = withDefaults(defineProps<Props>(), {
         <div class="reviewer-details">
           <h4 class="reviewer-name">{{ props.reviewerName }}</h4>
           <div v-if="props.productSize || props.productColor" class="product-attributes">
-            <Badge v-if="props.productSize" variant="stroke" size="sm">{{ props.productSize }}</Badge>
-            <Badge v-if="props.productColor" variant="stroke" size="sm">{{ props.productColor }}</Badge>
+            <Badge v-if="props.productSize" variant="stroke" size="sm">
+              {{ props.productSize }}
+            </Badge>
+            <Badge v-if="props.productColor" variant="stroke" size="sm">
+              {{ props.productColor }}
+            </Badge>
           </div>
         </div>
       </div>
