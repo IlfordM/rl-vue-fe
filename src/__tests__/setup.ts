@@ -1,6 +1,35 @@
 import { config } from '@vue/test-utils';
 import { vi, beforeEach } from 'vitest';
 
+// Mock Firebase
+vi.mock('@/config/firebase', () => ({
+  auth: {
+    currentUser: null,
+    onAuthStateChanged: vi.fn(),
+    signInWithEmailAndPassword: vi.fn(),
+    createUserWithEmailAndPassword: vi.fn(),
+    signOut: vi.fn(),
+  },
+  analytics: {},
+  default: {},
+}));
+
+// Mock useAuth composable
+vi.mock('@/composables/useAuth', () => ({
+  useAuth: () => ({
+    user: { value: null },
+    loading: { value: false },
+    error: { value: null },
+    isAuthenticated: { value: false },
+    userEmail: { value: '' },
+    userId: { value: '' },
+    signIn: vi.fn(),
+    signUp: vi.fn(),
+    signOut: vi.fn(),
+    clearError: vi.fn(),
+  }),
+}));
+
 // Global test setup
 beforeEach(() => {
   // Clear all mocks before each test
