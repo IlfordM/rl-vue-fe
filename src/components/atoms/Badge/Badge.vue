@@ -4,7 +4,7 @@ defineOptions({
 });
 
 interface Props {
-  variant?: 'default' | 'sale' | 'info';
+  variant?: 'default' | 'sale' | 'info' | 'stroke';
   size?: 'sm' | 'md' | 'lg';
   class?: string;
 }
@@ -47,6 +47,12 @@ const props = withDefaults(defineProps<Props>(), {
 .badge--info {
   background-color: var(--color-blue);
   color: var(--color-white);
+}
+
+.badge--stroke {
+  background-color: var(--color-white);
+  color: var(--color-gray);
+  border: 1px solid var(--color-gray);
 }
 
 /* Sizes */

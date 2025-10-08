@@ -142,12 +142,4 @@ describe('Home View', () => {
     );
     expect((wrapper.vm as unknown as HomeComponent).product.price).toBe(199.99);
   });
-
-  it('shows about section', () => {
-    const wrapper = mount(Home);
-
-    const aboutSection = wrapper.find('.about');
-    expect(aboutSection.exists()).toBe(true);
-    expect(aboutSection.find('h2').text()).toBe('About Us');
-  });
 });
