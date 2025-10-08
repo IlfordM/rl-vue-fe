@@ -1,7 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router';
+import { useAuth } from '@/composables/useAuth';
 import Home from '../views/Home.vue';
 import About from '../views/About.vue';
 import Contacts from '../views/Contacts.vue';
+// Remove: import Profile from '../views/Profile.vue';
 
 const routes = [
   {
@@ -19,11 +21,33 @@ const routes = [
     name: 'Contacts',
     component: Contacts,
   },
+  {
+    path: '/profile',
+    name: 'Profile',
+    component: () => import('../views/Profile.vue'),
+    meta: { requiresAuth: true },
+  },
 ];
 
 const router = createRouter({
   history: createWebHistory(),
   routes,
+});
+
+// Route guard
+router.beforeEach(async (to, from, next) => {
+  const { isAuthenticated, loading } = useAuth();
+
+  // Wait for auth state to be determined
+  while (loading.value) {
+    await new Promise(resolve => setTimeout(resolve, 10));
+  }
+
+  if (to.meta.requiresAuth && !isAuthenticated.value) {
+    next('/');
+  } else {
+    next();
+  }
 });
 
 export default router;
