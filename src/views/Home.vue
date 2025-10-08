@@ -62,7 +62,7 @@ const addToCart = () => {
 
 const product = ref({
   id: '1',
-  name: 'Premium Wireless Headphones',
+  name: 'The Perfect Pockets Long Parka',
   price: 199.99,
   originalPrice: 249.99,
   discount: 20,
@@ -224,11 +224,7 @@ const handleRemoveFromFavorites = (product: IProduct) => {
     <Button class="sidebar-button" variant="ghost" :style="{ top: '240px' }" @click="openFavorites">
       <div class="icon-with-badge">
         <Icon name="heart" w="27" h="24" class="icon-heart" />
-        <span
-          v-if="favoritesCount > 0"
-          class="badge"
-          :aria-label="`${favoritesCount} items in favorites`"
-        >
+        <span v-if="favoritesCount > 0" class="badge" :aria-label="`${favoritesCount} items in favorites`">
           {{ favoritesCount > 99 ? '99+' : favoritesCount }}
         </span>
       </div>
@@ -237,22 +233,11 @@ const handleRemoveFromFavorites = (product: IProduct) => {
     <!-- Single Sidebar Container -->
     <div v-if="isSidebarOpen" class="sidebar-overlay" @click="closeSidebar">
       <div class="sidebar-container" @click.stop>
-        <Cart
-          v-if="sidebarType === SidebarType.CART"
-          :is-open="true"
-          :cart-count="currentCount"
-          @close="closeSidebar"
-          @remove-item="removeFromCart"
-        />
+        <Cart v-if="sidebarType === SidebarType.CART" :is-open="true" :cart-count="currentCount" @close="closeSidebar"
+          @remove-item="removeFromCart" />
 
-        <Favorites
-          v-if="sidebarType === SidebarType.FAVORITES"
-          :is-open="true"
-          :favorites-count="currentCount"
-          @close="closeSidebar"
-          @remove-favorite="removeFromFavorites"
-          @add-to-cart="addToCart"
-        />
+        <Favorites v-if="sidebarType === SidebarType.FAVORITES" :is-open="true" :favorites-count="currentCount"
+          @close="closeSidebar" @remove-favorite="removeFromFavorites" @add-to-cart="addToCart" />
       </div>
     </div>
 
@@ -262,29 +247,17 @@ const handleRemoveFromFavorites = (product: IProduct) => {
       </section>
       <section class="item-section">
         <div class="item-details">
-          <Product
-            :product="product"
-            variant="detailed"
-            @add-to-cart="handleAddToCart"
-            @add-to-favorites="handleAddToFavorites"
-            @remove-from-favorites="handleRemoveFromFavorites"
-          />
+          <Product :product="product" variant="detailed" @add-to-cart="handleAddToCart"
+            @add-to-favorites="handleAddToFavorites" @remove-from-favorites="handleRemoveFromFavorites" />
         </div>
       </section>
 
       <section class="reviews">
         <h2 class="reviews-title">Reviews ({{ product.reviews.length }})</h2>
-        <ReviewCard
-          v-for="review in product.reviews"
-          :key="review.reviewerName"
-          :reviewer-name="review.reviewerName"
-          :reviewer-initials="review.reviewerInitials"
-          :rating="review.rating"
-          :review-text="review.reviewText"
-          :product-size="review.productSize"
-          :product-color="review.productColor"
-          :avatar-background-color="review.avatarBackgroundColor || '#5c7995'"
-        />
+        <ReviewCard v-for="review in product.reviews" :key="review.reviewerName" :reviewer-name="review.reviewerName"
+          :reviewer-initials="review.reviewerInitials" :rating="review.rating" :review-text="review.reviewText"
+          :product-size="review.productSize" :product-color="review.productColor"
+          :avatar-background-color="review.avatarBackgroundColor || '#5c7995'" />
       </section>
     </main>
   </div>
