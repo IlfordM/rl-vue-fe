@@ -11,7 +11,7 @@ const meta: Meta<typeof Badge> = {
   argTypes: {
     variant: {
       control: { type: 'select' },
-      options: ['default', 'sale', 'info'],
+      options: ['default', 'sale', 'info', 'stroke'],
     },
     size: {
       control: { type: 'select' },
@@ -65,6 +65,20 @@ export const Info: Story = {
   }),
 };
 
+export const Stroke: Story = {
+  args: {
+    variant: 'stroke',
+    size: 'sm',
+  },
+  render: args => ({
+    components: { Badge },
+    setup() {
+      return { args };
+    },
+    template: '<Badge v-bind="args">Stroke</Badge>',
+  }),
+};
+
 export const AllSizes: Story = {
   render: () => ({
     components: { Badge },
@@ -86,6 +100,7 @@ export const AllVariants: Story = {
         <Badge variant="default">Default</Badge>
         <Badge variant="sale">Sale</Badge>
         <Badge variant="info">Info</Badge>
+        <Badge variant="stroke">Stroke</Badge>
       </div>
     `,
   }),
