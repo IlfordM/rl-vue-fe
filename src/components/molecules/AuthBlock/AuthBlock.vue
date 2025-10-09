@@ -2,6 +2,7 @@
 import { ref } from 'vue';
 import Button from '../../atoms/Button/Button.vue';
 import Input from '../../atoms/Input/Input.vue';
+import Icon from '../../atoms/Icon/Icon.vue';
 import { useAuth } from '@/composables/useAuth';
 
 defineOptions({
@@ -13,8 +14,8 @@ const {
   loading,
   error,
   emailVerificationSent,
-  // isEmailVerified,
   signIn,
+  signInWithGoogle,
   signUp,
   signOut,
   resendVerificationEmail,
@@ -88,6 +89,15 @@ const handleResendVerification = async () => {
     await resendVerificationEmail();
   } catch (err) {
     console.error('Resend verification error:', err);
+  }
+};
+
+const handleGoogleSignIn = async () => {
+  try {
+    await signInWithGoogle();
+    showAuthModal.value = false;
+  } catch (err) {
+    console.error('Google sign in error:', err);
   }
 };
 </script>
@@ -170,6 +180,21 @@ const handleResendVerification = async () => {
             <button type="button" class="toggle-auth-btn" @click="toggleAuthMode">Sign Up</button>
           </p>
         </div>
+
+        <div class="divider">
+          <span>or</span>
+        </div>
+
+        <Button
+          type="button"
+          variant="secondary"
+          class="google-signin-btn"
+          @click="handleGoogleSignIn"
+          :disabled="loading"
+        >
+          <Icon name="google" size="32" />
+          Continue with Google
+        </Button>
       </div>
     </div>
   </div>
@@ -313,5 +338,46 @@ const handleResendVerification = async () => {
 .verification-message p {
   margin: 0 0 8px 0;
   font-size: 14px;
+}
+
+.google-signin-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 16px;
+  border: 1px solid var(--color-blue-3);
+  background: var(--color-white);
+  color: var(--color-blue);
+}
+
+.google-signin-btn:hover {
+  background: var(--color-gray-1);
+}
+
+.divider {
+  position: relative;
+  text-align: center;
+  margin: 16px 0;
+  color: var(--color-gray-2);
+}
+
+.divider::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--color-gray-2);
+  z-index: 1;
+}
+
+.divider span {
+  background: var(--color-white);
+  padding: 0 16px;
+  position: relative;
+  z-index: 2;
 }
 </style>

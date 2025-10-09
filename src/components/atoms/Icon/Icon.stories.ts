@@ -43,6 +43,7 @@ const meta: Meta<typeof Icon> = {
         'star-fill',
         'star-half',
         'star-empty',
+        'google',
       ],
       description: 'The name of the icon to display',
     },
@@ -159,6 +160,7 @@ export const AllIcons: Story = {
           'star-fill',
           'star-half',
           'star-empty',
+          'google',
         ],
       };
     },

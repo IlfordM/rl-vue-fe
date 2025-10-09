@@ -58,6 +58,7 @@ const availableIcons = [
   'star-fill',
   'star-half',
   'star-empty',
+  'google',
 ];
 
 if (!availableIcons.includes(props.name)) {
