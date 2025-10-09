@@ -38,7 +38,7 @@ defineOptions({
       style="max-width: 800px"
     />
     <AuthBlock
-      style="min-width: 300px; display: inline-flex; align-items: end; justify-content: flex-end"
+      style="min-width: 320px; display: inline-flex; align-items: end; justify-content: flex-end"
     />
   </div>
 </template>

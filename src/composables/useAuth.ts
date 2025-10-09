@@ -5,8 +5,8 @@ import {
   signOut as firebaseSignOut,
   onAuthStateChanged,
   sendEmailVerification,
-  // EmailAuthProvider,
-  // reauthenticateWithCredential,
+  signInWithPopup,
+  GoogleAuthProvider,
 } from 'firebase/auth';
 import type { User } from 'firebase/auth';
 import { auth } from '@/config/firebase';
@@ -113,6 +113,26 @@ export const useAuth = () => {
     }
   };
 
+  const signInWithGoogle = async () => {
+    try {
+      loading.value = true;
+      error.value = null;
+      const provider = new GoogleAuthProvider();
+      const result = await signInWithPopup(auth, provider);
+      user.value = result.user;
+      return result;
+    } catch (err: unknown) {
+      if (err instanceof Error && 'code' in err) {
+        error.value = getErrorMessage((err as { code: string }).code);
+      } else {
+        error.value = 'An unexpected error occurred.';
+      }
+      throw err;
+    } finally {
+      loading.value = false;
+    }
+  };
+
   const signOut = async () => {
     try {
       loading.value = true;
@@ -146,6 +166,7 @@ export const useAuth = () => {
     userEmail,
     userId,
     signIn,
+    signInWithGoogle,
     signUp,
     signOut,
     resendVerificationEmail,
