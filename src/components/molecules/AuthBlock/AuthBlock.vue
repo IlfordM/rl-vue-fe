@@ -93,9 +93,21 @@ const handleSignOut = async () => {
         </div>
 
         <form @submit.prevent="handleAuth" class="auth-form">
-          <Input v-model="credentials.email" type="email" placeholder="Email" required :disabled="loading" />
+          <Input
+            v-model="credentials.email"
+            type="email"
+            placeholder="Email"
+            required
+            :disabled="loading"
+          />
 
-          <Input v-model="credentials.password" type="password" placeholder="Password" required :disabled="loading" />
+          <Input
+            v-model="credentials.password"
+            type="password"
+            placeholder="Password"
+            required
+            :disabled="loading"
+          />
 
           <div v-if="error" class="error-message">
             {{ error }}

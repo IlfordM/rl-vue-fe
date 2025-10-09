@@ -109,13 +109,36 @@ const handleBlur = (event: FocusEvent) => {
   <div class="input-wrapper">
     <div v-if="variant === 'withIcon'" class="input-icon-container">
       <Icon :name="icon" :size="iconSize" class="input-icon" />
-      <input :type="type" :placeholder="placeholder" :value="modelValue" :disabled="disabled" :readonly="readonly"
-        :required="required" :class="inputClasses" :style="inputStyles" @input="handleInput" @change="handleChange"
-        @focus="handleFocus" @blur="handleBlur" />
+      <input
+        :type="type"
+        :placeholder="placeholder"
+        :value="modelValue"
+        :disabled="disabled"
+        :readonly="readonly"
+        :required="required"
+        :class="inputClasses"
+        :style="inputStyles"
+        @input="handleInput"
+        @change="handleChange"
+        @focus="handleFocus"
+        @blur="handleBlur"
+      />
     </div>
-    <input v-else :type="type" :placeholder="placeholder" :value="modelValue" :disabled="disabled" :readonly="readonly"
-      :required="required" :class="inputClasses" :style="inputStyles" @input="handleInput" @change="handleChange"
-      @focus="handleFocus" @blur="handleBlur" />
+    <input
+      v-else
+      :type="type"
+      :placeholder="placeholder"
+      :value="modelValue"
+      :disabled="disabled"
+      :readonly="readonly"
+      :required="required"
+      :class="inputClasses"
+      :style="inputStyles"
+      @input="handleInput"
+      @change="handleChange"
+      @focus="handleFocus"
+      @blur="handleBlur"
+    />
   </div>
 </template>
 
