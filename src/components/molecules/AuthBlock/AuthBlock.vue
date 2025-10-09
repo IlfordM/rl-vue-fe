@@ -71,7 +71,7 @@ const handleSignOut = async () => {
     <!-- Authenticated State -->
     <div v-if="user" class="authenticated-state">
       <span class="user-email">{{ user.email }}</span>
-      <Button variant="ghost" @click="handleSignOut" :disabled="loading">
+      <Button variant="ghost" size="sm" @click="handleSignOut" :disabled="loading">
         {{ loading ? 'Signing out...' : 'Sign Out' }}
       </Button>
     </div>
@@ -93,21 +93,9 @@ const handleSignOut = async () => {
         </div>
 
         <form @submit.prevent="handleAuth" class="auth-form">
-          <Input
-            v-model="credentials.email"
-            type="email"
-            placeholder="Email"
-            required
-            :disabled="loading"
-          />
+          <Input v-model="credentials.email" type="email" placeholder="Email" required :disabled="loading" />
 
-          <Input
-            v-model="credentials.password"
-            type="password"
-            placeholder="Password"
-            required
-            :disabled="loading"
-          />
+          <Input v-model="credentials.password" type="password" placeholder="Password" required :disabled="loading" />
 
           <div v-if="error" class="error-message">
             {{ error }}

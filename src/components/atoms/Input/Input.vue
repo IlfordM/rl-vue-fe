@@ -9,7 +9,7 @@ defineOptions({
 interface Props {
   type?: 'text' | 'email' | 'password' | 'search' | 'tel' | 'url';
   placeholder?: string;
-  value?: string;
+  modelValue?: string;
   disabled?: boolean;
   readonly?: boolean;
   required?: boolean;
@@ -24,7 +24,7 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {
   type: 'text',
   placeholder: '',
-  value: '',
+  modelValue: '',
   disabled: false,
   readonly: false,
   required: false,
@@ -35,7 +35,7 @@ const props = withDefaults(defineProps<Props>(), {
 });
 
 const emit = defineEmits<{
-  'update:value': [value: string];
+  'update:modelValue': [value: string];
   input: [event: Event];
   change: [event: Event];
   focus: [event: FocusEvent];
@@ -88,7 +88,7 @@ const inputStyles = computed(() => {
 
 const handleInput = (event: Event) => {
   const target = event.target as HTMLInputElement;
-  emit('update:value', target.value);
+  emit('update:modelValue', target.value);
   emit('input', event);
 };
 
@@ -109,36 +109,13 @@ const handleBlur = (event: FocusEvent) => {
   <div class="input-wrapper">
     <div v-if="variant === 'withIcon'" class="input-icon-container">
       <Icon :name="icon" :size="iconSize" class="input-icon" />
-      <input
-        :type="type"
-        :placeholder="placeholder"
-        :value="value"
-        :disabled="disabled"
-        :readonly="readonly"
-        :required="required"
-        :class="inputClasses"
-        :style="inputStyles"
-        @input="handleInput"
-        @change="handleChange"
-        @focus="handleFocus"
-        @blur="handleBlur"
-      />
+      <input :type="type" :placeholder="placeholder" :value="modelValue" :disabled="disabled" :readonly="readonly"
+        :required="required" :class="inputClasses" :style="inputStyles" @input="handleInput" @change="handleChange"
+        @focus="handleFocus" @blur="handleBlur" />
     </div>
-    <input
-      v-else
-      :type="type"
-      :placeholder="placeholder"
-      :value="value"
-      :disabled="disabled"
-      :readonly="readonly"
-      :required="required"
-      :class="inputClasses"
-      :style="inputStyles"
-      @input="handleInput"
-      @change="handleChange"
-      @focus="handleFocus"
-      @blur="handleBlur"
-    />
+    <input v-else :type="type" :placeholder="placeholder" :value="modelValue" :disabled="disabled" :readonly="readonly"
+      :required="required" :class="inputClasses" :style="inputStyles" @input="handleInput" @change="handleChange"
+      @focus="handleFocus" @blur="handleBlur" />
   </div>
 </template>
 
