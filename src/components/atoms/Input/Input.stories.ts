@@ -24,7 +24,7 @@ const meta: Meta<typeof Input> = {
       control: 'text',
       description: 'Placeholder text',
     },
-    value: {
+    modelValue: {
       control: 'text',
       description: 'Input value',
     },
@@ -72,14 +72,14 @@ export const Default: Story = {
   args: {
     type: 'text',
     placeholder: 'Enter text...',
-    value: '',
+    modelValue: '',
     size: 'md',
     variant: 'default',
   },
   render: args => ({
     components: { Input },
     setup() {
-      const value = ref(args.value || '');
+      const value = ref(args.modelValue || '');
       return { args, value };
     },
     template: '<Input v-bind="args" v-model:value="value" style="width: 300px;" />',
@@ -101,7 +101,7 @@ export const WithIcon: Story = {
       const value = ref('');
       return { args, value };
     },
-    template: '<Input v-bind="args" v-model:value="value" style="width: 300px;" />',
+    template: '<Input v-bind="args" v-model:modelValue="value" style="width: 300px;" />',
   }),
 };
 
@@ -118,7 +118,7 @@ export const Outline: Story = {
       const value = ref('');
       return { args, value };
     },
-    template: '<Input v-bind="args" v-model:value="value" style="width: 300px;" />',
+    template: '<Input v-bind="args" v-model:modelValue="value" style="width: 300px;" />',
   }),
 };
 
