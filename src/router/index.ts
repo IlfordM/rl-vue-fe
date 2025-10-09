@@ -36,7 +36,7 @@ const router = createRouter({
 
 // Route guard
 router.beforeEach(async (to, from, next) => {
-  const { isAuthenticated, loading } = useAuth();
+  const { isAuthenticated, isEmailVerified, loading } = useAuth();
 
   // Wait for auth state to be determined
   while (loading.value) {
@@ -44,6 +44,9 @@ router.beforeEach(async (to, from, next) => {
   }
 
   if (to.meta.requiresAuth && !isAuthenticated.value) {
+    next('/');
+  } else if (to.meta.requiresAuth && isAuthenticated.value && !isEmailVerified.value) {
+    // Redirect to email verification page or show message
     next('/');
   } else {
     next();
