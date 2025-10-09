@@ -8,7 +8,18 @@ defineOptions({
   name: 'AuthBlock',
 });
 
-const { user, loading, error, signIn, signUp, signOut, clearError } = useAuth();
+const {
+  user,
+  loading,
+  error,
+  emailVerificationSent,
+  // isEmailVerified,
+  signIn,
+  signUp,
+  signOut,
+  resendVerificationEmail,
+  clearError,
+} = useAuth();
 
 const showAuthModal = ref(false);
 const isSignUp = ref(false);
@@ -47,13 +58,20 @@ const handleAuth = async () => {
   try {
     if (isSignUp.value) {
       await signUp(credentials.value);
+      // Only close modal on successful sign up
+      showAuthModal.value = false;
+      credentials.value = { email: '', password: '' };
     } else {
       await signIn(credentials.value);
+      // Only close modal if there's no error and user is logged in
+      if (!error.value && user.value) {
+        showAuthModal.value = false;
+        credentials.value = { email: '', password: '' };
+      }
     }
-    showAuthModal.value = false;
-    credentials.value = { email: '', password: '' };
   } catch (err) {
     console.error('Auth error:', err);
+    // Don't close modal on error - let user see the error message
   }
 };
 
@@ -62,6 +80,14 @@ const handleSignOut = async () => {
     await signOut();
   } catch (err) {
     console.error('Sign out error:', err);
+  }
+};
+
+const handleResendVerification = async () => {
+  try {
+    await resendVerificationEmail();
+  } catch (err) {
+    console.error('Resend verification error:', err);
   }
 };
 </script>
@@ -111,6 +137,22 @@ const handleSignOut = async () => {
 
           <div v-if="error" class="error-message">
             {{ error }}
+          </div>
+
+          <!-- Email verification message -->
+          <div v-if="emailVerificationSent && isSignUp" class="verification-message">
+            <p>
+              📧 Verification email sent! Please check your inbox and click the verification link.
+            </p>
+            <Button
+              type="button"
+              variant="ghost"
+              size="sm"
+              @click="handleResendVerification"
+              :disabled="loading"
+            >
+              Resend Email
+            </Button>
           </div>
 
           <Button type="submit" variant="secondary" class="auth-submit-btn" :disabled="loading">
@@ -257,5 +299,19 @@ const handleSignOut = async () => {
 
 .toggle-auth-btn:hover {
   color: var(--color-blue-3);
+}
+
+.verification-message {
+  background: var(--color-blue-3);
+  color: var(--color-white);
+  padding: 12px;
+  border-radius: 4px;
+  text-align: center;
+  margin: 8px 0;
+}
+
+.verification-message p {
+  margin: 0 0 8px 0;
+  font-size: 14px;
 }
 </style>

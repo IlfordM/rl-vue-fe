@@ -4,8 +4,11 @@ import {
   createUserWithEmailAndPassword,
   signOut as firebaseSignOut,
   onAuthStateChanged,
+  sendEmailVerification,
+  // EmailAuthProvider,
+  // reauthenticateWithCredential,
 } from 'firebase/auth';
-import type { User, AuthError } from 'firebase/auth';
+import type { User } from 'firebase/auth';
 import { auth } from '@/config/firebase';
 
 export type UserCredentials = {
@@ -17,8 +20,10 @@ export const useAuth = () => {
   const user = ref<User | null>(null);
   const loading = ref(true);
   const error = ref<string | null>(null);
+  const emailVerificationSent = ref(false);
 
   const isAuthenticated = computed(() => !!user.value);
+  const isEmailVerified = computed(() => user.value?.emailVerified || false);
   const userEmail = computed(() => user.value?.email || '');
   const userId = computed(() => user.value?.uid || '');
 
@@ -37,13 +42,23 @@ export const useAuth = () => {
         credentials.email,
         credentials.password
       );
+
+      // Check if email is verified
+      if (!result.user.emailVerified) {
+        await firebaseSignOut(auth);
+        user.value = null;
+        error.value =
+          'Please verify your email before signing in. Check your inbox for a verification link.';
+        return;
+      }
+
       user.value = result.user;
       return result;
     } catch (err: unknown) {
       if (err instanceof Error && 'code' in err) {
-        error.value = getErrorMessage((err as AuthError).code);
-      } else {
         error.value = getErrorMessage((err as { code: string }).code);
+      } else {
+        error.value = 'An unexpected error occurred.';
       }
       throw err;
     } finally {
@@ -60,17 +75,41 @@ export const useAuth = () => {
         credentials.email,
         credentials.password
       );
-      user.value = result.user;
+
+      // Send email verification
+      await sendEmailVerification(result.user);
+      emailVerificationSent.value = true;
+
+      // Sign out the user immediately after sign up
+      await firebaseSignOut(auth);
+      user.value = null;
+
       return result;
     } catch (err: unknown) {
       if (err instanceof Error && 'code' in err) {
-        error.value = getErrorMessage((err as AuthError).code);
-      } else {
         error.value = getErrorMessage((err as { code: string }).code);
+      } else {
+        error.value = 'An unexpected error occurred.';
       }
       throw err;
     } finally {
       loading.value = false;
+    }
+  };
+
+  const resendVerificationEmail = async () => {
+    try {
+      if (user.value) {
+        await sendEmailVerification(user.value);
+        emailVerificationSent.value = true;
+      }
+    } catch (err: unknown) {
+      if (err instanceof Error && 'code' in err) {
+        error.value = getErrorMessage((err as { code: string }).code);
+      } else {
+        error.value = 'An unexpected error occurred.';
+      }
+      throw err;
     }
   };
 
@@ -80,11 +119,12 @@ export const useAuth = () => {
       error.value = null;
       await firebaseSignOut(auth);
       user.value = null;
+      emailVerificationSent.value = false;
     } catch (err: unknown) {
       if (err instanceof Error && 'code' in err) {
-        error.value = getErrorMessage((err as AuthError).code);
-      } else {
         error.value = getErrorMessage((err as { code: string }).code);
+      } else {
+        error.value = 'An unexpected error occurred.';
       }
       throw err;
     } finally {
@@ -100,12 +140,15 @@ export const useAuth = () => {
     user,
     loading,
     error,
+    emailVerificationSent,
     isAuthenticated,
+    isEmailVerified,
     userEmail,
     userId,
     signIn,
     signUp,
     signOut,
+    resendVerificationEmail,
     clearError,
   };
 };
@@ -121,6 +164,8 @@ const getErrorMessage = (errorCode: string): string => {
     'auth/user-disabled': 'This account has been disabled.',
     'auth/too-many-requests': 'Too many failed attempts. Please try again later.',
     'auth/network-request-failed': 'Network error. Please check your connection.',
+    'auth/requires-recent-login': 'Please sign in again to continue.',
+    'auth/email-not-verified': 'Please verify your email before signing in.',
   };
 
   return errorMessages[errorCode] || 'An error occurred. Please try again.';
