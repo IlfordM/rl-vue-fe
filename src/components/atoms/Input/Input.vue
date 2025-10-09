@@ -9,7 +9,7 @@ defineOptions({
 interface Props {
   type?: 'text' | 'email' | 'password' | 'search' | 'tel' | 'url';
   placeholder?: string;
-  value?: string;
+  modelValue?: string;
   disabled?: boolean;
   readonly?: boolean;
   required?: boolean;
@@ -24,7 +24,7 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {
   type: 'text',
   placeholder: '',
-  value: '',
+  modelValue: '',
   disabled: false,
   readonly: false,
   required: false,
@@ -35,7 +35,7 @@ const props = withDefaults(defineProps<Props>(), {
 });
 
 const emit = defineEmits<{
-  'update:value': [value: string];
+  'update:modelValue': [value: string];
   input: [event: Event];
   change: [event: Event];
   focus: [event: FocusEvent];
@@ -88,7 +88,7 @@ const inputStyles = computed(() => {
 
 const handleInput = (event: Event) => {
   const target = event.target as HTMLInputElement;
-  emit('update:value', target.value);
+  emit('update:modelValue', target.value);
   emit('input', event);
 };
 
@@ -112,7 +112,7 @@ const handleBlur = (event: FocusEvent) => {
       <input
         :type="type"
         :placeholder="placeholder"
-        :value="value"
+        :value="modelValue"
         :disabled="disabled"
         :readonly="readonly"
         :required="required"
@@ -128,7 +128,7 @@ const handleBlur = (event: FocusEvent) => {
       v-else
       :type="type"
       :placeholder="placeholder"
-      :value="value"
+      :value="modelValue"
       :disabled="disabled"
       :readonly="readonly"
       :required="required"

@@ -71,7 +71,7 @@ const handleSignOut = async () => {
     <!-- Authenticated State -->
     <div v-if="user" class="authenticated-state">
       <span class="user-email">{{ user.email }}</span>
-      <Button variant="ghost" @click="handleSignOut" :disabled="loading">
+      <Button variant="ghost" size="sm" @click="handleSignOut" :disabled="loading">
         {{ loading ? 'Signing out...' : 'Sign Out' }}
       </Button>
     </div>
