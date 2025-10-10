@@ -74,10 +74,10 @@ const product = ref({
   inStock: true,
   tags: ['Wireless', 'Noise Cancelling', 'Premium'],
   colors: [
-    { name: 'Black', value: '#000000', available: true },
-    { name: 'White', value: '#ffffff', available: true },
-    { name: 'Red', value: '#ff0000', available: true },
-    { name: 'Green', value: '#00ff00', available: true },
+    { name: 'Black', value: '#1b1b1b', available: true },
+    { name: 'White', value: '#f3f3f3', available: true },
+    { name: 'Red', value: '#bb1616', available: true },
+    { name: 'Green', value: '#16bb16', available: true },
     { name: 'Blue', value: '#3b82f6', available: false },
   ],
   sizes: [
@@ -224,11 +224,7 @@ const handleRemoveFromFavorites = (product: IProduct) => {
     <Button class="sidebar-button" variant="ghost" :style="{ top: '240px' }" @click="openFavorites">
       <div class="icon-with-badge">
         <Icon name="heart" w="27" h="24" class="icon-heart" />
-        <span
-          v-if="favoritesCount > 0"
-          class="badge"
-          :aria-label="`${favoritesCount} items in favorites`"
-        >
+        <span v-if="favoritesCount > 0" class="badge" :aria-label="`${favoritesCount} items in favorites`">
           {{ favoritesCount > 99 ? '99+' : favoritesCount }}
         </span>
       </div>
@@ -237,22 +233,11 @@ const handleRemoveFromFavorites = (product: IProduct) => {
     <!-- Single Sidebar Container -->
     <div v-if="isSidebarOpen" class="sidebar-overlay" @click="closeSidebar">
       <div class="sidebar-container" @click.stop>
-        <Cart
-          v-if="sidebarType === SidebarType.CART"
-          :is-open="true"
-          :cart-count="currentCount"
-          @close="closeSidebar"
-          @remove-item="removeFromCart"
-        />
+        <Cart v-if="sidebarType === SidebarType.CART" :is-open="true" :cart-count="currentCount" @close="closeSidebar"
+          @remove-item="removeFromCart" />
 
-        <Favorites
-          v-if="sidebarType === SidebarType.FAVORITES"
-          :is-open="true"
-          :favorites-count="currentCount"
-          @close="closeSidebar"
-          @remove-favorite="removeFromFavorites"
-          @add-to-cart="addToCart"
-        />
+        <Favorites v-if="sidebarType === SidebarType.FAVORITES" :is-open="true" :favorites-count="currentCount"
+          @close="closeSidebar" @remove-favorite="removeFromFavorites" @add-to-cart="addToCart" />
       </div>
     </div>
 
@@ -262,29 +247,17 @@ const handleRemoveFromFavorites = (product: IProduct) => {
       </section>
       <section class="item-section">
         <div class="item-details">
-          <Product
-            :product="product"
-            variant="detailed"
-            @add-to-cart="handleAddToCart"
-            @add-to-favorites="handleAddToFavorites"
-            @remove-from-favorites="handleRemoveFromFavorites"
-          />
+          <Product :product="product" variant="detailed" @add-to-cart="handleAddToCart"
+            @add-to-favorites="handleAddToFavorites" @remove-from-favorites="handleRemoveFromFavorites" />
         </div>
       </section>
 
       <section class="reviews">
         <h2 class="reviews-title">Reviews ({{ product.reviews.length }})</h2>
-        <ReviewCard
-          v-for="review in product.reviews"
-          :key="review.reviewerName"
-          :reviewer-name="review.reviewerName"
-          :reviewer-initials="review.reviewerInitials"
-          :rating="review.rating"
-          :review-text="review.reviewText"
-          :product-size="review.productSize"
-          :product-color="review.productColor"
-          :avatar-background-color="review.avatarBackgroundColor || '#5c7995'"
-        />
+        <ReviewCard v-for="review in product.reviews" :key="review.reviewerName" :reviewer-name="review.reviewerName"
+          :reviewer-initials="review.reviewerInitials" :rating="review.rating" :review-text="review.reviewText"
+          :product-size="review.productSize" :product-color="review.productColor"
+          :avatar-background-color="review.avatarBackgroundColor || '#5c7995'" />
       </section>
     </main>
   </div>
