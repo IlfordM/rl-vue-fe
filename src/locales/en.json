@@ -1,0 +1,41 @@
+{
+  "navigation": {
+    "home": "Home",
+    "about": "About",
+    "contacts": "Contacts",
+    "profile": "Profile"
+  },
+  "product": {
+    "addToCart": "Add to Cart",
+    "buyNow": "Buy Now",
+    "addToWishlist": "Add to Wishlist",
+    "removeFromWishlist": "Remove from Wishlist",
+    "description": "Description",
+    "reviews": "Reviews",
+    "seeAllReviews": "See All Reviews"
+  },
+  "auth": {
+    "signUp": "Sign Up",
+    "signIn": "Sign In",
+    "signOut": "Sign Out",
+    "signingOut": "Signing out...",
+    "createAccount": "Create Account",
+    "email": "Email",
+    "password": "Password",
+    "pleaseWait": "Please wait...",
+    "alreadyHaveAccount": "Already have an account?",
+    "dontHaveAccount": "Don't have an account?",
+    "continueWithGoogle": "Continue with Google",
+    "resendEmail": "Resend Email",
+    "verificationEmailSent": "📧 Verification email sent! Please check your inbox and click the verification link."
+  },
+  "breadcrumb": {
+    "home": "Home",
+    "products": "Products",
+    "electronics": "Electronics"
+  },
+  "cart": {
+    "itemsInCart": "items in cart",
+    "itemsInFavorites": "items in favorites"
+  }
+}

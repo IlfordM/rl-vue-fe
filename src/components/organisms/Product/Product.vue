@@ -8,6 +8,10 @@ import Sizes from '../../molecules/Sizes/Sizes.vue';
 import Colors from '../../molecules/Colors/Colors.vue';
 import ImageCarousel from '@/components/organisms/Carousel/ImageCarousel.vue';
 import Breadcrumb from '@/components/organisms/Breadcrumb/Breadcrumb.vue';
+import { useI18n } from '@/composables/useI18n';
+
+const { t } = useI18n();
+
 // Sample images for the carousel
 const carouselImages = [
   {
@@ -118,9 +122,9 @@ const selectedSize = ref<string>('');
 const isInFavorites = ref(false);
 
 const breadcrumbItems = ref([
-  { label: 'Home', href: '/' },
-  { label: 'Products', href: '/products' },
-  { label: 'Electronics', href: '/products/electronics' },
+  { label: t('breadcrumb.home'), href: '/' },
+  { label: t('breadcrumb.products'), href: '/products' },
+  { label: t('breadcrumb.electronics'), href: '/products/electronics' },
   { label: props.product.name, active: true },
 ]);
 
@@ -237,7 +241,7 @@ const averageRating = computed(() => {
           class="add-to-cart-btn"
         >
           <Icon name="cart-plus" w="16" h="16" />
-          Add to Cart
+          {{ t('product.addToCart') }}
         </Button>
         <Button
           variant="primary"
@@ -247,7 +251,7 @@ const averageRating = computed(() => {
           class="buy-now-btn"
         >
           <Icon name="bag-plus" w="22" h="22" />
-          Buy Now
+          {{ t('product.buyNow') }}
         </Button>
         <Button
           v-if="props.showFavorites"

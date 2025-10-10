@@ -4,6 +4,9 @@ import Button from '../../atoms/Button/Button.vue';
 import Input from '../../atoms/Input/Input.vue';
 import Icon from '../../atoms/Icon/Icon.vue';
 import { useAuth } from '@/composables/useAuth';
+import { useI18n } from '@/composables/useI18n';
+
+const { t } = useI18n();
 
 defineOptions({
   name: 'AuthBlock',
@@ -108,23 +111,25 @@ const handleGoogleSignIn = async () => {
     <div v-if="user" class="authenticated-state">
       <span class="user-email">{{ user.email }}</span>
       <Button variant="ghost" size="sm" @click="handleSignOut" :disabled="loading">
-        {{ loading ? 'Signing out...' : 'Sign Out' }}
+        {{ loading ? t('auth.signingOut') : t('auth.signOut') }}
       </Button>
     </div>
 
     <!-- Unauthenticated State -->
     <div v-else class="unauthenticated-state">
       <Button variant="ghost" :style="{ color: 'var(--color-black)' }" @click="openSignUpModal">
-        Sign Up
+        {{ t('auth.signUp') }}
       </Button>
-      <Button variant="secondary" class="sign-in-btn" @click="openSignInModal">Sign in</Button>
+      <Button variant="secondary" class="sign-in-btn" @click="openSignInModal">
+        {{ t('auth.signIn') }}
+      </Button>
     </div>
 
     <!-- Auth Modal -->
     <div v-if="showAuthModal" class="auth-modal-overlay" @click="toggleAuthModal">
       <div class="auth-modal" @click.stop>
         <div class="auth-modal-header">
-          <h3>{{ isSignUp ? 'Create Account' : 'Sign In' }}</h3>
+          <h3>{{ isSignUp ? t('auth.createAccount') : t('auth.signIn') }}</h3>
           <button class="close-btn" @click="toggleAuthModal">&times;</button>
         </div>
 
@@ -140,7 +145,7 @@ const handleGoogleSignIn = async () => {
           <Input
             v-model="credentials.password"
             type="password"
-            placeholder="Password"
+            placeholder="t('auth.password')"
             required
             :disabled="loading"
           />
@@ -151,9 +156,7 @@ const handleGoogleSignIn = async () => {
 
           <!-- Email verification message -->
           <div v-if="emailVerificationSent && isSignUp" class="verification-message">
-            <p>
-              📧 Verification email sent! Please check your inbox and click the verification link.
-            </p>
+            <p>📧 {{ t('auth.verificationEmailSent') }}</p>
             <Button
               type="button"
               variant="ghost"
@@ -161,28 +164,32 @@ const handleGoogleSignIn = async () => {
               @click="handleResendVerification"
               :disabled="loading"
             >
-              Resend Email
+              {{ t('auth.resendEmail') }}
             </Button>
           </div>
 
           <Button type="submit" variant="secondary" class="auth-submit-btn" :disabled="loading">
-            {{ loading ? 'Please wait...' : isSignUp ? 'Sign Up' : 'Sign In' }}
+            {{ loading ? t('auth.pleaseWait') : isSignUp ? t('auth.signUp') : t('auth.signIn') }}
           </Button>
         </form>
 
         <div class="auth-modal-footer">
           <p v-if="isSignUp">
-            Already have an account?
-            <button type="button" class="toggle-auth-btn" @click="toggleAuthMode">Sign In</button>
+            {{ t('auth.alreadyHaveAccount') }}
+            <button type="button" class="toggle-auth-btn" @click="toggleAuthMode">
+              {{ t('auth.signIn') }}
+            </button>
           </p>
           <p v-else>
-            Don't have an account?
-            <button type="button" class="toggle-auth-btn" @click="toggleAuthMode">Sign Up</button>
+            {{ t('auth.dontHaveAccount') }}
+            <button type="button" class="toggle-auth-btn" @click="toggleAuthMode">
+              {{ t('auth.signUp') }}
+            </button>
           </p>
         </div>
 
         <div class="divider">
-          <span>or</span>
+          <span>{{ t('auth.or') }}</span>
         </div>
 
         <Button
@@ -193,7 +200,7 @@ const handleGoogleSignIn = async () => {
           :disabled="loading"
         >
           <Icon name="google" size="32" />
-          Continue with Google
+          {{ t('auth.continueWithGoogle') }}
         </Button>
       </div>
     </div>
