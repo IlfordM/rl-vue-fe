@@ -1,7 +1,5 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
-import PageHeader from '@/components/organisms/Header/Header.vue';
-import PageFooter from '@/components/organisms/Footer/Footer.vue';
 import Button from '@/components/atoms/Button/Button.vue';
 import Icon from '@/components/atoms/Icon/Icon.vue';
 import Cart from '@/components/organisms/Cart/Cart.vue';
@@ -212,8 +210,7 @@ const handleRemoveFromFavorites = (product: IProduct) => {
 
 <template>
   <div class="home">
-    <PageHeader />
-    <Button class="sidebar-button" variant="ghost" :style="{ top: '140px' }" @click="openCart">
+    <Button class="sidebar-button" variant="ghost" :style="{ top: '180px' }" @click="openCart">
       <div class="icon-with-badge">
         <Icon name="cart" w="27" h="24" class="icon-cart" />
         <span v-if="cartCount > 0" class="badge" :aria-label="`${cartCount} items in cart`">
@@ -221,10 +218,14 @@ const handleRemoveFromFavorites = (product: IProduct) => {
         </span>
       </div>
     </Button>
-    <Button class="sidebar-button" variant="ghost" :style="{ top: '240px' }" @click="openFavorites">
+    <Button class="sidebar-button" variant="ghost" :style="{ top: '280px' }" @click="openFavorites">
       <div class="icon-with-badge">
         <Icon name="heart" w="27" h="24" class="icon-heart" />
-        <span v-if="favoritesCount > 0" class="badge" :aria-label="`${favoritesCount} items in favorites`">
+        <span
+          v-if="favoritesCount > 0"
+          class="badge"
+          :aria-label="`${favoritesCount} items in favorites`"
+        >
           {{ favoritesCount > 99 ? '99+' : favoritesCount }}
         </span>
       </div>
@@ -233,11 +234,22 @@ const handleRemoveFromFavorites = (product: IProduct) => {
     <!-- Single Sidebar Container -->
     <div v-if="isSidebarOpen" class="sidebar-overlay" @click="closeSidebar">
       <div class="sidebar-container" @click.stop>
-        <Cart v-if="sidebarType === SidebarType.CART" :is-open="true" :cart-count="currentCount" @close="closeSidebar"
-          @remove-item="removeFromCart" />
+        <Cart
+          v-if="sidebarType === SidebarType.CART"
+          :is-open="true"
+          :cart-count="currentCount"
+          @close="closeSidebar"
+          @remove-item="removeFromCart"
+        />
 
-        <Favorites v-if="sidebarType === SidebarType.FAVORITES" :is-open="true" :favorites-count="currentCount"
-          @close="closeSidebar" @remove-favorite="removeFromFavorites" @add-to-cart="addToCart" />
+        <Favorites
+          v-if="sidebarType === SidebarType.FAVORITES"
+          :is-open="true"
+          :favorites-count="currentCount"
+          @close="closeSidebar"
+          @remove-favorite="removeFromFavorites"
+          @add-to-cart="addToCart"
+        />
       </div>
     </div>
 
@@ -247,21 +259,32 @@ const handleRemoveFromFavorites = (product: IProduct) => {
       </section>
       <section class="item-section">
         <div class="item-details">
-          <Product :product="product" variant="detailed" @add-to-cart="handleAddToCart"
-            @add-to-favorites="handleAddToFavorites" @remove-from-favorites="handleRemoveFromFavorites" />
+          <Product
+            :product="product"
+            variant="detailed"
+            @add-to-cart="handleAddToCart"
+            @add-to-favorites="handleAddToFavorites"
+            @remove-from-favorites="handleRemoveFromFavorites"
+          />
         </div>
       </section>
 
       <section class="reviews">
         <h2 class="reviews-title">Reviews ({{ product.reviews.length }})</h2>
-        <ReviewCard v-for="review in product.reviews" :key="review.reviewerName" :reviewer-name="review.reviewerName"
-          :reviewer-initials="review.reviewerInitials" :rating="review.rating" :review-text="review.reviewText"
-          :product-size="review.productSize" :product-color="review.productColor"
-          :avatar-background-color="review.avatarBackgroundColor || '#5c7995'" />
+        <ReviewCard
+          v-for="review in product.reviews"
+          :key="review.reviewerName"
+          :reviewer-name="review.reviewerName"
+          :reviewer-initials="review.reviewerInitials"
+          :rating="review.rating"
+          :review-text="review.reviewText"
+          :product-size="review.productSize"
+          :product-color="review.productColor"
+          :avatar-background-color="review.avatarBackgroundColor || '#5c7995'"
+        />
       </section>
     </main>
   </div>
-  <PageFooter />
 </template>
 
 <style scoped>

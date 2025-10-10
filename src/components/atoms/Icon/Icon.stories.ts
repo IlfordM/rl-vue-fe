@@ -44,6 +44,8 @@ const meta: Meta<typeof Icon> = {
         'star-half',
         'star-empty',
         'google',
+        'sun',
+        'moon',
       ],
       description: 'The name of the icon to display',
     },
@@ -161,6 +163,8 @@ export const AllIcons: Story = {
           'star-half',
           'star-empty',
           'google',
+          'sun',
+          'moon',
         ],
       };
     },
