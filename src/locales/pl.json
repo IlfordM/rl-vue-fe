@@ -1,0 +1,41 @@
+{
+  "navigation": {
+    "home": "Strona główna",
+    "about": "O nas",
+    "contacts": "Kontakt",
+    "profile": "Profil"
+  },
+  "product": {
+    "addToCart": "Dodaj do koszyka",
+    "buyNow": "Kup teraz",
+    "addToWishlist": "Dodaj do listy życzeń",
+    "removeFromWishlist": "Usuń z listy życzeń",
+    "description": "Opis",
+    "reviews": "Opinie",
+    "seeAllReviews": "Zobacz wszystkie opinie"
+  },
+  "auth": {
+    "signUp": "Zarejestruj się",
+    "signIn": "Zaloguj się",
+    "signOut": "Wyloguj się",
+    "signingOut": "Wylogowywanie...",
+    "createAccount": "Utwórz konto",
+    "email": "Email",
+    "password": "Hasło",
+    "pleaseWait": "Proszę czekać...",
+    "alreadyHaveAccount": "Masz już konto?",
+    "dontHaveAccount": "Nie masz konta?",
+    "continueWithGoogle": "Kontynuuj z Google",
+    "resendEmail": "Wyślij ponownie email",
+    "verificationEmailSent": "📧 Email weryfikacyjny został wysłany! Sprawdź swoją skrzynkę i kliknij link weryfikacyjny."
+  },
+  "breadcrumb": {
+    "home": "Strona główna",
+    "products": "Produkty",
+    "electronics": "Elektronika"
+  },
+  "cart": {
+    "itemsInCart": "przedmiotów w koszyku",
+    "itemsInFavorites": "przedmiotów w ulubionych"
+  }
+}

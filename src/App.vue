@@ -1,8 +1,11 @@
 <script setup lang="ts">
 import Icon from './components/atoms/Icon/Icon.vue';
 import { useAuth } from '@/composables/useAuth';
+import { useI18n } from '@/composables/useI18n';
+import LanguageSwitcher from '@/components/atoms/LanguageSwitcher/LanguageSwitcher.vue';
 
 const { isAuthenticated } = useAuth();
+const { t } = useI18n();
 </script>
 
 <template>
@@ -11,21 +14,22 @@ const { isAuthenticated } = useAuth();
       <nav class="navigation">
         <router-link to="/" class="nav-link">
           <Icon name="home" class="nav-icon" />
-          Home
+          {{ t('navigation.home') }}
         </router-link>
         <router-link to="/about" class="nav-link">
           <Icon name="user" class="nav-icon" />
-          About
+          {{ t('navigation.about') }}
         </router-link>
         <router-link to="/contacts" class="nav-link">
           <Icon name="mail" class="nav-icon" />
-          Contacts
+          {{ t('navigation.contacts') }}
         </router-link>
         <router-link v-if="isAuthenticated" to="/profile" class="nav-link">
           <Icon name="user" class="nav-icon" />
-          Profile
+          {{ t('navigation.profile') }}
         </router-link>
       </nav>
+      <LanguageSwitcher />
       <router-view />
     </div>
   </div>
@@ -48,7 +52,7 @@ const { isAuthenticated } = useAuth();
   top: 0;
   padding: 10px 0;
   text-align: end;
-  background-color: white;
+  background-color: var(--color-white);
   z-index: 3;
 }
 
