@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import Icon from '../../atoms/Icon/Icon.vue';
+import { useI18n } from '@/composables/useI18n';
+
+const { t } = useI18n();
 
 defineOptions({
   name: 'ProductRating',
@@ -65,7 +68,7 @@ const getStarClass = (starIndex: number) => {
         :href="props.reviewsLink"
         class="reviews-link"
       >
-        See All Reviews ({{ props.reviewCount || 0 }})
+        {{ t('product.seeAllReviews') }} ({{ props.reviewCount || 0 }})
       </a>
       <span v-else>({{ props.reviewCount || 0 }})</span>
     </span>

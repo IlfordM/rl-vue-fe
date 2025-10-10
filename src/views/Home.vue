@@ -6,29 +6,34 @@ import Cart from '@/components/organisms/Cart/Cart.vue';
 import Favorites from '@/components/organisms/Favorites/Favorites.vue';
 import ReviewCard from '@/components/organisms/ReviewCard/ReviewCard.vue';
 import Product from '@/components/organisms/Product/Product.vue';
+import { useCart } from '@/composables/useCart';
 import type { IProduct } from '@/components/organisms/Product/Product.vue';
+import { useI18n } from '@/composables/useI18n';
+
+const { t } = useI18n();
 
 defineOptions({
   name: 'HomePage',
 });
+
+const { addToFavorites, removeFromFavorites, addToCart, removeFromCart, cartItems, favorites } =
+  useCart();
+const cartCount = computed(() => cartItems.value.length);
+const favoritesCount = computed(() => favorites.value.length);
 
 enum SidebarType {
   CART = 'cart',
   FAVORITES = 'favorites',
 }
 
-// Mock data for cart and favorites count
-const cartCount = ref(2);
-const favoritesCount = ref(1);
-
 // Sidebar state
 const sidebarType = ref<SidebarType | null>(null);
 
 // Computed properties
 const isSidebarOpen = computed(() => sidebarType.value !== null);
-const currentCount = computed(() => {
-  return sidebarType.value === SidebarType.CART ? cartCount.value : favoritesCount.value;
-});
+// const currentCount = computed(() => {
+//   return sidebarType.value === SidebarType.CART ? cartCount.value : favoritesCount.value;
+// });
 
 // Sidebar handlers
 const openCart = () => {
@@ -41,21 +46,6 @@ const openFavorites = () => {
 
 const closeSidebar = () => {
   sidebarType.value = null;
-};
-
-const removeFromCart = () => {
-  cartCount.value = Math.max(0, cartCount.value - 1);
-  // Here you would remove the item from cart
-};
-
-const removeFromFavorites = () => {
-  favoritesCount.value = Math.max(0, favoritesCount.value - 1);
-  // Here you would remove the item from favorites
-};
-
-const addToCart = () => {
-  cartCount.value += 1;
-  // Here you would add the item to cart
 };
 
 const product = ref({
@@ -193,18 +183,25 @@ const product = ref({
 });
 
 const handleAddToCart = (product: IProduct) => {
-  cartCount.value += 1;
-  console.log('Added to cart:', product);
+  addToCart(product);
 };
 
 const handleAddToFavorites = (product: IProduct) => {
-  favoritesCount.value += 1;
+  addToFavorites(product);
   console.log('Added to favorites:', product);
 };
 
 const handleRemoveFromFavorites = (product: IProduct) => {
-  favoritesCount.value = Math.max(0, favoritesCount.value - 1);
+  removeFromFavorites(product.id);
   console.log('Removed from favorites:', product);
+};
+
+const handleAddToCartFromFavorites = (productId: string) => {
+  const favoriteItem = favorites.value.find(item => item.productId === productId);
+  if (favoriteItem) {
+    // ToDo getItemById from API
+    // addToCart(favoriteItem);
+  }
 };
 </script>
 
@@ -237,7 +234,7 @@ const handleRemoveFromFavorites = (product: IProduct) => {
         <Cart
           v-if="sidebarType === SidebarType.CART"
           :is-open="true"
-          :cart-count="currentCount"
+          :cart-count="cartCount"
           @close="closeSidebar"
           @remove-item="removeFromCart"
         />
@@ -245,17 +242,17 @@ const handleRemoveFromFavorites = (product: IProduct) => {
         <Favorites
           v-if="sidebarType === SidebarType.FAVORITES"
           :is-open="true"
-          :favorites-count="currentCount"
+          :favorites-count="favoritesCount"
           @close="closeSidebar"
           @remove-favorite="removeFromFavorites"
-          @add-to-cart="addToCart"
+          @add-to-cart="handleAddToCartFromFavorites"
         />
       </div>
     </div>
 
     <main class="main-content">
       <section class="hero">
-        <h1>RL shop</h1>
+        <h1 class="hero-title visually-hidden">RL shop</h1>
       </section>
       <section class="item-section">
         <div class="item-details">
@@ -270,7 +267,7 @@ const handleRemoveFromFavorites = (product: IProduct) => {
       </section>
 
       <section class="reviews">
-        <h2 class="reviews-title">Reviews ({{ product.reviews.length }})</h2>
+        <h2 class="reviews-title">{{ t('product.reviews') }} ({{ product.reviews.length }})</h2>
         <ReviewCard
           v-for="review in product.reviews"
           :key="review.reviewerName"
@@ -293,6 +290,12 @@ const handleRemoveFromFavorites = (product: IProduct) => {
   width: 100%;
   padding: 0;
   margin: 0 auto;
+}
+
+.hero-title {
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 48px;
 }
 
 .main-content {
