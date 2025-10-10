@@ -1,7 +1,5 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
-import PageHeader from '@/components/organisms/Header/Header.vue';
-import PageFooter from '@/components/organisms/Footer/Footer.vue';
 import Button from '@/components/atoms/Button/Button.vue';
 import Icon from '@/components/atoms/Icon/Icon.vue';
 import Cart from '@/components/organisms/Cart/Cart.vue';
@@ -74,10 +72,10 @@ const product = ref({
   inStock: true,
   tags: ['Wireless', 'Noise Cancelling', 'Premium'],
   colors: [
-    { name: 'Black', value: '#000000', available: true },
-    { name: 'White', value: '#ffffff', available: true },
-    { name: 'Red', value: '#ff0000', available: true },
-    { name: 'Green', value: '#00ff00', available: true },
+    { name: 'Black', value: '#1b1b1b', available: true },
+    { name: 'White', value: '#f3f3f3', available: true },
+    { name: 'Red', value: '#bb1616', available: true },
+    { name: 'Green', value: '#16bb16', available: true },
     { name: 'Blue', value: '#3b82f6', available: false },
   ],
   sizes: [
@@ -212,8 +210,7 @@ const handleRemoveFromFavorites = (product: IProduct) => {
 
 <template>
   <div class="home">
-    <PageHeader />
-    <Button class="sidebar-button" variant="ghost" :style="{ top: '140px' }" @click="openCart">
+    <Button class="sidebar-button" variant="ghost" :style="{ top: '180px' }" @click="openCart">
       <div class="icon-with-badge">
         <Icon name="cart" w="27" h="24" class="icon-cart" />
         <span v-if="cartCount > 0" class="badge" :aria-label="`${cartCount} items in cart`">
@@ -221,7 +218,7 @@ const handleRemoveFromFavorites = (product: IProduct) => {
         </span>
       </div>
     </Button>
-    <Button class="sidebar-button" variant="ghost" :style="{ top: '240px' }" @click="openFavorites">
+    <Button class="sidebar-button" variant="ghost" :style="{ top: '280px' }" @click="openFavorites">
       <div class="icon-with-badge">
         <Icon name="heart" w="27" h="24" class="icon-heart" />
         <span
@@ -288,7 +285,6 @@ const handleRemoveFromFavorites = (product: IProduct) => {
       </section>
     </main>
   </div>
-  <PageFooter />
 </template>
 
 <style scoped>

@@ -28,6 +28,18 @@ const switchLanguage = () => {
 }
 
 .language-switcher:hover {
-  background: var(--color-gray-1);
+  background: var(--color-gray-4);
+  border-color: var(--color-blue);
+}
+
+/* Dark mode styles */
+:global(.dark) .language-switcher {
+  background: var(--color-gray-4);
+  border-color: var(--color-gray-3);
+}
+
+:global(.dark) .language-switcher:hover {
+  background: var(--color-gray-3);
+  border-color: var(--color-blue);
 }
 </style>
