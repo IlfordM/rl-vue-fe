@@ -11,25 +11,27 @@ const { t } = useI18n();
 <template>
   <div id="app">
     <div class="app-container">
-      <nav class="navigation">
-        <router-link to="/" class="nav-link">
-          <Icon name="home" class="nav-icon" />
-          {{ t('navigation.home') }}
-        </router-link>
-        <router-link to="/about" class="nav-link">
-          <Icon name="user" class="nav-icon" />
-          {{ t('navigation.about') }}
-        </router-link>
-        <router-link to="/contacts" class="nav-link">
-          <Icon name="mail" class="nav-icon" />
-          {{ t('navigation.contacts') }}
-        </router-link>
-        <router-link v-if="isAuthenticated" to="/profile" class="nav-link">
-          <Icon name="user" class="nav-icon" />
-          {{ t('navigation.profile') }}
-        </router-link>
-      </nav>
-      <LanguageSwitcher />
+      <div class="top-bar">
+        <nav class="navigation">
+          <router-link to="/" class="nav-link">
+            <Icon name="home" class="nav-icon" />
+            {{ t('navigation.home') }}
+          </router-link>
+          <router-link to="/about" class="nav-link">
+            <Icon name="user" class="nav-icon" />
+            {{ t('navigation.about') }}
+          </router-link>
+          <router-link to="/contacts" class="nav-link">
+            <Icon name="mail" class="nav-icon" />
+            {{ t('navigation.contacts') }}
+          </router-link>
+          <router-link v-if="isAuthenticated" to="/profile" class="nav-link">
+            <Icon name="user" class="nav-icon" />
+            {{ t('navigation.profile') }}
+          </router-link>
+        </nav>
+        <LanguageSwitcher />
+      </div>
       <router-view />
     </div>
   </div>
@@ -41,6 +43,13 @@ const { t } = useI18n();
   width: vw;
   padding: 0 100px;
   margin: 0 auto;
+}
+
+.top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 44px;
 }
 
 .navigation {
