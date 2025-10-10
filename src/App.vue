@@ -46,10 +46,14 @@ const { t } = useI18n();
 }
 
 .top-bar {
+  position: sticky;
   display: flex;
   align-items: center;
   justify-content: flex-end;
   gap: 44px;
+  z-index: 3;
+  top: 0;
+  background-color: var(--color-white);
 }
 
 .navigation {
@@ -57,12 +61,8 @@ const { t } = useI18n();
   align-items: center;
   justify-content: flex-end;
   gap: 38px;
-  position: sticky;
-  top: 0;
   padding: 10px 0;
   text-align: end;
-  background-color: var(--color-white);
-  z-index: 3;
 }
 
 .navigation .nav-link {
