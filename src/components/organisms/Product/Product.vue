@@ -9,7 +9,9 @@ import Colors from '../../molecules/Colors/Colors.vue';
 import ImageCarousel from '@/components/organisms/Carousel/ImageCarousel.vue';
 import Breadcrumb from '@/components/organisms/Breadcrumb/Breadcrumb.vue';
 import { useI18n } from '@/composables/useI18n';
+import { useCart } from '@/composables/useCart';
 
+const { addToFavorites, removeFromFavorites, isInFavorites } = useCart();
 const { t } = useI18n();
 
 // Sample images for the carousel
@@ -119,7 +121,7 @@ const emit = defineEmits<{
 
 const selectedColor = ref<string>('');
 const selectedSize = ref<string>('');
-const isInFavorites = ref(false);
+const isInFavoritesState = computed(() => isInFavorites(props.product.id));
 
 const breadcrumbItems = ref([
   { label: t('breadcrumb.home'), href: '/' },
@@ -133,12 +135,11 @@ const handleAddToCart = () => {
 };
 
 const handleToggleFavorites = () => {
-  if (isInFavorites.value) {
-    emit('removeFromFavorites', props.product);
+  if (isInFavoritesState.value) {
+    removeFromFavorites(props.product.id);
   } else {
-    emit('addToFavorites', props.product);
+    addToFavorites(props.product);
   }
-  isInFavorites.value = !isInFavorites.value;
 };
 
 const handleBuyNow = () => {
@@ -261,13 +262,13 @@ const averageRating = computed(() => {
           class="add-to-wishlist-btn"
         >
           <Icon name="heart-plus" w="22" h="22" />
-          {{ isInFavorites ? 'Remove from Wishlist' : 'Add to Wishlist' }}
+          {{ isInFavoritesState ? t('product.removeFromWishlist') : t('product.addToWishlist') }}
         </Button>
       </div>
     </div>
   </div>
   <!-- Description -->
-  <h4 class="product-description-title">Description</h4>
+  <h4 class="product-description-title">{{ t('product.description') }}</h4>
   <p v-if="props.variant === 'detailed'" class="product-description">
     {{ props.product.description }}
   </p>

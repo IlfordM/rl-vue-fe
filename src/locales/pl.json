@@ -3,7 +3,8 @@
     "home": "Strona główna",
     "about": "O nas",
     "contacts": "Kontakt",
-    "profile": "Profil"
+    "profile": "Profil",
+    "shop": "Sklep"
   },
   "product": {
     "addToCart": "Dodaj do koszyka",
@@ -12,7 +13,9 @@
     "removeFromWishlist": "Usuń z listy życzeń",
     "description": "Opis",
     "reviews": "Opinie",
-    "seeAllReviews": "Zobacz wszystkie opinie"
+    "seeAllReviews": "Zobacz wszystkie opinie",
+    "onSale": "Na Sale",
+    "offerEndDate": "Oferta kończy się"
   },
   "auth": {
     "signUp": "Zarejestruj się",

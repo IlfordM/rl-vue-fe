@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import Badge from '@/components/atoms/Badge/Badge.vue';
 import { computed } from 'vue';
+import { useI18n } from '@/composables/useI18n';
+
+const { t, getLocale } = useI18n();
 
 defineOptions({
   name: 'PriceWithDiscount',
@@ -33,9 +36,10 @@ const shouldShowDiscount = computed(() => {
 });
 
 const offerEndDateText = computed(() => {
+  const locale = getLocale.value;
   if (!props.offerEndDate) return '';
   const date = new Date(props.offerEndDate);
-  return `Offer ends ${date.toLocaleDateString('en-US', { month: 'long', day: 'numeric' })}`;
+  return `${t('product.offerEndDate')} ${date.toLocaleDateString(locale, { month: 'long', day: 'numeric' })}`;
 });
 
 const formatPrice = (price: number) => {
@@ -47,7 +51,7 @@ const formatPrice = (price: number) => {
   <div class="price-with-discount">
     <span v-if="shouldShowDiscount" class="original-price">{{ formatPrice(price) }}</span>
     <span class="discounted-price">{{ formatPrice(discountedPrice) }}</span>
-    <Badge v-if="isOfferActive" variant="sale" size="lg">On Sale</Badge>
+    <Badge v-if="isOfferActive" variant="sale" size="lg">{{ t('product.onSale') }}</Badge>
     <a v-if="isOfferActive && offerDescriptionLink" :href="offerDescriptionLink" class="offer-link">
       {{ offerEndDateText }}
     </a>

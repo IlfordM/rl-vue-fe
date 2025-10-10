@@ -4,10 +4,13 @@ import AuthBlock from '../../molecules/AuthBlock/AuthBlock.vue';
 import Button from '../../atoms/Button/Button.vue';
 import Icon from '../../atoms/Icon/Icon.vue';
 import Input from '../../atoms/Input/Input.vue';
+import { useI18n } from '@/composables/useI18n';
 
 defineOptions({
   name: 'PageHeader',
 });
+
+const { t } = useI18n();
 </script>
 
 <template>
@@ -25,7 +28,7 @@ defineOptions({
       }"
     >
       <Icon name="bag" w="18" h="18" />
-      Shop
+      {{ t('navigation.shop') }}
       <Icon name="dropdown" w="16" h="8" />
     </Button>
     <Input

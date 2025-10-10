@@ -3,7 +3,8 @@
     "home": "Home",
     "about": "About",
     "contacts": "Contacts",
-    "profile": "Profile"
+    "profile": "Profile",
+    "shop": "Shop"
   },
   "product": {
     "addToCart": "Add to Cart",
@@ -12,7 +13,9 @@
     "removeFromWishlist": "Remove from Wishlist",
     "description": "Description",
     "reviews": "Reviews",
-    "seeAllReviews": "See All Reviews"
+    "seeAllReviews": "See All Reviews",
+    "onSale": "On Sale",
+    "offerEndDate": "Offer ends"
   },
   "auth": {
     "signUp": "Sign Up",
